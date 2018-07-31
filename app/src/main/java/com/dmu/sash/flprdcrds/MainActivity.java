@@ -34,6 +34,7 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     // my comment
+    // Sashe comment
     private URLAsyncTask URLAsyncTask;
     public static Realm realm;
     public static TextView data;
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        });
 
     }
-
         //Button to add words here.
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
