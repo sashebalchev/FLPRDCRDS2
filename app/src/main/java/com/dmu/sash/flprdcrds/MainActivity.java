@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     // my comment
     // Sashe comment
+    // Third comment
     private URLAsyncTask URLAsyncTask;
     public static Realm realm;
     public static TextView data;
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         setFrag(new HomeFragment());
-
         //Realm stuff here.
 
 //        RealmResults<Word> words = realm.where(Word.class).findAll();
