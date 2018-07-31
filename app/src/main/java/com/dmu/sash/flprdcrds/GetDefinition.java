@@ -70,7 +70,12 @@ public class GetDefinition implements AsyncResponse {
         // TODO Loop senses over and find the short definitions there.
         // TODO handle exception if word doesn't exist
         pronunciation = "";
-        audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(0).getAudioFile();
+        for (int i = 0; audioPronunciation == null;i++){
+            audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(i).getAudioFile();
+        }
+
+
+
 //        definition = response.getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses().get(0).getShort_definitions().get(0);
         if (word!=null && definition != null && pronunciation != null && audioPronunciation != null){
             final Word wordDef = new Word();
@@ -81,6 +86,5 @@ public class GetDefinition implements AsyncResponse {
             wordDef.setAudioPronounciation(audioPronunciation);
             realm.executeTransactionAsync(realm -> realm.copyToRealm(wordDef));
         }
-
     }
 }
