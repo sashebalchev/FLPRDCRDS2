@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     // my comment
     // Sashe comment
     // Third comment
+    // another comment
     private URLAsyncTask URLAsyncTask;
     public static Realm realm;
     public static TextView data;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        });
 
     }
+
         //Button to add words here.
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
