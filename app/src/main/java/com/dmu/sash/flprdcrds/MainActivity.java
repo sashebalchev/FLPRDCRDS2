@@ -95,11 +95,4 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return setFrag(fragment);
     }
 
-//    @Override
-//    public void processFinish(String output) {
-////        System.out.println(output);
-//        getWordDefinition(output);
-//    }
-
-
 }
