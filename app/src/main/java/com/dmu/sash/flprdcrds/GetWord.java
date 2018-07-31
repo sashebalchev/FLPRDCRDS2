@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class GetWord implements AsyncResponse{
     private final String language;
-    public GetWord(){
+    GetWord(){
         language = "en";
     }
     public String searchWord (EditText editText){

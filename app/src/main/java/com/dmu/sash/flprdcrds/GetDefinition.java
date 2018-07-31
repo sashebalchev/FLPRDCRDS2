@@ -11,17 +11,20 @@ import com.google.gson.Gson;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class GetDefinition implements AsyncResponse {
 
-    private final String language;
-    private static Realm realm;
+    private Realm realm;
 
     public GetDefinition() {
-        language = "en";
-        realm = Realm.getDefaultInstance();
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .name("flprcrds.realm")
+                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
     }
-
     @Override
     public void processFinish(String output) {
         String word = null;
@@ -31,6 +34,7 @@ public class GetDefinition implements AsyncResponse {
         Result result;
         Gson gson = new Gson();
         Response response = gson.fromJson(output, Response.class);
+//        word = response.getResults().get(0).getWord();
         if (response != null) {
             result = response.getResults().get(0);
             if (result != null) {
@@ -67,7 +71,7 @@ public class GetDefinition implements AsyncResponse {
         // TODO handle exception if word doesn't exist
         pronunciation = "";
         audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(0).getAudioFile();
-//        String definition = response.getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses().get(0).getShort_definitions().get(0);
+//        definition = response.getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses().get(0).getShort_definitions().get(0);
         if (word!=null && definition != null && pronunciation != null && audioPronunciation != null){
             final Word wordDef = new Word();
             wordDef.setId(UUID.randomUUID().toString());

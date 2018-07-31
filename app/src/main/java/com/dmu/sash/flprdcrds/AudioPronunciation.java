@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import java.io.IOException;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class AudioPronunciation {
 
@@ -14,7 +15,12 @@ public class AudioPronunciation {
     private MediaPlayer mediaPlayer;
 
     AudioPronunciation() {
-        realm = Realm.getDefaultInstance();
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .name("flprcrds.realm")
+                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
         mediaPlayer = new MediaPlayer();
     }
 

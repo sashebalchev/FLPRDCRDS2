@@ -12,4 +12,6 @@
         android:background="#123456"
         android:text="Profile Fragment" />
 
+
+
 </FrameLayout>

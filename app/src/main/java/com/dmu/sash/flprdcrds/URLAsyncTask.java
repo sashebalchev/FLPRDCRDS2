@@ -8,11 +8,11 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class DefinitionTask extends AsyncTask<String, Integer, String> {
+public class URLAsyncTask extends AsyncTask<String, Integer, String> {
     String data = "";
-    public AsyncResponse delegate = null;
+    public AsyncResponse delegate;
 
-    public DefinitionTask(AsyncResponse activity){
+    public URLAsyncTask(AsyncResponse activity){
         delegate = activity;
     }
     @Override
@@ -22,27 +22,33 @@ public class DefinitionTask extends AsyncTask<String, Integer, String> {
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setRequestProperty("Accept", "application/Response");
             urlConnection.setRequestProperty("app_id", app_id);
             urlConnection.setRequestProperty("app_key", app_key);
-            System.out.println(urlConnection.getResponseCode());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((data = reader.readLine()) != null) {
-                stringBuilder.append(data + "\n");
-                data = stringBuilder.toString();
+            if (urlConnection.getResponseCode() == 200){
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((data = reader.readLine()) != null) {
+                    stringBuilder.append(data).append("\n");
+                    data = stringBuilder.toString();
+                }
+                return stringBuilder.toString();
+            } else if (400 <= urlConnection.getResponseCode() && urlConnection.getResponseCode() < 500  ){
+                System.out.println("Bad request or word not found");
+            } else if (urlConnection.getResponseCode() >= 500){
+                System.out.println("Server problem");
             }
-            return stringBuilder.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
         }
+        return null;
     }
 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-//        MainActivity.results(result);
-        delegate.processFinish2(result);
+        delegate.processFinish(result);
     }
 }
