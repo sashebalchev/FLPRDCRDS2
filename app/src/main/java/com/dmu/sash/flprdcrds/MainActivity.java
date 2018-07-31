@@ -33,7 +33,7 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-
+    // my comment
     private URLAsyncTask URLAsyncTask;
     public static Realm realm;
     public static TextView data;
