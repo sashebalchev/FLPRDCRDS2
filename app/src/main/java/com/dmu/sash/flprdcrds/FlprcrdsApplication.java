@@ -3,8 +3,6 @@ package com.dmu.sash.flprdcrds;
 import android.app.Application;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.annotations.RealmModule;
 
 public class FlprcrdsApplication extends Application {
     @Override

@@ -1,7 +1,6 @@
 package com.dmu.sash.flprdcrds;
 
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 import java.io.IOException;
