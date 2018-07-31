@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     // Sashe comment
     // Third comment
     // another comment
+    // 5th comment
     private URLAsyncTask URLAsyncTask;
     public static Realm realm;
     public static TextView data;

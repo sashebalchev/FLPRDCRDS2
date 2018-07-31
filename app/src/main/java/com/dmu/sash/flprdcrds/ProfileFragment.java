@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  */
 public class ProfileFragment extends Fragment {
 
-
+    // fragment
     public ProfileFragment() {
         // Required empty public constructor
     }
