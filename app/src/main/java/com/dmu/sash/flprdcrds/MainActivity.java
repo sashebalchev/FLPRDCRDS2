@@ -34,12 +34,13 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     // my comment
+    // alskjdasd
     // Sashe comment
+    // sadkhaskdasd
     // Third comment
-    // another comment
+
     private URLAsyncTask URLAsyncTask;
-    public static Realm realm;
-    public static TextView data;
+
     private BottomNavigationView mainNav;
     private FrameLayout mainFrame;
     private FrameLayout something;
@@ -53,74 +54,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         setFrag(new HomeFragment());
-        //Realm stuff here.
-
-//        RealmResults<Word> words = realm.where(Word.class).findAll();
-//        final WordAdapter adapter = new WordAdapter(MainActivity.this, words);
-//        ListView listView = findViewById(R.id.word_list);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener((parent, view, position, id) -> {
-//            final Word word = (Word) parent.getAdapter().getItem(position);
-//            final EditText wordEdit = new EditText(MainActivity.this);
-//            wordEdit.setText(word.getWord());
-//            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-//                    .setTitle("Edit Entry")
-//                    .setView(wordEdit)
-//                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getId()))
-//                    .setNegativeButton("Delete", (dialog12, which) -> deleteWordEntry(word.getId()))
-//                    .create();
-//            dialog.show();
-//        });
 
     }
-
-        //Button to add words here.
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(view -> {
-//            final EditText taskEditText = new EditText(MainActivity.this);
-//            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-//                    .setTitle("Add Word")
-//                    .setView(taskEditText)
-//                    .setPositiveButton("Add", (dialogInterface, i) -> {
-//                        GetWord getWord = new GetWord();
-//                        URLAsyncTask = new URLAsyncTask(getWord);
-//                        URLAsyncTask.execute(getWord.searchWord(taskEditText));
-//                    })
-//                    .setNegativeButton("Cancel", null)
-//                    .create();
-//            dialog.show();
-//        });
-
 
         //Frame stuff here.
 
 
-
-
-
-    private void audioPronunciation(String id) {
-        AudioPronunciation audio = new AudioPronunciation();
-        audio.playPronunciation(id);
-    }
-
-    private void deleteWordEntry(String id) {
-        realm.executeTransactionAsync((realm) -> {
-            Objects.requireNonNull(realm.where(Word.class).equalTo("id", id)
-                    .findFirst())
-                    .deleteFromRealm();
-        });
-    }
-
     //Setting the fragment
     private boolean setFrag(android.support.v4.app.Fragment fragment) {
         if (fragment != null){
-
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
                     .commit();
-
             return true;
         }
         return false;
@@ -129,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

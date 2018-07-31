@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,5 +106,11 @@ public class HomeFragment extends Fragment {
                     .findFirst())
                     .deleteFromRealm();
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

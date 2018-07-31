@@ -35,7 +35,7 @@ private volatile Settings settings = null;
         RealmConfiguration settingsConfig = new RealmConfiguration.Builder()
                 .name("settings.realm")
                 .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
+
                 .build();
         realm = Realm.getInstance(settingsConfig);
 
