@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:layout_gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/fetched_text"
-        android:textSize="20sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="100"
         android:background="@color/bgColor"
         android:textColor="@color/fontColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textSize="20sp"
+        app:fontFamily="@font/hanalei_font_family" />
 
     <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/pronunciation"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/baseline_volume_up_black_24dp"-->
-        <!--/>-->
+    <!--android:id="@+id/pronunciation"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/baseline_volume_up_black_24dp"-->
+    <!--/>-->
 
 </LinearLayout>

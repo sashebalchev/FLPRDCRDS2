@@ -10,18 +10,26 @@
         android:title="@string/pref_bgcolor" />
 
     <!--<android.support.v7.preference.EditTextPreference-->
-        <!--android:defaultValue="20"-->
-        <!--android:key="edit_text_preference_1"-->
-        <!--android:selectAllOnFocus="true"-->
-        <!--android:singleLine="true"-->
-        <!--android:title="Edit text preference" />-->
+    <!--android:defaultValue="20"-->
+    <!--android:key="edit_text_preference_1"-->
+    <!--android:selectAllOnFocus="true"-->
+    <!--android:singleLine="true"-->
+    <!--android:title="Edit text preference" />-->
 
     <android.support.v7.preference.ListPreference
-        android:defaultValue="Black"
+        android:defaultValue="#000000"
         android:entries="@array/fontColorsArray"
         android:entryValues="@array/fontColorsValues"
         android:key="PREF_COLOR_FONT"
         android:summary="Select the preferred font color"
         android:title="Font Color" />
+
+    <android.support.v7.preference.ListPreference
+        android:defaultValue="1"
+        android:entries="@array/fontStylesArray"
+        android:entryValues="@array/fontStylesValues"
+        android:key="PREF_STYLE_FONT"
+        android:summary="Select the preferred font style"
+        android:title="Font Style" />
 
 </android.support.v7.preference.PreferenceScreen>

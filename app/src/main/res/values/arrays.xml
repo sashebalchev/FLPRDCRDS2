@@ -32,4 +32,14 @@
         <item>#0000FF</item>
         <item>#000000</item>
     </string-array>
+
+    <string-array name="fontStylesArray">
+        <item>Default</item>
+        <item>Hanalei</item>
+    </string-array>
+
+    <string-array name="fontStylesValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
