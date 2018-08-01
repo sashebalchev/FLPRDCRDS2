@@ -1,7 +1,10 @@
 package com.dmu.sash.flprdcrds;
 
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,14 +19,60 @@ import android.widget.EditText;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class SettingsFragment extends PreferenceFragmentCompat {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private int bgColor;
+    private int fontColor;
+    private View view;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
+//        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = super.onCreateView(inflater, container, savedInstanceState);
+        view.setBackgroundColor(bgColor);
+        return view;
 
-//    public SettingsFragment() {
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        switch (key) {
+            case "PREF_COLOR_BG":
+                String bgColorPref = sharedPreferences1.getString("PREF_COLOR_BG", "#FFFFFF");
+                bgColor = Color.parseColor(bgColorPref);
+                view.setBackgroundColor(bgColor);
+                break;
+            default:
+                System.out.println("Nothing happened");;
+        }
+    }
+    //    public SettingsFragment() {
 //// Required empty public constructor
 //    }
 //

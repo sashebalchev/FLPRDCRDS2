@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.v7.preference.ListPreference
+        android:defaultValue="#FFFFFF"
         android:dialogTitle="@string/pref_bgcolor"
-        android:entries="@array/colorsArray"
-        android:entryValues="@array/colorsValues"
-        android:key="pref_bgcolor"
-        android:defaultValue="White"
-        android:summary="Select the prefered background color"
+        android:entries="@array/BGcolorsArray"
+        android:entryValues="@array/BGcolorsValues"
+        android:key="PREF_COLOR_BG"
+        android:summary="Select the preferred background color"
         android:title="@string/pref_bgcolor" />
 
     <!--<android.support.v7.preference.EditTextPreference-->
@@ -16,10 +16,12 @@
         <!--android:singleLine="true"-->
         <!--android:title="Edit text preference" />-->
 
-    <!--<ListPreference-->
-    <!--android:defaultValue="1"-->
-    <!--android:entries="@array/colorsArray"-->
-    <!--android:entryValues="@array/colorsValues"-->
-    <!--android:key="list_preference_1"-->
-    <!--android:title="Font Color" />-->
+    <android.support.v7.preference.ListPreference
+        android:defaultValue="Black"
+        android:entries="@array/fontColorsArray"
+        android:entryValues="@array/fontColorsValues"
+        android:key="PREF_COLOR_FONT"
+        android:summary="Select the preferred font color"
+        android:title="Font Color" />
+
 </android.support.v7.preference.PreferenceScreen>

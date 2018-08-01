@@ -32,12 +32,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainFrame = findViewById(R.id.main_frame);
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
         setFrag(new HomeFragment());
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String color = sharedPreferences.getString("pref_bgcolor", "White");
-
-
-
 //
 //        if (color.equals("Black")){
 //            mainFrame.setBackgroundColor(sharedPreferences.getInt("pref_bgcolor", ""));
