@@ -73,9 +73,6 @@ public class GetDefinition implements AsyncResponse {
         for (int i = 0; audioPronunciation == null;i++){
             audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(i).getAudioFile();
         }
-
-
-
 //        definition = response.getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSenses().get(0).getShort_definitions().get(0);
         if (word!=null && definition != null && pronunciation != null && audioPronunciation != null){
             final Word wordDef = new Word();

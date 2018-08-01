@@ -1,7 +1,10 @@
 package com.dmu.sash.flprdcrds;
 
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,12 +26,15 @@ import io.realm.RealmResults;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     //    private Button button;
 //    public static TextView data;
     private Realm realm;
     private URLAsyncTask urlAsyncTask;
-
+    private String textColor;
+    private String bgColor;
+    private ListView listView;
+    private Color color;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -43,6 +49,9 @@ public class HomeFragment extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
+        color = new Color();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        bgColor = sharedPreferences.getString("pref_bgcolor", "White");
     }
 
     @Nullable
@@ -57,6 +66,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        listView = getView().findViewById(R.id.word_list);
+        listView.setBackgroundColor(Color.parseColor(bgColor));
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             final EditText taskEditText = new EditText(getActivity());
@@ -106,5 +117,10 @@ public class HomeFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         realm.close();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
     }
 }

@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="pref_bgcolor"
-        android:title="@string/pref_bgcolor"
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.preference.ListPreference
         android:dialogTitle="@string/pref_bgcolor"
-        android:entries="@array/colors" />
+        android:entries="@array/colorsArray"
+        android:entryValues="@array/colorsValues"
+        android:key="pref_bgcolor"
+        android:defaultValue="White"
+        android:summary="Select the prefered background color"
+        android:title="@string/pref_bgcolor" />
 
-</PreferenceScreen>
+    <!--<android.support.v7.preference.EditTextPreference-->
+        <!--android:defaultValue="20"-->
+        <!--android:key="edit_text_preference_1"-->
+        <!--android:selectAllOnFocus="true"-->
+        <!--android:singleLine="true"-->
+        <!--android:title="Edit text preference" />-->
+
+    <!--<ListPreference-->
+    <!--android:defaultValue="1"-->
+    <!--android:entries="@array/colorsArray"-->
+    <!--android:entryValues="@array/colorsValues"-->
+    <!--android:key="list_preference_1"-->
+    <!--android:title="Font Color" />-->
+</android.support.v7.preference.PreferenceScreen>
