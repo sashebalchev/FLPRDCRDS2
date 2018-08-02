@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.v7.preference.ListPreference
         android:defaultValue="#FFFFFF"
@@ -22,7 +23,7 @@
         android:entryValues="@array/fontColorsValues"
         android:key="PREF_COLOR_FONT"
         android:summary="Select the preferred font color"
-        android:title="Font Color" />
+        android:title="@string/pref_fontcolor" />
 
     <android.support.v7.preference.ListPreference
         android:defaultValue="1"
@@ -31,5 +32,10 @@
         android:key="PREF_STYLE_FONT"
         android:summary="Select the preferred font style"
         android:title="Font Style" />
+
+    <android.support.v7.preference.Preference
+        android:title="Reset"
+        android:summary="Reset all settings to default"
+        android:key="@string/PREF_RESET"/>
 
 </android.support.v7.preference.PreferenceScreen>

@@ -33,7 +33,6 @@ public class AudioPronunciation {
             }
         });
     }
-
     private void play(String urlAudio) {
 //        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()

@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#FFFFFF"-->
+    <!--android:text="Profile Fragment" />-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#123456"
-        android:text="Profile Fragment" />
+        android:layout_height="match_parent">
 
+        <com.wajahatkarim3.easyflipview.EasyFlipView
+            android:id="@+id/easy_flip"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="200dp"
+            app:flipDuration="400"
+            app:flipEnabled="true"
+            app:flipFrom="right"
+            app:flipOnTouch="true"
+            app:flipType="horizontal">
+            
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/back_logo_large_red"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/front_logo_large_red"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+            <!--&lt;!&ndash; Back Layout Goes Here &ndash;&gt;-->
+            <!--<include layout="@layout/card_back_test" />-->
+
+            <!--&lt;!&ndash; Front Layout Goes Here &ndash;&gt;-->
+            <!--<include layout="@layout/card_front_test" />-->
+
+        </com.wajahatkarim3.easyflipview.EasyFlipView>
+    </RelativeLayout>
 
 
 </FrameLayout>

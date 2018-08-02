@@ -1,7 +1,5 @@
 package com.dmu.sash.flprdcrds;
 
-
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,23 +24,16 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
+public class LearningFragment extends Fragment {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HomeFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-    //    private Button button;
-//    public static TextView data;
     private Realm realm;
-    private URLAsyncTask urlAsyncTask;
-    private String textColor;
     private int bgColor;
-    private int fontColor;
     private ListView listView;
+    private URLAsyncTask urlAsyncTask;
 
-    public HomeFragment() {
-        // Required empty public constructor
+    public LearningFragment() {
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,24 +45,20 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         realm = Realm.getInstance(realmConfig);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-//        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
-    }
 
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-
+        return inflater.inflate(R.layout.fragment_learning, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listView = getView().findViewById(R.id.word_list);
         listView.setBackgroundColor(bgColor);
-
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             final EditText taskEditText = new EditText(getActivity());
@@ -98,7 +86,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
             wordEdit.setTypeface(null, Typeface.ITALIC);
             wordEdit.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
-                    .setTitle(word.getWord().toUpperCase())
+                    .setTitle("LEARNING")
                     .setView(wordEdit)
                     .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getId()))
                     .setNegativeButton("Delete", (dialog12, which) -> deleteWordEntry(word.getId()))
@@ -123,10 +111,5 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     public void onDestroy() {
         super.onDestroy();
         realm.close();
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
     }
 }

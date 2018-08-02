@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,13 @@ import io.realm.RealmConfiguration;
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private int bgColor;
     private int fontColor;
+    private SharedPreferences sharedPreferences;
     private View view;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
 //        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
@@ -43,6 +45,17 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Preference button = findPreference(getString(R.string.PREF_RESET));
+
+        //TODO make preference selection reflect the real selection
+        button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                sharedPreferences.edit().clear().commit();
+                onSharedPreferenceChanged(sharedPreferences, "PREF_COLOR_BG");
+                return false;
+            }
+        });
     }
 
     @Override
@@ -61,10 +74,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getActivity());
         switch (key) {
             case "PREF_COLOR_BG":
-                String bgColorPref = sharedPreferences1.getString("PREF_COLOR_BG", "#FFFFFF");
+                String bgColorPref = sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF");
                 bgColor = Color.parseColor(bgColorPref);
                 view.setBackgroundColor(bgColor);
                 break;

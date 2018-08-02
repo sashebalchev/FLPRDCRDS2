@@ -1,7 +1,6 @@
 package com.dmu.sash.flprdcrds;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -33,11 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
-        setFrag(new HomeFragment());
-//
-//        if (color.equals("Black")){
-//            mainFrame.setBackgroundColor(sharedPreferences.getInt("pref_bgcolor", ""));
-//        }
+        setFrag(new ManagementFragment());
     }
 
         //Frame stuff here.
@@ -66,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                fragment = new HomeFragment();
+                fragment = new LearningFragment();
+                break;
+            case R.id.nav_management:
+                fragment = new ManagementFragment();
                 break;
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
