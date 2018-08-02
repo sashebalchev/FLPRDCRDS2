@@ -41,10 +41,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             typeface = ResourcesCompat.getFont(activity, R.font.hanalei_font_family);
         }
         backgroundColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-//        String fontColor = sharedPreferences.getString("PREF_COLOR_FONT", "Black");
-//        int test = Color.parseColor(fontColor);
-//        System.out.println(test);
-//        typeface =
         fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
     @Override
