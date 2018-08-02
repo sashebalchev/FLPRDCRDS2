@@ -47,8 +47,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int test = findPreference("EXAMPLE_TEXT").getLayoutResource();
-        exampleText = getView().findViewById(findPreference("EXAMPLE_TEXT").getLayoutResource());
+//        int test = findPreference("EXAMPLE_TEXT").getLayoutResource();
+        View testView = getLayoutInflater().inflate(R.layout.example_text, null);
+        exampleText = testView.findViewById(R.id.example_text);
+
+//        exampleText = getView().findViewById(findPreference("EXAMPLE_TEXT").getWidgetLayoutResource());
         Preference button = findPreference(getString(R.string.PREF_RESET));
 
         //TODO make preference selection reflect the real selection
@@ -75,22 +78,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        switch (key) {
-//            case "PREF_COLOR_BG":
-//                String bgColorPref = sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF");
-//                bgColor = Color.parseColor(bgColorPref);
-//                exampleText.setBackgroundColor(bgColor);
-//                break;
-//            case "PREF_COLOR_FONT":
-//                String fontColorPref = sharedPreferences.getString("PREF_COLOR_FONT", "#000000");
-//                fontColor = Color.parseColor(fontColorPref);
-//                exampleText.setTextColor(fontColor);
-//                break;
-//            default:
-//                System.out.println("Nothing happened");;
-//        }
+        switch (key) {
+            case "PREF_COLOR_BG":
+                String bgColorPref = sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF");
+                bgColor = Color.parseColor(bgColorPref);
+                exampleText.setBackgroundColor(bgColor);
+                break;
+            case "PREF_COLOR_FONT":
+                String fontColorPref = sharedPreferences.getString("PREF_COLOR_FONT", "#000000");
+                fontColor = Color.parseColor(fontColorPref);
+                exampleText.setTextColor(fontColor);
+                break;
+            default:
+                System.out.println("Nothing happened");;
+        }
     }
 }

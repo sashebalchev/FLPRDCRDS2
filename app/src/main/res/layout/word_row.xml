@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -17,11 +18,12 @@
         android:textSize="20sp"
         app:fontFamily="@font/hanalei_font_family" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/pronunciation"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/baseline_volume_up_black_24dp"-->
-    <!--/>-->
+    <ImageButton
+        android:id="@+id/pronunciation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:src="@drawable/baseline_volume_up_black_24dp" />
 
 </LinearLayout>

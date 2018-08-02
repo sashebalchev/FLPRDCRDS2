@@ -26,7 +26,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     private Typeface typeface;
 
     private static class ViewHolder{
-
         TextView wordWithDef;
         ImageButton pronunciation;
     }
@@ -55,9 +54,9 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             viewHolder.wordWithDef.setTextColor(fontColor);
             viewHolder.wordWithDef.setBackgroundColor(backgroundColor);
             viewHolder.wordWithDef.setTypeface(typeface);
+            viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation);
+            viewHolder.pronunciation.setOnClickListener(listener);
 
-//            viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation);
-//            viewHolder.pronunciation.setOnClickListener(listener);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -66,7 +65,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             Word word = adapterData.get(position);
             String text = word.getWord() + " - " + word.getDefinition();
             viewHolder.wordWithDef.setText(text);
-//            viewHolder.pronunciation.setTag(position);
+            viewHolder.pronunciation.setTag(position);
         }
         return convertView;
     }
