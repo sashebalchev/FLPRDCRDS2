@@ -16,18 +16,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     // Sashe comment
     // sadkhaskdasd
     // Third comment
-
-    private URLAsyncTask URLAsyncTask;
-
     private BottomNavigationView mainNav;
-    private FrameLayout mainFrame;
-    private FrameLayout something;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainFrame = findViewById(R.id.main_frame);
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
@@ -46,10 +40,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -69,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new SettingsFragment();
                 break;
         }
+
         return setFrag(fragment);
     }
-
 }

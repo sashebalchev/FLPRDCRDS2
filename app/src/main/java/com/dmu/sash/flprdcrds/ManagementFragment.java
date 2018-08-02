@@ -1,6 +1,7 @@
 package com.dmu.sash.flprdcrds;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -15,6 +16,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +45,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     public ManagementFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +74,37 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         super.onViewCreated(view, savedInstanceState);
         listView = getView().findViewById(R.id.word_list);
         listView.setBackgroundColor(bgColor);
+        Button deleteButton = getView().findViewById(R.id.delete_words_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog deleteWordsDialog = new AlertDialog.Builder(getActivity())
+                        .setTitle("Delete ALL words?")
+                        .setPositiveButton("Delete", (dialog1, which) -> deleteAllWords())
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                deleteWordsDialog.show();
+            }
+
+        });
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             final EditText taskEditText = new EditText(getActivity());
+            taskEditText.setGravity(Gravity.CENTER);
+            taskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    taskEditText.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
+                        }
+                    });
+                }
+            });
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                    .setTitle("Add Word")
+                    .setTitle(R.string.add_word)
                     .setView(taskEditText)
                     .setPositiveButton("Add", (dialogInterface, i) -> {
                         GetWord getWord = new GetWord();
@@ -84,6 +114,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setNegativeButton("Cancel", null)
                     .create();
             dialog.show();
+            taskEditText.requestFocus();
         });
         RealmResults<Word> words = realm.where(Word.class).findAll();
         final WordAdapter adapter = new WordAdapter(this, words, getActivity());
@@ -105,6 +136,16 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             dialog.show();
         });
     }
+
+    private void deleteAllWords() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
+    }
+
     private void audioPronunciation(String id) {
         AudioPronunciation audio = new AudioPronunciation();
         audio.playPronunciation(id);

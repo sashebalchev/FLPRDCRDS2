@@ -10,10 +10,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.recyclerview.extensions.ListAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +28,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
+
 public class LearningFragment extends Fragment {
 
     private Realm realm;
@@ -32,6 +37,7 @@ public class LearningFragment extends Fragment {
     private URLAsyncTask urlAsyncTask;
 
     public LearningFragment() {
+//        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.fragment_learning, R.id.fetched_text, al)
     }
 
 //    @Override
@@ -54,7 +60,16 @@ public class LearningFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_learning, container, false);
     }
-//    @Override
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+
+    }
+
+    //    @Override
 //    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 //        super.onViewCreated(view, savedInstanceState);
 //        listView = getView().findViewById(R.id.word_list);

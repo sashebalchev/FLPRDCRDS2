@@ -33,7 +33,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, null);
     }
@@ -42,7 +41,6 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         easyFlipView = getView().findViewById(R.id.easy_flip);
-//        easyFlipView.setFlipOnTouch(true);
         easyFlipView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
