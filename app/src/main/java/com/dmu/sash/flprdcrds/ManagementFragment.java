@@ -147,7 +147,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     }
 
     private void audioPronunciation(String id) {
-        AudioPronunciation audio = new AudioPronunciation();
+        AudioPronunciation audio = new AudioPronunciation(getContext());
         audio.playPronunciation(id);
     }
 

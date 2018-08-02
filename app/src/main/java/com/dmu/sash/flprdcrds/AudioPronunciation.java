@@ -1,7 +1,10 @@
 package com.dmu.sash.flprdcrds;
 
+import android.app.Activity;
+import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.os.PowerManager;
 
 import java.io.IOException;
 
@@ -12,8 +15,10 @@ public class AudioPronunciation {
 
     private Realm realm;
     private MediaPlayer mediaPlayer;
+    private Context context;
 
-    AudioPronunciation() {
+    AudioPronunciation(Context context) {
+        this.context = context;
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)
@@ -42,6 +47,7 @@ public class AudioPronunciation {
         try {
             mediaPlayer.setDataSource(urlAudio);
             mediaPlayer.prepare();
+            mediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
             mediaPlayer.seekTo(0);
             mediaPlayer.start();
         } catch (IOException e) {

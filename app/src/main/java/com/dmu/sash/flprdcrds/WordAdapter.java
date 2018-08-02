@@ -1,6 +1,7 @@
 package com.dmu.sash.flprdcrds;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     private int fontColor;
     private int backgroundColor;
     private Typeface typeface;
+    private Context context;
 
     private static class ViewHolder{
         TextView wordWithDef;
@@ -32,6 +34,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
 
     WordAdapter(Fragment fragment, OrderedRealmCollection<Word> data, Activity activity){
         super(data);
+        context = activity;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String font = sharedPreferences.getString("PREF_STYLE_FONT", "1");
         if (font.equals("1")){
@@ -73,7 +76,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
         int position = (Integer) view.getTag();
         if (adapterData != null) {
             Word word = adapterData.get(position);
-            AudioPronunciation audioPronunciation = new AudioPronunciation();
+            AudioPronunciation audioPronunciation = new AudioPronunciation(context);
             audioPronunciation.playPronunciation(word.getId());
         }
     };
