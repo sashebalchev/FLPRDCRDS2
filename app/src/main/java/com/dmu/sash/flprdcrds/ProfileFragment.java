@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
@@ -15,6 +16,7 @@ import com.wajahatkarim3.easyflipview.EasyFlipView;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
+    private EasyFlipView easyFlipView;
 
     // fragment
     public ProfileFragment() {
@@ -29,7 +31,7 @@ public class ProfileFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable  ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -39,13 +41,14 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EasyFlipView easyFlipView = getView().findViewById(R.id.easy_flip);
-        easyFlipView.setOnFlipListener((flipView, newCurrentSide) -> {
-
-            // ...
-            // Your code goes here
-            // ...
-
+        easyFlipView = getView().findViewById(R.id.easy_flip);
+//        easyFlipView.setFlipOnTouch(true);
+        easyFlipView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                easyFlipView.flipTheView();
+            }
         });
+
     }
 }

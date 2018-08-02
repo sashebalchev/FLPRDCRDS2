@@ -11,10 +11,9 @@
         android:id="@+id/nav_management"
         android:icon="@drawable/baseline_list_alt_black_24dp"
         android:orderInCategory="101"
-        android:title="Word Management" />
+        android:title="@string/word_management" />
     <item
         android:id="@+id/nav_profile"
-        android:layout_height="wrap_content"
         android:icon="@drawable/baseline_person_outline_black_24dp"
         android:orderInCategory="102"
         android:title="@string/nav_profile" />

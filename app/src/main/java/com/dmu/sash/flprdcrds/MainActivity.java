@@ -27,17 +27,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mainFrame = findViewById(R.id.main_frame);
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
-        setFrag(new ManagementFragment());
+        setFrag(new LearningFragment());
     }
-
         //Frame stuff here.
-
-
     //Setting the fragment
     private boolean setFrag(android.support.v4.app.Fragment fragment) {
         if (fragment != null){
