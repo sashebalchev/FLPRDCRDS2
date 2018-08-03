@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
-
-    <!-- TODO: Update blank fragment layout --><!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="#FFFFFF"--><!--android:text="Profile Fragment" />-->
-
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LearningFragment">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
-        android:id="@+id/easy_flip"
+        android:clickable="false"
+        android:focusable="false"
+        android:id="@+id/word_flip"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
@@ -36,36 +35,24 @@
         <!--android:layout_gravity="center"-->
         <!--android:src="@drawable/front_logo_large_red" />-->
         <!-- Back Layout Goes Here -->
-        <!--<include layout="@layout/card_back_test" />-->
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/back_logo_large_red" />-->
-
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:text="BACK"
-            android:id="@+id/back"
-             />
+            android:id="@+id/definition"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_gravity="center"/>
+
         <!-- Front Layout Goes Here -->
-        <!--<include layout="@layout/card_front_test" />-->
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/front_logo_large_red" />-->
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:text="FRONT"/>
-
+            android:id="@+id/word"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_gravity="center"/>
     </com.wajahatkarim3.easyflipview.EasyFlipView>
-
 
 </FrameLayout>

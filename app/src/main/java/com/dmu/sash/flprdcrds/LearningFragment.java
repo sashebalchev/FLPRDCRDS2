@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+
 import java.util.Objects;
 
 import io.realm.Realm;
@@ -32,6 +34,7 @@ import io.realm.RealmResults;
 public class LearningFragment extends Fragment {
 
     private Realm realm;
+    private SwipeFlingAdapterView swipeFlingAdapterView;
     private int bgColor;
     private ListView listView;
     private URLAsyncTask urlAsyncTask;
@@ -40,19 +43,17 @@ public class LearningFragment extends Fragment {
 //        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.fragment_learning, R.id.fetched_text, al)
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-//                .name("flprcrds.realm")
-//                .schemaVersion(0)
-//                .deleteRealmIfMigrationNeeded()
-//                .build();
-//        realm = Realm.getInstance(realmConfig);
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-//
-//    }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .name("flprcrds.realm")
+                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
+
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -64,6 +65,39 @@ public class LearningFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        swipeFlingAdapterView = getView().findViewById(R.id.swipe_frame);
+
+        RealmResults<Word> words = realm.where(Word.class).findAll();
+        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, words, getContext());
+        swipeFlingAdapterView.setAdapter(wordCardAdapter);
+        swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            @Override
+            public void removeFirstObjectInAdapter() {
+
+            }
+
+            @Override
+            public void onLeftCardExit(Object o) {
+
+            }
+
+            @Override
+            public void onRightCardExit(Object o) {
+
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int i) {
+
+            }
+
+            @Override
+            public void onScroll(float v) {
+
+            }
+        });
+
 
     }
 

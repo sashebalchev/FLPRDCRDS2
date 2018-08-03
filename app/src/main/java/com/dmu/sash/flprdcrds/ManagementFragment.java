@@ -108,8 +108,9 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setView(taskEditText)
                     .setPositiveButton("Add", (dialogInterface, i) -> {
                         GetWord getWord = new GetWord();
+                        String word = taskEditText.getText().toString();
                         urlAsyncTask = new URLAsyncTask(getWord);
-                        urlAsyncTask.execute(getWord.searchWord(taskEditText));
+                        urlAsyncTask.execute(getWord.searchWord(word));
                     })
                     .setNegativeButton("Cancel", null)
                     .create();
