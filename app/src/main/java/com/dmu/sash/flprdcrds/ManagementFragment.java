@@ -66,7 +66,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_management, container, false);
-
     }
 
     @Override
@@ -110,7 +109,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                         GetWord getWord = new GetWord();
                         String word = taskEditText.getText().toString();
                         urlAsyncTask = new URLAsyncTask(getWord);
-                        urlAsyncTask.execute(getWord.searchWord(word));
+                        urlAsyncTask.execute(getWord.getSearchURL(word));
                     })
                     .setNegativeButton("Cancel", null)
                     .create();

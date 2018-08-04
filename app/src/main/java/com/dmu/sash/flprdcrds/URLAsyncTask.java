@@ -9,7 +9,9 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class URLAsyncTask extends AsyncTask<String, Integer, String> {
-    String data = "";
+    private String data = "";
+    private static final String app_id = "e6e4aac0";
+    private static final String app_key = "cef4c78764ba3d3a8395707ad006bb25";
     public AsyncResponse delegate;
 
     public URLAsyncTask(AsyncResponse activity){
@@ -17,8 +19,6 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
     }
     @Override
     protected String doInBackground(String... params) {
-        final String app_id = "e6e4aac0";
-        final String app_key = "cef4c78764ba3d3a8395707ad006bb25";
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();

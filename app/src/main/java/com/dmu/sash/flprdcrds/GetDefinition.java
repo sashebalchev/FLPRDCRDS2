@@ -70,6 +70,7 @@ public class GetDefinition implements AsyncResponse {
         // TODO Loop senses over and find the short definitions there.
         // TODO handle exception if word doesn't exist
         pronunciation = "";
+
         for (int i = 0; audioPronunciation == null;i++){
             audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(i).getAudioFile();
         }
