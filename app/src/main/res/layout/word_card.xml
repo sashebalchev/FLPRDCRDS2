@@ -10,7 +10,8 @@
         android:id="@+id/flipper_single"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="40dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <TextView
             android:elevation="4dp"

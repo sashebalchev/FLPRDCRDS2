@@ -19,10 +19,6 @@ public class Word extends RealmObject {
     private String audioPronounciation;
     private int score;
 
-    public Word() {
-        score = 0;
-    }
-
     public String getId() {
         return id;
     }
