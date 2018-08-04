@@ -4,7 +4,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class Word extends RealmObject{
+public class Word extends RealmObject {
 
     @Required
     @PrimaryKey
@@ -17,6 +17,11 @@ public class Word extends RealmObject{
     private String pronounciation;
     @Required
     private String audioPronounciation;
+    private int score;
+
+    public Word() {
+        score = 0;
+    }
 
     public String getId() {
         return id;
@@ -56,5 +61,21 @@ public class Word extends RealmObject{
 
     public void setAudioPronounciation(String audioPronounciation) {
         this.audioPronounciation = audioPronounciation;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void increaseScore() {
+        score = score + 1;
+    }
+
+    public void decreaseScore() {
+        score = score - 1;
     }
 }

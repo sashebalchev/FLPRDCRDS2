@@ -126,6 +126,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             final TextView wordEdit = new TextView(getActivity());
             wordEdit.setText(word.getDefinition());
             wordEdit.setTextSize(24);
+            wordEdit.setPadding(14, 14, 14, 14);
             wordEdit.setTypeface(null, Typeface.ITALIC);
             wordEdit.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
