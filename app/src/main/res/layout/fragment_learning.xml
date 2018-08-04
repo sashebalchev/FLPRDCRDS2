@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".LearningFragment">
 
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:descendantFocusability="blocksDescendants"
-        android:id="@+id/swipe_frame"
+    <!--<com.lorentzos.flingswipe.SwipeFlingAdapterView-->
+        <!--android:id="@+id/swipe_frame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="#ff0000"-->
+        <!--android:descendantFocusability="blocksDescendants"-->
+        <!--app:rotation_degrees="15.5"-->
+        <!--tools:context=".LearningFragment"></com.lorentzos.flingswipe.SwipeFlingAdapterView>-->
+
+    <AdapterViewFlipper
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#ff0000"
-        app:rotation_degrees="15.5"
-        tools:context=".LearningFragment">
-    </com.lorentzos.flingswipe.SwipeFlingAdapterView>
+        android:id="@+id/flipper_all"></AdapterViewFlipper>
 
 
     <!--<ImageView-->

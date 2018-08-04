@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.widget.ViewFlipper;
 
 import com.dmu.sash.flprdcrds.Word;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
@@ -24,14 +27,19 @@ import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 import io.realm.RealmRecyclerViewAdapter;
 
-public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
+public  class WordCardAdapter extends  RealmBaseAdapter<Word> {
+
+
+
 
     private Context context;
     private GestureDetector gestureDetector;
+    private AdapterViewFlipper viewFlipper;
 
     class ViewHolder {
         TextView word, definition;
-        EasyFlipView flipView;
+        ViewFlipper flipView;
+        Button nextWordButton;
     }
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -39,13 +47,11 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
             return true;
         }
     }
-
-    WordCardAdapter(android.support.v4.app.Fragment fragment, OrderedRealmCollection<Word> data, Context context) {
+    WordCardAdapter(android.support.v4.app.Fragment fragment, OrderedRealmCollection<Word> data, Context context, AdapterViewFlipper viewFlipper) {
         super(data);
         this.context = context;
-        gestureDetector = new GestureDetector(context, new SingleTapConfirm());
+        this.viewFlipper = viewFlipper;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -54,9 +60,22 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
             convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.word_card, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.flipView = convertView.findViewById(R.id.word_flip);
-            viewHolder.word = convertView.findViewById(R.id.word);
-            viewHolder.definition = (TextView) viewHolder.flipView.getChildAt(0);
+            viewHolder.flipView = convertView.findViewById(R.id.flipper_single);
+            viewHolder.word = convertView.findViewById(R.id.front);
+            viewHolder.definition = convertView.findViewById(R.id.back);
+            viewHolder.nextWordButton = convertView.findViewById(R.id.next_word_button);
+            viewHolder.nextWordButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewFlipper.showNext();
+                }
+            });
+            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.flipView.showNext();
+                }
+            });
 //            viewHolder.definition = LayoutInflater.from(viewHolder.flipView.getContext())
 //            viewHolder.flipView.setOnTouchListener(new View.OnTouchListener() {
 //                @Override
@@ -69,12 +88,19 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
 //                    }
 //                }
 //            });
-            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    viewHolder.flipView.flipTheView();
-                }
-            });
+//            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    viewHolder.flipView.flipTheView();
+////                    if (viewHolder.definition.getVisibility()==View.GONE){
+//////                        viewHolder.definition.setVisibility(View.VISIBLE);
+//////                        viewHolder.word.setVisibility(View.GONE);
+//////                    } if (viewHolder.definition.getVisibility()==View.VISIBLE){
+//////                        viewHolder.definition.setVisibility(View.GONE);
+//////                        viewHolder.word.setVisibility(View.VISIBLE);
+//////                    }
+//                }
+//            });
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

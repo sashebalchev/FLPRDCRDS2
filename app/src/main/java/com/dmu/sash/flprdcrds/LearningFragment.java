@@ -17,13 +17,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterViewFlipper;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import io.realm.Realm;
@@ -38,6 +41,7 @@ public class LearningFragment extends Fragment {
     private int bgColor;
     private ListView listView;
     private URLAsyncTask urlAsyncTask;
+    private AdapterViewFlipper viewFlipper;
 
     public LearningFragment() {
 //        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.fragment_learning, R.id.fetched_text, al)
@@ -52,8 +56,8 @@ public class LearningFragment extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
-
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -66,37 +70,39 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        swipeFlingAdapterView = getView().findViewById(R.id.swipe_frame);
-
+//        swipeFlingAdapterView = getView().findViewById(R.id.swipe_frame);
+        viewFlipper = getView().findViewById(R.id.flipper_all);
         RealmResults<Word> words = realm.where(Word.class).findAll();
-        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, words, getContext());
-        swipeFlingAdapterView.setAdapter(wordCardAdapter);
-        swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-
-            }
-
-            @Override
-            public void onLeftCardExit(Object o) {
-
-            }
-
-            @Override
-            public void onRightCardExit(Object o) {
-
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int i) {
-
-            }
-
-            @Override
-            public void onScroll(float v) {
-
-            }
-        });
+        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, words, getContext(), viewFlipper);
+        viewFlipper.setAdapter(wordCardAdapter);
+//        swipeFlingAdapterView.setAdapter(wordCardAdapter);
+//        swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+//            @Override
+//            public void removeFirstObjectInAdapter() {
+//                words.deleteFirstFromRealm();
+//                wordCardAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onLeftCardExit(Object o) {
+//
+//            }
+//
+//            @Override
+//            public void onRightCardExit(Object o) {
+//
+//            }
+//
+//            @Override
+//            public void onAdapterAboutToEmpty(int i) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(float v) {
+//
+//            }
+//        });
 
 
     }
