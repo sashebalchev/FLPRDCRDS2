@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -32,6 +33,7 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
         TextView word, definition;
         ViewFlipper flipView;
         Button dontKnowWordButton, knowWordButton;
+        ImageButton pronunciation, pronunciation2;
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
@@ -64,14 +66,14 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
             viewHolder.flipView = convertView.findViewById(R.id.flipper_single);
             viewHolder.word = convertView.findViewById(R.id.front);
             viewHolder.definition = convertView.findViewById(R.id.back);
-
-
-
+            viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);
+            viewHolder.pronunciation.setOnClickListener(listener);
+//            viewHolder.pronunciation2 = convertView.findViewById(R.id.pronunciation_card_back);
+//            viewHolder.pronunciation2.setOnClickListener(listener);
 
 
             viewHolder.flipView.setInAnimation(context, R.anim.animate_flip_in);
             viewHolder.flipView.setOutAnimation(context, R.anim.animate_flip_out);
-
 
 
             viewHolder.dontKnowWordButton = convertView.findViewById(R.id.dont_know_word);
@@ -108,6 +110,8 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
             Word wordFromData = adapterData.get(position);
             viewHolder.word.setText(wordFromData.getWord());
             viewHolder.definition.setText(wordFromData.getDefinition());
+            viewHolder.pronunciation.setTag(position);
+//            viewHolder.pronunciation2.setTag(position);
         }
         return convertView;
     }
@@ -119,6 +123,7 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
                     .decreaseScore();
         });
     }
+
     private void increaseScore(String id) {
         realm.executeTransactionAsync((realm) -> {
             Objects.requireNonNull(realm.where(Word.class).equalTo("id", id)
@@ -126,4 +131,14 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
                     .increaseScore();
         });
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int position = (Integer) view.getTag();
+            if (adapterData != null) {
+                new AudioPronunciation(context).playPronunciation(adapterData.get(position).getId());
+            }
+        }
+    };
 }
