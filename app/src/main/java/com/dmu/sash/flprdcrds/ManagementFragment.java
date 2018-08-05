@@ -41,7 +41,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     private String textColor;
     private int bgColor;
     private int fontColor;
-    private ListView listView;
     private static ManagementFragment instance;
 
     public ManagementFragment() {
@@ -70,8 +69,8 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_management, container, false);
     }
@@ -79,20 +78,16 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        listView = getView().findViewById(R.id.word_list);
+        ListView listView = getView().findViewById(R.id.word_list);
         listView.setBackgroundColor(bgColor);
         Button deleteButton = getView().findViewById(R.id.delete_words_button);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog deleteWordsDialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("Delete ALL words?")
-                        .setPositiveButton("Delete", (dialog1, which) -> deleteAllWords())
-                        .setNegativeButton("Cancel", null)
-                        .create();
-                deleteWordsDialog.show();
-            }
-
+        deleteButton.setOnClickListener(v -> {
+            AlertDialog deleteWordsDialog = new AlertDialog.Builder(getContext())
+                    .setTitle("Delete ALL words?")
+                    .setPositiveButton("Delete", (dialog1, which) -> deleteAllWords())
+                    .setNegativeButton("Cancel", null)
+                    .create();
+            deleteWordsDialog.show();
         });
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
@@ -101,12 +96,9 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             taskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    taskEditText.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
-                        }
+                    taskEditText.post(() -> {
+                        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
                     });
                 }
             });
@@ -125,7 +117,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             taskEditText.requestFocus();
         });
         final WordAdapter adapter = new WordAdapter(this, words, getActivity());
-        ListView listView = getView().findViewById(R.id.word_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             final Word word = (Word) parent.getAdapter().getItem(position);
@@ -133,7 +124,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             wordEdit.setText(word.getDefinition());
             wordEdit.setTextSize(24);
             wordEdit.setPadding(14, 14, 14, 14);
-//            wordEdit.setTypeface(null, Typeface.ITALIC);
+            wordEdit.setTypeface(null, Typeface.ITALIC);
             wordEdit.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                     .setTitle(word.getWord().toUpperCase())
@@ -146,12 +137,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     }
 
     private void deleteAllWords() {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.deleteAll();
-            }
-        });
+        realm.executeTransactionAsync(realm -> realm.deleteAll());
     }
 
     private void audioPronunciation(String id) {
@@ -160,11 +146,10 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     }
 
     private void deleteWordEntry(String id) {
-        realm.executeTransactionAsync((realm) -> {
-            Objects.requireNonNull(realm.where(Word.class).equalTo("id", id)
-                    .findFirst())
-                    .deleteFromRealm();
-        });
+        realm.executeTransactionAsync((realm) -> Objects.requireNonNull(realm.where(Word.class)
+                .equalTo("id", id)
+                .findFirst())
+                .deleteFromRealm());
     }
 
     @Override
@@ -175,6 +160,5 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
     }
 }

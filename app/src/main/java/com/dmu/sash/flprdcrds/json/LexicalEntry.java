@@ -4,18 +4,28 @@ import java.util.List;
 
 public class LexicalEntry {
     /**
-     * entries : [{"etymologies":["Middle English (denoting the \u2018one\u2019 on dice): via Old French from Latin as \u2018unity, a unit\u2019"],"grammaticalFeatures":[{"text":"Singular","type":"Number"}],"homographNumber":"100","senses":[{"definitions":["a playing card with a single spot on it, ranked as the highest card in its suit in most card games"],"domains":["Cards"],"examples":[{"registers":["figurative"],"text":"life had started dealing him aces again"},{"text":"the ace of diamonds"}],"id":"m_en_gbus0005680.006","short_definitions":["playing card with single spot on it, ranked as highest card in its suit in most card games"]},{"definitions":["a person who excels at a particular sport or other activity"],"domains":["Sport"],"examples":[{"text":"a motorcycle ace"}],"id":"m_en_gbus0005680.010","registers":["informal"],"short_definitions":["person who excels at particular sport or other activity"],"subsenses":[{"definitions":["a pilot who has shot down many enemy aircraft"],"domains":["Air Force"],"examples":[{"text":"a Battle of Britain ace"}],"id":"m_en_gbus0005680.011","short_definitions":["pilot who has shot down many enemy aircraft"]}],"thesaurusLinks":[{"entry_id":"ace","sense_id":"t_en_gb0000173.001"}]},{"definitions":["(in tennis and similar games) a service that an opponent is unable to return and thus wins a point"],"domains":["Tennis"],"examples":[{"text":"Nadal banged down eight aces in the set"}],"id":"m_en_gbus0005680.013","short_definitions":["(in tennis and similar games) service that opponent is unable to return and thus wins point"],"subsenses":[{"definitions":["a hole in one"],"domains":["Golf"],"examples":[{"text":"his hole in one at the 15th was Senior's second ace as a professional"}],"id":"m_en_gbus0005680.014","registers":["informal"],"short_definitions":["hole in one"]}]}]},{"etymologies":["early 21st century: abbreviation of asexual, with alteration of spelling on the model of ace"],"grammaticalFeatures":[{"text":"Singular","type":"Number"}],"homographNumber":"200","senses":[{"definitions":["a person who has no sexual feelings or desires"],"domains":["Sex"],"examples":[{"text":"both asexual, they have managed to connect with other aces offline"}],"id":"m_en_gbus1190638.004","short_definitions":["asexual person"]}]}]
-     * language : en
-     * lexicalCategory : Noun
-     * pronunciations : [{"audioFile":"http://audio.oxforddictionaries.com/en/mp3/ace_1_gb_1_abbr.mp3","dialects":["British English"],"phoneticNotation":"IPA","phoneticSpelling":"eɪs"}]
-     * text : ace
+     * derivativeOf : [{"domains":["string"],"id":"string","language":"string","regions":["string"],"registers":["string"],"text":"string"}]
+     * derivatives : [{"domains":["string"],"id":"string","language":"string","regions":["string"],"registers":["string"],"text":"string"}]
+     * entries : [{"etymologies":["string"],"grammaticalFeatures":[{"text":"string","type":"string"}],"homographNumber":"string","notes":[{"id":"string","text":"string","type":"string"}],"pronunciations":[{"audioFile":"string","dialects":["string"],"phoneticNotation":"string","phoneticSpelling":"string","regions":["string"]}],"senses":[{"crossReferenceMarkers":["string"],"crossReferences":[{"id":"string","text":"string","type":"string"}],"definitions":["string"],"domains":["string"],"examples":[{"definitions":["string"],"domains":["string"],"notes":[{"id":"string","text":"string","type":"string"}],"regions":["string"],"registers":["string"],"senseIds":["string"],"text":"string","translations":[{"domains":["string"],"grammaticalFeatures":[{"text":"string","type":"string"}],"language":"string","notes":[{"id":"string","text":"string","type":"string"}],"regions":["string"],"registers":["string"],"text":"string"}]}],"id":"string","notes":[{"id":"string","text":"string","type":"string"}],"pronunciations":[{"audioFile":"string","dialects":["string"],"phoneticNotation":"string","phoneticSpelling":"string","regions":["string"]}],"regions":["string"],"registers":["string"],"short_definitions":["string"],"subsenses":[{}],"thesaurusLinks":[{"entry_id":"string","sense_id":"string"}],"translations":[{"domains":["string"],"grammaticalFeatures":[{"text":"string","type":"string"}],"language":"string","notes":[{"id":"string","text":"string","type":"string"}],"regions":["string"],"registers":["string"],"text":"string"}],"variantForms":[{"regions":["string"],"text":"string"}]}],"variantForms":[{"regions":["string"],"text":"string"}]}]
+     * grammaticalFeatures : [{"text":"string","type":"string"}]
+     * language : string
+     * lexicalCategory : string
+     * notes : [{"id":"string","text":"string","type":"string"}]
+     * pronunciations : [{"audioFile":"string","dialects":["string"],"phoneticNotation":"string","phoneticSpelling":"string","regions":["string"]}]
+     * text : string
+     * variantForms : [{"regions":["string"],"text":"string"}]
      */
 
     private String language;
     private String lexicalCategory;
     private String text;
+    private List<Derivative> derivativeOf;
+    private List<Derivative> derivatives;
     private List<Entry> entries;
+    private List<Notes> grammaticalFeatures;
+    private List<Notes> notes;
     private List<Pronunciation> pronunciations;
+    private List<VariantForm> variantForms;
 
     public String getLanguage() {
         return language;
@@ -41,6 +51,22 @@ public class LexicalEntry {
         this.text = text;
     }
 
+    public List<Derivative> getDerivativeOf() {
+        return derivativeOf;
+    }
+
+    public void setDerivativeOf(List<Derivative> derivativeOf) {
+        this.derivativeOf = derivativeOf;
+    }
+
+    public List<Derivative> getDerivatives() {
+        return derivatives;
+    }
+
+    public void setDerivatives(List<Derivative> derivatives) {
+        this.derivatives = derivatives;
+    }
+
     public List<Entry> getEntries() {
         return entries;
     }
@@ -49,11 +75,35 @@ public class LexicalEntry {
         this.entries = entries;
     }
 
+    public List<Notes> getGrammaticalFeatures() {
+        return grammaticalFeatures;
+    }
+
+    public void setGrammaticalFeatures(List<Notes> grammaticalFeatures) {
+        this.grammaticalFeatures = grammaticalFeatures;
+    }
+
+    public List<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Notes> notes) {
+        this.notes = notes;
+    }
+
     public List<Pronunciation> getPronunciations() {
         return pronunciations;
     }
 
     public void setPronunciations(List<Pronunciation> pronunciations) {
         this.pronunciations = pronunciations;
+    }
+
+    public List<VariantForm> getVariantForms() {
+        return variantForms;
+    }
+
+    public void setVariantForms(List<VariantForm> variantForms) {
+        this.variantForms = variantForms;
     }
 }

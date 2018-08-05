@@ -1,13 +1,23 @@
 package com.dmu.sash.flprdcrds.json;
 
-public class GrammaticalFeature {
+public class Notes {
     /**
+     * id : string
      * text : string
      * type : string
      */
 
+    private String id;
     private String text;
     private String type;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;

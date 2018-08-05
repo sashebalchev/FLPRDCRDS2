@@ -2,8 +2,8 @@ package com.dmu.sash.flprdcrds.json;
 
 public class ThesaurusLink {
     /**
-     * entry_id : ace
-     * sense_id : t_en_gb0000173.001
+     * entry_id : string
+     * sense_id : string
      */
 
     private String entry_id;

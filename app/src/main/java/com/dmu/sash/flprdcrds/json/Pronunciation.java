@@ -4,16 +4,26 @@ import java.util.List;
 
 public class Pronunciation {
     /**
-     * audioFile : http://audio.oxforddictionaries.com/en/mp3/ace_1_gb_1_abbr.mp3
-     * dialects : ["British English"]
-     * phoneticNotation : IPA
-     * phoneticSpelling : eɪs
+     * audioFile : string
+     * dialects : ["string"]
+     * phoneticNotation : string
+     * phoneticSpelling : string
+     * regions : ["string"]
      */
 
     private String audioFile;
     private String phoneticNotation;
     private String phoneticSpelling;
     private List<String> dialects;
+    private List<String> regions;
+
+    /**
+     * audioFile : string
+     * dialects : ["string"]
+     * phoneticNotation : string
+     * phoneticSpelling : string
+     * regions : ["string"]
+     */
 
     public String getAudioFile() {
         return audioFile;
@@ -45,5 +55,13 @@ public class Pronunciation {
 
     public void setDialects(List<String> dialects) {
         this.dialects = dialects;
+    }
+
+    public List<String> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<String> regions) {
+        this.regions = regions;
     }
 }

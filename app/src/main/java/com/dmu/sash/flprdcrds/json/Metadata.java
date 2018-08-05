@@ -1,10 +1,6 @@
 package com.dmu.sash.flprdcrds.json;
 
 public class Metadata {
-    /**
-     * provider : Oxford University Press
-     */
-
     private String provider;
 
     public String getProvider() {
