@@ -102,6 +102,7 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (adapterData != null) {
+            //TODO nullpointer when word is out of bounds (out of current session bounds)
             Word wordFromData = adapterData.get(position);
             viewHolder.word.setText(wordFromData.getWord());
             viewHolder.definition.setText(wordFromData.getDefinition());
