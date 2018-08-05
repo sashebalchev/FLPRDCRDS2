@@ -18,6 +18,8 @@ public class Word extends RealmObject {
     @Required
     private String audioPronounciation;
     private int score;
+    private int proficiency;
+    private long timestamp;
 
     public String getId() {
         return id;
@@ -67,11 +69,33 @@ public class Word extends RealmObject {
         this.score = score;
     }
 
-    public void increaseScore() {
-        score = score + 1;
+    public void decreaseScore() {
+        setScore(1);
+        setProficiency(1);
     }
 
-    public void decreaseScore() {
-        score = score - 1;
+    public void increaseScore() {
+        if (score < 3) {
+            score = score + 1;
+        } else {
+            proficiency++;
+        }
+    }
+
+    public int getProficiency() {
+        return proficiency;
+    }
+
+
+    public void setProficiency(int proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

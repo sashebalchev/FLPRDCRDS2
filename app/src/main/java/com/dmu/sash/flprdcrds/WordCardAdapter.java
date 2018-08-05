@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -17,14 +18,16 @@ import java.util.Objects;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
+import io.realm.RealmCollection;
 import io.realm.RealmConfiguration;
 
-public class WordCardAdapter extends RealmBaseAdapter<Word> {
+public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
 
     private Realm realm;
     private Context context;
     private GestureDetector gestureDetector;
     private AdapterViewFlipper viewFlipper;
+    private OrderedRealmCollection<Word> words;
 
     class ViewHolder {
         TextView word, definition;
@@ -42,6 +45,7 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
 
     WordCardAdapter(android.support.v4.app.Fragment fragment, OrderedRealmCollection<Word> data, Context context, AdapterViewFlipper viewFlipper) {
         super(data);
+        words = data;
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)
@@ -76,21 +80,15 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
             viewHolder.dontKnowWordButton = convertView.findViewById(R.id.dont_know_word);
             viewHolder.knowWordButton = convertView.findViewById(R.id.know_word);
 
-            viewHolder.dontKnowWordButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    decreaseScore(adapterData.get(position).getId());
-//                    System.out.println(adapterData.get(position).getWord()+ adapterData.get(position).getScore());
-                    viewFlipper.showNext();
-                }
+            viewHolder.dontKnowWordButton.setOnClickListener(v -> {
+                rankDown(adapterData.get(position).getId());
+//                adapterData.(adapterData.get(position));
+                viewFlipper.showNext();
             });
-            viewHolder.knowWordButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    increaseScore(adapterData.get(position).getId());
-//                    System.out.println(adapterData.get(position).getWord()+ adapterData.get(position).getScore());
-                    viewFlipper.showNext();
-                }
+            viewHolder.knowWordButton.setOnClickListener(v -> {
+                rankUp(adapterData.get(position).getId());
+//                adapterData.(adapterData.get(position));
+                viewFlipper.showNext();
             });
 
             viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
@@ -113,20 +111,19 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> {
         return convertView;
     }
 
-    private void decreaseScore(String id) {
-        realm.executeTransactionAsync((realm) -> {
-            Objects.requireNonNull(realm.where(Word.class).equalTo("id", id)
-                    .findFirst())
-                    .decreaseScore();
-        });
+    private void rankDown(String id) {
+        realm.executeTransactionAsync((realm) -> Objects.requireNonNull(realm.where(Word.class)
+                .equalTo("id", id)
+                .findFirst())
+                .decreaseScore());
     }
 
-    private void increaseScore(String id) {
-        realm.executeTransactionAsync((realm) -> {
-            Objects.requireNonNull(realm.where(Word.class).equalTo("id", id)
-                    .findFirst())
-                    .increaseScore();
-        });
+    private void rankUp(String id) {
+        realm.executeTransactionAsync((realm) -> Objects.requireNonNull(realm.where(Word.class)
+                .equalTo("id", id)
+                .findFirst())
+                .increaseScore());
+
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

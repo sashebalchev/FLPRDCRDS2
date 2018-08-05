@@ -22,6 +22,13 @@
         android:layout_gravity="center"
         android:id="@+id/flipper_all"></AdapterViewFlipper>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="@string/next_session"
+        android:id="@+id/session_button"/>
+
 
     <!--<ImageView-->
     <!--android:layout_width="wrap_content"-->

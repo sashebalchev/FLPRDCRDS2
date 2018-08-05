@@ -107,6 +107,8 @@ public class GetDefinition implements AsyncResponse {
             wordDef.setPronounciation(pronunciation);
             wordDef.setAudioPronounciation(audioPronunciation);
             wordDef.setScore(1);
+            wordDef.setProficiency(1);
+            wordDef.setTimestamp(System.currentTimeMillis());
             realm.executeTransactionAsync(realm -> realm.copyToRealm(wordDef));
         }
     }

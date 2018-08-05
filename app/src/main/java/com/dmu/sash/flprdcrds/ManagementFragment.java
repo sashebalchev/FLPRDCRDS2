@@ -61,7 +61,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
-        words = realm.where(Word.class).findAllAsync();
+        words = realm.where(Word.class).findAllAsync().sort("timestamp");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
 //        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
