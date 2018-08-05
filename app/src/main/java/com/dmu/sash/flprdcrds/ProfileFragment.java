@@ -25,6 +25,7 @@ public class ProfileFragment extends Fragment {
     private EasyFlipView easyFlipView;
     private Realm realm;
     private GestureDetector gestureDetector;
+    private static ProfileFragment instance;
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -36,6 +37,12 @@ public class ProfileFragment extends Fragment {
     // fragment
     public ProfileFragment() {
         // Required empty public constructor
+    }
+    public static ProfileFragment getInstance(){
+        if (instance == null){
+            instance = new ProfileFragment();
+        }
+        return instance;
     }
 
     @Override

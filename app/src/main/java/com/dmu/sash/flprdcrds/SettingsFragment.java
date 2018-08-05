@@ -27,6 +27,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private TextView exampleText;
     private SharedPreferences sharedPreferences;
     private View view;
+    private static SettingsFragment instance;
+
+    public static SettingsFragment getInstance(){
+        if (instance == null){
+            instance = new SettingsFragment();
+        }
+        return instance;
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

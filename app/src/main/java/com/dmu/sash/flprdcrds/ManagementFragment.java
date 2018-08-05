@@ -36,16 +36,23 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     //    private Button button;
 //    public static TextView data;
     private Realm realm;
+    private RealmResults<Word> words;
     private URLAsyncTask urlAsyncTask;
     private String textColor;
     private int bgColor;
     private int fontColor;
     private ListView listView;
+    private static ManagementFragment instance;
 
     public ManagementFragment() {
         // Required empty public constructor
     }
-
+    public static ManagementFragment getInstance(){
+        if (instance == null){
+            instance = new ManagementFragment();
+        }
+        return instance;
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
+        words = realm.where(Word.class).findAllAsync();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
 //        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
@@ -107,16 +115,15 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setView(taskEditText)
                     .setPositiveButton("Add", (dialogInterface, i) -> {
                         GetWord getWord = new GetWord();
-                        String word = taskEditText.getText().toString();
+                        String text = taskEditText.getText().toString();
                         urlAsyncTask = new URLAsyncTask(getWord);
-                        urlAsyncTask.execute(getWord.getSearchURL(word));
+                        urlAsyncTask.execute(getWord.getSearchURL(text));
                     })
                     .setNegativeButton("Cancel", null)
                     .create();
             dialog.show();
             taskEditText.requestFocus();
         });
-        RealmResults<Word> words = realm.where(Word.class).findAll();
         final WordAdapter adapter = new WordAdapter(this, words, getActivity());
         ListView listView = getView().findViewById(R.id.word_list);
         listView.setAdapter(adapter);
@@ -126,7 +133,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             wordEdit.setText(word.getDefinition());
             wordEdit.setTextSize(24);
             wordEdit.setPadding(14, 14, 14, 14);
-            wordEdit.setTypeface(null, Typeface.ITALIC);
+//            wordEdit.setTypeface(null, Typeface.ITALIC);
             wordEdit.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                     .setTitle(word.getWord().toUpperCase())

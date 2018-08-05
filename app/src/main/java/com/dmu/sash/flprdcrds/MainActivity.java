@@ -42,27 +42,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         android.support.v4.app.Fragment fragment = null;
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                fragment = new LearningFragment();
+                fragment = LearningFragment.getInstance();
                 break;
             case R.id.nav_management:
-                fragment = new ManagementFragment();
+                fragment = ManagementFragment.getInstance();
                 break;
             case R.id.nav_profile:
-                fragment = new ProfileFragment();
+                fragment = ProfileFragment.getInstance();
                 break;
             case R.id.nav_settings:
-                fragment = new SettingsFragment();
+                fragment = SettingsFragment.getInstance();
                 break;
         }
-
         return setFrag(fragment);
     }
 }

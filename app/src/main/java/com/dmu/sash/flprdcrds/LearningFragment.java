@@ -22,8 +22,17 @@ public class LearningFragment extends Fragment {
     private ListView listView;
     private URLAsyncTask urlAsyncTask;
     private AdapterViewFlipper viewFlipper;
+    private RealmResults<Word> words;
+    private static LearningFragment instance;
 
     public LearningFragment() {
+    }
+
+    public static LearningFragment getInstance(){
+        if (instance == null){
+            instance = new LearningFragment();
+        }
+        return instance;
     }
 
     @Override
@@ -35,6 +44,7 @@ public class LearningFragment extends Fragment {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
+        words = realm.where(Word.class).findAllAsync();
     }
 
     @Nullable
@@ -49,9 +59,9 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewFlipper = getView().findViewById(R.id.flipper_all);
-        RealmResults<Word> words = realm.where(Word.class).findAll();
+//        RealmResults<Word> wordsToLearn = realm.where(Word.class).equalTo("score", "1").findAll();
+//        RealmResults<Word> words = realm.where(Word.class).findAllAsync();
         WordCardAdapter wordCardAdapter = new WordCardAdapter(this, words, getContext(), viewFlipper);
         viewFlipper.setAdapter(wordCardAdapter);
-
     }
 }
