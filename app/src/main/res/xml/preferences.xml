@@ -43,6 +43,9 @@
         android:key="EXAMPLE_TEXT"
         android:layout="@layout/example_text" />
 
+    <!--<android.support.v7.preference.Preference-->
+        <!--android:key="SESSION" />-->
+
     <android.support.v7.preference.Preference
         android:key="SESSION" />
 

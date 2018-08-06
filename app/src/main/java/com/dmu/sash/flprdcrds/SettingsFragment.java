@@ -54,18 +54,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        int test = findPreference("EXAMPLE_TEXT").getLayoutResource();
-//        View testView = getLayoutInflater().inflate(R.layout.example_text, null);
-//        exampleText = testView.findViewById(R.id.example_text);
-
-//        exampleText = getView().findViewById(findPreference("EXAMPLE_TEXT").getWidgetLayoutResource());
         Preference resetPreferencesButton = findPreference(getString(R.string.PREF_RESET));
 
         //TODO make preference selection reflect the real selection
         resetPreferencesButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                int session = sharedPreferences.getInt("SESSION", 1);
                 sharedPreferences.edit().clear().apply();
+                sharedPreferences.edit().putInt("SESSION", session).apply();
                 return false;
             }
         });

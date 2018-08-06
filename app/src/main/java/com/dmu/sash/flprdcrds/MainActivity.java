@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         new URLAsyncTaskPrepare().execute("https://od-api.oxforddictionaries.com/api/v1/search/en/?q=");
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
+        PreferenceManager.getDefaultSharedPreferences(this);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences,true);
         setFrag(new LearningFragment());
     }
         //Frame stuff here.
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
             return true;
         }
