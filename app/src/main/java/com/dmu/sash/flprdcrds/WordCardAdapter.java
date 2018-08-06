@@ -58,7 +58,6 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext())
@@ -90,7 +89,6 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
 //                adapterData.(adapterData.get(position));
                 viewFlipper.showNext();
             });
-
             viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,7 +109,6 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
         }
         return convertView;
     }
-
     private void rankDown(String id) {
         realm.executeTransactionAsync((realm) -> Objects.requireNonNull(realm.where(Word.class)
                 .equalTo("id", id)
