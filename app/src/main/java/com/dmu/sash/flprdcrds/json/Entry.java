@@ -16,7 +16,7 @@ public class Entry {
     private String homographNumber;
     private List<String> etymologies;
     private List<GrammaticalFeature> grammaticalFeatures;
-    private List<Notes> notes;
+    private List<Note> notes;
     private List<Pronunciation> pronunciations;
     private List<Sense> senses;
     private List<VariantForm> variantForms;
@@ -45,11 +45,11 @@ public class Entry {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

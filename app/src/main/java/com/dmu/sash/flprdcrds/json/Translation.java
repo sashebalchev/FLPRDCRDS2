@@ -16,8 +16,8 @@ public class Translation {
     private String language;
     private String text;
     private List<String> domains;
-    private List<Notes> grammaticalFeatures;
-    private List<Notes> notes;
+    private List<Note> grammaticalFeatures;
+    private List<Note> notes;
     private List<String> regions;
     private List<String> registers;
 
@@ -46,19 +46,19 @@ public class Translation {
         this.domains = domains;
     }
 
-    public List<Notes> getGrammaticalFeatures() {
+    public List<Note> getGrammaticalFeatures() {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<Notes> grammaticalFeatures) {
+    public void setGrammaticalFeatures(List<Note> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

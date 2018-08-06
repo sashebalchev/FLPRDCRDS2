@@ -1,6 +1,11 @@
 package com.dmu.sash.flprdcrds;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,19 +33,16 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
     private GestureDetector gestureDetector;
     private AdapterViewFlipper viewFlipper;
     private OrderedRealmCollection<Word> words;
+    private SharedPreferences sharedPreferences;
+    private int bgColor;
+    private int fontColor;
+    private Typeface typeface;
 
     class ViewHolder {
         TextView word, definition;
         ViewFlipper flipView;
         Button dontKnowWordButton, knowWordButton;
-        ImageButton pronunciation, pronunciation2;
-    }
-
-    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onSingleTapUp(MotionEvent event) {
-            return true;
-        }
+        ImageButton pronunciation;
     }
 
     WordCardAdapter(android.support.v4.app.Fragment fragment, OrderedRealmCollection<Word> data, Context context, AdapterViewFlipper viewFlipper) {
@@ -52,6 +54,15 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
+        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
+        String font = sharedPreferences.getString("PREF_STYLE_FONT", "1");
+        if (font.equals("1")){
+            typeface = Typeface.DEFAULT;
+        } else if (font.equals("2")){
+            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
+        }
         this.context = context;
         this.viewFlipper = viewFlipper;
     }
@@ -66,7 +77,9 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
             viewHolder.flipView = convertView.findViewById(R.id.flipper_single);
             viewHolder.word = convertView.findViewById(R.id.front);
             viewHolder.definition = convertView.findViewById(R.id.back);
+
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);
+            setPreferences(viewHolder.word, viewHolder.definition, viewHolder.pronunciation);
             viewHolder.pronunciation.setOnClickListener(listener);
 //            viewHolder.pronunciation2 = convertView.findViewById(R.id.pronunciation_card_back);
 //            viewHolder.pronunciation2.setOnClickListener(listener);
@@ -80,13 +93,17 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
             viewHolder.knowWordButton = convertView.findViewById(R.id.know_word);
 
             viewHolder.dontKnowWordButton.setOnClickListener(v -> {
+
                 rankDown(adapterData.get(position).getId());
-//                adapterData.(adapterData.get(position));
+//                realm.beginTransaction();
+//                adapterData.get(position).deleteFromRealm();
+//                adapterData.remove(position);
+//                realm.commitTransaction();
                 viewFlipper.showNext();
             });
             viewHolder.knowWordButton.setOnClickListener(v -> {
                 rankUp(adapterData.get(position).getId());
-//                adapterData.(adapterData.get(position));
+//                adapterData.remove(position);
                 viewFlipper.showNext();
             });
             viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +126,17 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
         }
         return convertView;
     }
+
+    private void setPreferences(TextView word, TextView definition, ImageButton pronunciationButton) {
+        word.setBackgroundColor(bgColor);
+        word.setTextColor(fontColor);
+        word.setTypeface(typeface);
+        definition.setBackgroundColor(bgColor);
+        definition.setTextColor(fontColor);
+        definition.setTypeface(typeface);
+        pronunciationButton.setColorFilter(fontColor);
+    }
+
     private void rankDown(String id) {
         realm.executeTransactionAsync((realm) -> Objects.requireNonNull(realm.where(Word.class)
                 .equalTo("id", id)
@@ -121,7 +149,6 @@ public class WordCardAdapter extends RealmBaseAdapter<Word> implements ListAdapt
                 .equalTo("id", id)
                 .findFirst())
                 .increaseScore());
-
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

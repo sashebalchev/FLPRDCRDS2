@@ -1,6 +1,6 @@
 package com.dmu.sash.flprdcrds.json;
 
-public class Notes {
+public class Note {
     /**
      * id : string
      * text : string

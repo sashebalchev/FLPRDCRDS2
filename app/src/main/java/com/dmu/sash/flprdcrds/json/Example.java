@@ -17,7 +17,7 @@ public class Example {
     private String text;
     private List<String> definitions;
     private List<String> domains;
-    private List<Notes> notes;
+    private List<Note> notes;
     private List<String> regions;
     private List<String> registers;
     private List<String> senseIds;
@@ -47,11 +47,11 @@ public class Example {
         this.domains = domains;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

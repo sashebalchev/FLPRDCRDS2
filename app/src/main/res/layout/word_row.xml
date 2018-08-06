@@ -6,6 +6,7 @@
     android:layout_gravity="center_vertical"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
+    android:id="@+id/word_row"
     android:padding="10dp">
 
     <TextView
@@ -18,13 +19,20 @@
         android:textSize="20sp"
         app:fontFamily="@font/hanalei_font_family" />
 
+    <!--<ImageButton-->
+        <!--android:id="@+id/pronunciation"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:focusable="false"-->
+        <!--android:focusableInTouchMode="false"-->
+        <!--android:src="@drawable/baseline_volume_up_black_24dp" />-->
     <ImageButton
         android:id="@+id/pronunciation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:src="@drawable/baseline_volume_up_black_24dp" />
+        android:src="@drawable/outline_volume_up_white_24dp" />
 
 </LinearLayout>

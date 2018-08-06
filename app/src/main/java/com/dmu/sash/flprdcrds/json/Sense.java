@@ -23,11 +23,11 @@ public class Sense {
 
     private String id;
     private List<String> crossReferenceMarkers;
-    private List<Notes> crossReferences;
+    private List<Note> crossReferences;
     private List<String> definitions;
     private List<String> domains;
     private List<Example> examples;
-    private List<Notes> notes;
+    private List<Note> notes;
     private List<Pronunciation> pronunciations;
     private List<String> regions;
     private List<String> registers;
@@ -53,11 +53,11 @@ public class Sense {
         this.crossReferenceMarkers = crossReferenceMarkers;
     }
 
-    public List<Notes> getCrossReferences() {
+    public List<Note> getCrossReferences() {
         return crossReferences;
     }
 
-    public void setCrossReferences(List<Notes> crossReferences) {
+    public void setCrossReferences(List<Note> crossReferences) {
         this.crossReferences = crossReferences;
     }
 
@@ -85,11 +85,11 @@ public class Sense {
         this.examples = examples;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

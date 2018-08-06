@@ -12,6 +12,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +36,7 @@ import io.realm.RealmResults;
  * A simple {@link Fragment} subclass.
  */
 public class ManagementFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-    //    private Button button;
-//    public static TextView data;
+
     private Realm realm;
     private RealmResults<Word> words;
     private URLAsyncTask urlAsyncTask;
@@ -46,12 +48,14 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     public ManagementFragment() {
         // Required empty public constructor
     }
-    public static ManagementFragment getInstance(){
-        if (instance == null){
+
+    public static ManagementFragment getInstance() {
+        if (instance == null) {
             instance = new ManagementFragment();
         }
         return instance;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +66,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                 .build();
         realm = Realm.getInstance(realmConfig);
         words = realm.where(Word.class).findAllAsync().sort("timestamp");
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-//        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
 
     @Nullable
@@ -79,7 +80,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = getView().findViewById(R.id.word_list);
-        listView.setBackgroundColor(bgColor);
+//        listView.setBackgroundColor(bgColor);
         Button deleteButton = getView().findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
             AlertDialog deleteWordsDialog = new AlertDialog.Builder(getContext())
@@ -89,19 +90,15 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .create();
             deleteWordsDialog.show();
         });
+
         FloatingActionButton fab = getView().findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             final EditText taskEditText = new EditText(getActivity());
             taskEditText.setGravity(Gravity.CENTER);
-            taskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    taskEditText.post(() -> {
-                        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
-                    });
-                }
-            });
+            taskEditText.setOnFocusChangeListener((v1, hasFocus) -> taskEditText.post(() -> {
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
+            }));
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.add_word)
                     .setView(taskEditText)
@@ -114,6 +111,31 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setNegativeButton("Cancel", null)
                     .create();
             dialog.show();
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            taskEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before,
+                                          int count) {
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    // Check if EditText is empty
+                    if (TextUtils.isEmpty(s)) {
+                        // Disable ADD button if no there's no text.
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    } else {
+                        // Enable ADD button if there's some text.
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    }
+
+                }
+            });
             taskEditText.requestFocus();
         });
         final WordAdapter adapter = new WordAdapter(this, words, getActivity());
@@ -135,6 +157,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             dialog.show();
         });
     }
+
 
     private void deleteAllWords() {
         realm.executeTransactionAsync(realm -> realm.deleteAll());

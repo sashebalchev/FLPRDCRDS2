@@ -13,6 +13,8 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -26,19 +28,13 @@ public class LearningFragment extends Fragment {
     private URLAsyncTask urlAsyncTask;
     private AdapterViewFlipper viewFlipper;
     private RealmResults<Word> words;
-    private static LearningFragment instance;
+
     private int session;
     private SharedPreferences sharedPreferences;
 
     public LearningFragment() {
     }
 
-    public static LearningFragment getInstance() {
-        if (instance == null) {
-            instance = new LearningFragment();
-        }
-        return instance;
-    }
 
     //sd
     @Override
@@ -52,6 +48,8 @@ public class LearningFragment extends Fragment {
         realm = Realm.getInstance(realmConfig);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         session = Integer.parseInt(sharedPreferences.getString("SESSION", "1"));
+        System.out.println(session);
+
         switch (session) {
             case 1:
                 words = realm.where(Word.class).equalTo("score", 1).findAllAsync();
@@ -83,15 +81,18 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewFlipper = getView().findViewById(R.id.flipper_all);
+//        RealmResults<Word> wordsToLearn = realm.where(Word.class).equalTo("score", "1").findAll();
+//        RealmResults<Word> words = realm.where(Word.class).findAllAsync();
+
         WordCardAdapter wordCardAdapter = new WordCardAdapter(this, words, getContext(), viewFlipper);
         viewFlipper.setAdapter(wordCardAdapter);
         Button sessionButton = getView().findViewById(R.id.session_button);
         sessionButton.setOnClickListener(v -> {
             if (session < 5) {
                 String sessionToChangeTo = String.valueOf(session + 1);
-                sharedPreferences.edit().putString("SESSION", sessionToChangeTo).apply();
+                sharedPreferences.edit().putString("SESSION", sessionToChangeTo).commit();
             } else {
-                sharedPreferences.edit().putString("SESSION", "1").apply();
+                sharedPreferences.edit().putString("SESSION", "1").commit();
             }
         });
     }

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
+                    .addToBackStack(null)
                     .commit();
             return true;
         }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                fragment = LearningFragment.getInstance();
+                fragment = new LearningFragment();
                 break;
             case R.id.nav_management:
                 fragment = ManagementFragment.getInstance();

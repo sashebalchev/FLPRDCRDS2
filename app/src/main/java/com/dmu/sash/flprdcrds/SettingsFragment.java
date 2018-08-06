@@ -40,14 +40,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
+//        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
 //        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        view.setBackgroundColor(bgColor);
         return view;
 
     }
@@ -56,51 +55,55 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        int test = findPreference("EXAMPLE_TEXT").getLayoutResource();
-        View testView = getLayoutInflater().inflate(R.layout.example_text, null);
-        exampleText = testView.findViewById(R.id.example_text);
+//        View testView = getLayoutInflater().inflate(R.layout.example_text, null);
+//        exampleText = testView.findViewById(R.id.example_text);
 
 //        exampleText = getView().findViewById(findPreference("EXAMPLE_TEXT").getWidgetLayoutResource());
-        Preference button = findPreference(getString(R.string.PREF_RESET));
+        Preference resetPreferencesButton = findPreference(getString(R.string.PREF_RESET));
 
         //TODO make preference selection reflect the real selection
-        button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        resetPreferencesButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                sharedPreferences.edit().clear().commit();
-                onSharedPreferenceChanged(sharedPreferences, "PREF_COLOR_BG");
+                sharedPreferences.edit().clear().apply();
                 return false;
             }
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        getPreferenceScreen().getSharedPreferences()
+//                .registerOnSharedPreferenceChangeListener(this);
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        getPreferenceScreen().getSharedPreferences()
+//                .unregisterOnSharedPreferenceChangeListener(this);
+//    }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
-    }
-    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case "PREF_COLOR_BG":
-                String bgColorPref = sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF");
-                bgColor = Color.parseColor(bgColorPref);
-                exampleText.setBackgroundColor(bgColor);
-                break;
-            case "PREF_COLOR_FONT":
-                String fontColorPref = sharedPreferences.getString("PREF_COLOR_FONT", "#000000");
-                fontColor = Color.parseColor(fontColorPref);
-                exampleText.setTextColor(fontColor);
-                break;
-            default:
-                System.out.println("Nothing happened");;
-        }
+
     }
+//    @Override
+//    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//        switch (key) {
+//            case "PREF_COLOR_BG":
+//                String bgColorPref = sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF");
+//                bgColor = Color.parseColor(bgColorPref);
+//                exampleText.setBackgroundColor(bgColor);
+//                break;
+//            case "PREF_COLOR_FONT":
+//                String fontColorPref = sharedPreferences.getString("PREF_COLOR_FONT", "#000000");
+//                fontColor = Color.parseColor(fontColorPref);
+//                exampleText.setTextColor(fontColor);
+//                break;
+//            default:
+//                System.out.println("Nothing happened");;
+//        }
+//    }
 }

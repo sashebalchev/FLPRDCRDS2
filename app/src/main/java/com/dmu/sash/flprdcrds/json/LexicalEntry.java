@@ -22,8 +22,8 @@ public class LexicalEntry {
     private List<Derivative> derivativeOf;
     private List<Derivative> derivatives;
     private List<Entry> entries;
-    private List<Notes> grammaticalFeatures;
-    private List<Notes> notes;
+    private List<Note> grammaticalFeatures;
+    private List<Note> notes;
     private List<Pronunciation> pronunciations;
     private List<VariantForm> variantForms;
 
@@ -75,19 +75,19 @@ public class LexicalEntry {
         this.entries = entries;
     }
 
-    public List<Notes> getGrammaticalFeatures() {
+    public List<Note> getGrammaticalFeatures() {
         return grammaticalFeatures;
     }
 
-    public void setGrammaticalFeatures(List<Notes> grammaticalFeatures) {
+    public void setGrammaticalFeatures(List<Note> grammaticalFeatures) {
         this.grammaticalFeatures = grammaticalFeatures;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

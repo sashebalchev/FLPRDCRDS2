@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     private static class ViewHolder{
         TextView wordWithDef;
         ImageButton pronunciation;
+        LinearLayout layout;
     }
 
     WordAdapter(Fragment fragment, OrderedRealmCollection<Word> data, Activity activity){
@@ -53,9 +55,10 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.word_row, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.layout = convertView.findViewById(R.id.word_row);
+            viewHolder.layout.setBackgroundColor(backgroundColor);
             viewHolder.wordWithDef = convertView.findViewById(R.id.fetched_text);
             viewHolder.wordWithDef.setTextColor(fontColor);
-            viewHolder.wordWithDef.setBackgroundColor(backgroundColor);
             viewHolder.wordWithDef.setTypeface(typeface);
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation);
             viewHolder.pronunciation.setOnClickListener(listener);
