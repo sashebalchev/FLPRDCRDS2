@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:focusable="false"
-        app:flipOnTouch="true"
+        app:flipOnTouch="false"
         app:flipEnabled="true"
         app:flipDuration="200"
         app:flipType="horizontal"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterViewFlipper;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +31,7 @@ import io.realm.RealmBaseAdapter;
 import io.realm.RealmCollection;
 import io.realm.RealmConfiguration;
 
-public class WordCardAdapter extends ArrayAdapter<Word>{
+public class WordCardAdapter extends ArrayAdapter<Word> {
 
     private Realm realm;
     private Context context;
@@ -68,7 +69,6 @@ public class WordCardAdapter extends ArrayAdapter<Word>{
         } else if (font.equals("2")) {
             typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
         }
-
         this.context = context;
 
 
@@ -84,6 +84,13 @@ public class WordCardAdapter extends ArrayAdapter<Word>{
                     .inflate(R.layout.word_card, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.flipView = convertView.findViewById(R.id.flipper_single);
+
+            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.flipView.flipTheView();
+                }
+            });
             viewHolder.word = convertView.findViewById(R.id.front);
             viewHolder.definition = convertView.findViewById(R.id.back);
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);
