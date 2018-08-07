@@ -8,28 +8,29 @@ import android.os.PowerManager;
 
 import java.io.IOException;
 
-public class AudioPronunciation extends Application{
+public class AudioPronunciation extends Application {
 
     private MediaPlayer mediaPlayer;
     private static AudioPronunciation instance;
 
-   private AudioPronunciation() {
+    private AudioPronunciation() {
         mediaPlayer = new MediaPlayer();
-    }
-
-    public static AudioPronunciation getInstance(){
-       if (instance == null){
-           instance = new AudioPronunciation();
-       }
-       return instance;
-    }
-
-    public void play(String urlAudio, Context context) {
-        mediaPlayer.reset();
         mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                 .build());
+    }
+
+    public static AudioPronunciation getInstance() {
+        if (instance == null) {
+            instance = new AudioPronunciation();
+        }
+        return instance;
+    }
+
+    public void play(String urlAudio, Context context) {
+        mediaPlayer.reset();
+
         try {
             mediaPlayer.setDataSource(urlAudio);
             mediaPlayer.prepare();
