@@ -9,10 +9,14 @@
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/flipper_single"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="40dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
+        android:layout_gravity="center"
+        android:descendantFocusability="blocksDescendants"
+        app:flipOnTouch="true"
+        app:flipEnabled="true"
+        app:flipDuration="200"
+        app:flipType="horizontal"
+        android:layout_marginHorizontal="40dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -25,20 +29,19 @@
                 android:layout_height="180dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/rounded_corners"
-                android:elevation="3dp"
                 android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="italic" />
 
             <!--<ImageButton-->
-                <!--android:id="@+id/pronunciation_card_back"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignBottom="@+id/back"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:elevation="3dp"-->
-                <!--android:src="@drawable/outline_volume_up_white_24dp" />-->
+            <!--android:id="@+id/pronunciation_card_back"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/back"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:elevation="3dp"-->
+            <!--android:src="@drawable/outline_volume_up_white_24dp" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -69,16 +72,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_gravity="center"
             android:layout_height="180dp"
+            android:layout_gravity="center"
             android:layout_margin="12dp"
-            android:background="@drawable/rounded_corners"
-            android:elevation="3dp">
+            android:background="@drawable/rounded_corners">
 
             <TextView
                 android:id="@+id/front"
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="42sp" />
 
@@ -91,6 +93,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/outline_volume_up_white_24dp" />
         </RelativeLayout>
+
 
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 

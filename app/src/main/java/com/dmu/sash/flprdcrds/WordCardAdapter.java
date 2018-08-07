@@ -115,12 +115,12 @@ public class WordCardAdapter extends ArrayAdapter<Word>{
 
             });
 
-            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    viewHolder.flipView.flipTheView();
-                }
-            });
+//            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    viewHolder.flipView.flipTheView();
+//                }
+//            });
 
 
             convertView.setTag(viewHolder);
