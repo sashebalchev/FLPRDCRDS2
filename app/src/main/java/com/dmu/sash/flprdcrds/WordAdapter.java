@@ -61,6 +61,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             viewHolder.wordWithDef.setTextColor(fontColor);
             viewHolder.wordWithDef.setTypeface(typeface);
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation);
+            viewHolder.pronunciation.setColorFilter(fontColor);
             viewHolder.pronunciation.setOnClickListener(listener);
 
             convertView.setTag(viewHolder);

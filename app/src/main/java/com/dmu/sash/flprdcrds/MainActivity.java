@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
-//                    .addToBackStack(null)
+                    .addToBackStack(null)
                     .commit();
             return true;
         }
