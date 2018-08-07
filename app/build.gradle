@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.0'
     implementation 'com.lorentzos.swipecards:library:1.0.9'
     implementation 'io.realm:android-adapters:3.0.0'
+    implementation 'com.mapzen.android:speakerbox:1.4.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

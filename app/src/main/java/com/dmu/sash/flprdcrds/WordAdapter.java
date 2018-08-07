@@ -78,10 +78,13 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     }
     private View.OnClickListener listener = (View view) -> {
         int position = (Integer) view.getTag();
-        if (adapterData != null) {
-            Word word = adapterData.get(position);
-            AudioPronunciation audioPronunciation = new AudioPronunciation(context);
-            audioPronunciation.playPronunciation(word.getId());
+        Word wordToPronounce = getItem(position);
+        String url = wordToPronounce.getAudioPronounciation();
+//            String pronunciationURL = null;
+//            if (word != null) {
+//                pronunciationURL = word.getAudioPronounciation();
+        if (getCount() > 0) {
+            AudioPronunciation.getInstance().play(url, context);
         }
     };
 }

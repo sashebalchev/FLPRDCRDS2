@@ -86,7 +86,6 @@ public class Word extends RealmObject {
         return proficiency;
     }
 
-
     public void setProficiency(int proficiency) {
         this.proficiency = proficiency;
     }

@@ -151,7 +151,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                     .setTitle(word.getWord().toUpperCase())
                     .setView(wordEdit)
-                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getId()))
+                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getAudioPronounciation()))
                     .setNegativeButton("Delete", (dialog12, which) -> deleteWordEntry(word.getId()))
                     .create();
             dialog.show();
@@ -163,9 +163,8 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         realm.executeTransactionAsync(realm -> realm.deleteAll());
     }
 
-    private void audioPronunciation(String id) {
-        AudioPronunciation audio = new AudioPronunciation(getContext());
-        audio.playPronunciation(id);
+    private void audioPronunciation(String url) {
+            AudioPronunciation.getInstance().play(url, getContext());
     }
 
     private void deleteWordEntry(String id) {

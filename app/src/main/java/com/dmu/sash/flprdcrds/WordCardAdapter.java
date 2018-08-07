@@ -200,8 +200,13 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         @Override
         public void onClick(View view) {
             int position = (Integer) view.getTag();
+            Word wordToPronounce = getItem(position);
+            String url = wordToPronounce.getAudioPronounciation();
+//            String pronunciationURL = null;
+//            if (word != null) {
+//                pronunciationURL = word.getAudioPronounciation();
             if (getCount() > 0) {
-                new AudioPronunciation(context).playPronunciation(getItem(position).getId());
+                AudioPronunciation.getInstance().play(url, context);
             }
         }
     };

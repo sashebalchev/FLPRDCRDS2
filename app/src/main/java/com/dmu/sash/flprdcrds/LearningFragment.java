@@ -13,6 +13,7 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
@@ -47,27 +48,34 @@ public class LearningFragment extends Fragment {
         realm = Realm.getInstance(realmConfig);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         session = sharedPreferences.getInt("SESSION", 1);
-        System.out.println(session);
+        getRealmData();
+    }
 
+    private void getRealmData() {
         switch (session) {
             case 1:
-                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAllAsync();
+                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
                 break;
             case 2:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAllAsync();
+                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
                 break;
             case 3:
-                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAllAsync();
+                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
                 break;
             case 4:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAllAsync();
+                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
                 break;
             case 5:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 3).findAllAsync();
+                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 3).findAll();
                 break;
         }
-        wordsForSession = realm.copyFromRealm(wordRealmResults);
 
+        wordsForSession = realm.copyFromRealm(wordRealmResults);
+        Collections.shuffle(wordsForSession);
+        if (wordsForSession.size() == 0){
+            changeSession();
+            getRealmData();
+        }
     }
 
     @Nullable
