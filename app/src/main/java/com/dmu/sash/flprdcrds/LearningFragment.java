@@ -30,8 +30,8 @@ public class LearningFragment extends Fragment {
     private RealmResults<Word> wordRealmResults;
     private List<Word> wordsForSession;
 
-    private int session;
-    private SharedPreferences sharedPreferences;
+    public static int session;
+    private static SharedPreferences sharedPreferences;
 
     public LearningFragment() {
     }
@@ -82,15 +82,17 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewFlipper = getView().findViewById(R.id.flipper_all);
-        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, wordsForSession, getContext(), viewFlipper);
+        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, wordsForSession, getContext(), viewFlipper, getFragmentManager());
         viewFlipper.setAdapter(wordCardAdapter);
         Button sessionButton = getView().findViewById(R.id.session_button);
-        sessionButton.setOnClickListener(v -> {
-            if (session < 5) {
-                sharedPreferences.edit().putInt("SESSION", session + 1).commit();
-            } else {
-                sharedPreferences.edit().putInt("SESSION", 1).commit();
-            }
-        });
+        sessionButton.setOnClickListener(v -> changeSession());
+    }
+
+    public static void changeSession() {
+        if (session < 5) {
+            sharedPreferences.edit().putInt("SESSION", session + 1).commit();
+        } else {
+            sharedPreferences.edit().putInt("SESSION", 1).commit();
+        }
     }
 }

@@ -1,16 +1,12 @@
 package com.dmu.sash.flprdcrds;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -49,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         android.support.v4.app.Fragment fragment = null;
-
         switch (item.getItemId()){
             case R.id.nav_home:
                 fragment = new LearningFragment();
