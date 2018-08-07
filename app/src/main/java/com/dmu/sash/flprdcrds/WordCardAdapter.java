@@ -44,7 +44,6 @@ public class WordCardAdapter extends ArrayAdapter<Word>{
 
     class ViewHolder {
         TextView word, definition;
-
         EasyFlipView flipView;
         Button dontKnowWordButton, knowWordButton;
         ImageButton pronunciation;
