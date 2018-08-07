@@ -122,7 +122,6 @@ public class WordCardAdapter extends ArrayAdapter<Word>{
 //                }
 //            });
 
-
             convertView.setTag(viewHolder);
 
         } else {
