@@ -19,6 +19,8 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.wajahatkarim3.easyflipview.EasyFlipView;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -28,33 +30,36 @@ import io.realm.RealmBaseAdapter;
 import io.realm.RealmCollection;
 import io.realm.RealmConfiguration;
 
-public class WordCardAdapter extends ArrayAdapter<Word> {
+public class WordCardAdapter extends ArrayAdapter<Word>{
 
     private Realm realm;
     private Context context;
     private GestureDetector gestureDetector;
     private AdapterViewFlipper viewFlipper;
     private SharedPreferences sharedPreferences;
-    List<Word> words;
+
     private int bgColor;
     private int fontColor;
     private Typeface typeface;
 
     class ViewHolder {
         TextView word, definition;
-        ViewFlipper flipView;
+
+        EasyFlipView flipView;
         Button dontKnowWordButton, knowWordButton;
         ImageButton pronunciation;
     }
 
     WordCardAdapter(android.support.v4.app.Fragment fragment, List<Word> data, Context context, AdapterViewFlipper viewFlipper) {
         super(context, R.layout.word_card, data);
+
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
         fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
@@ -64,10 +69,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> {
         } else if (font.equals("2")) {
             typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
         }
+
         this.context = context;
-
-
-        words = data;
 
 
 //        System.out.println(words.get(0).getWord());
@@ -91,42 +94,48 @@ public class WordCardAdapter extends ArrayAdapter<Word> {
 //            viewHolder.pronunciation2.setOnClickListener(listener);
 
 
-            viewHolder.flipView.setInAnimation(context, R.anim.animate_flip_in);
-            viewHolder.flipView.setOutAnimation(context, R.anim.animate_flip_out);
+//            viewHolder.flipView.setInAnimation(context, R.anim.animate_flip_in);
+//            viewHolder.flipView.setOutAnimation(context, R.anim.animate_flip_out);
 
 
             viewHolder.dontKnowWordButton = convertView.findViewById(R.id.dont_know_word);
             viewHolder.knowWordButton = convertView.findViewById(R.id.know_word);
 
             viewHolder.dontKnowWordButton.setOnClickListener(v -> {
-                rankDown(words.get(position).getId());
-                words.remove(position);
-                viewFlipper.showNext();
+                Word currentWord = getItem(position);
+                rankDown(currentWord.getId());
+                this.remove(currentWord);
 
             });
+
             viewHolder.knowWordButton.setOnClickListener(v -> {
-                rankUp(words.get(position).getId());
-                words.remove(position);
-                viewFlipper.showNext();
+                Word currentWord = getItem(position);
+                rankUp(currentWord.getId());
+                this.remove(currentWord);
+
             });
+
             viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewHolder.flipView.showNext();
+                    viewHolder.flipView.flipTheView();
                 }
             });
+
+
             convertView.setTag(viewHolder);
+
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        if (words.size() > 0) {
+        if (getCount() > 0) {
             //TODO nullpointer when word is out of bounds (out of current session bounds)
-            Word wordFromData = null;
-            wordFromData = words.get(position);
+            Word wordFromData = getItem(position);
             viewHolder.word.setText(wordFromData.getWord());
             viewHolder.definition.setText(wordFromData.getDefinition());
             viewHolder.pronunciation.setTag(position);
-//            viewHolder.pronunciation2.setTag(position);
+        } else {
+            System.out.println("NO MORE DATA");
         }
         return convertView;
     }
@@ -159,8 +168,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> {
         @Override
         public void onClick(View view) {
             int position = (Integer) view.getTag();
-            if (words != null) {
-                new AudioPronunciation(context).playPronunciation(words.get(position).getId());
+            if (getCount() > 0) {
+                new AudioPronunciation(context).playPronunciation(getItem(position).getId());
             }
         }
     };

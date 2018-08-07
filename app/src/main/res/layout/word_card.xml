@@ -6,35 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".LearningFragment">
 
-    <ViewFlipper
+    <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/flipper_single"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="40dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="180dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/rounded_corners"
-            android:elevation="3dp">
-            <TextView
-                android:id="@+id/front"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:textSize="42sp" />
-
-            <ImageButton
-                android:id="@+id/pronunciation_card_front"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/outline_volume_up_white_24dp" />
-        </RelativeLayout>
 
 
         <RelativeLayout
@@ -90,6 +67,31 @@
 
         </RelativeLayout>
 
-    </ViewFlipper>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="180dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/rounded_corners"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/front"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textSize="42sp" />
+
+            <ImageButton
+                android:id="@+id/pronunciation_card_front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/outline_volume_up_white_24dp" />
+        </RelativeLayout>
+
+    </com.wajahatkarim3.easyflipview.EasyFlipView>
 
 </FrameLayout>
