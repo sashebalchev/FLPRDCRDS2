@@ -1,4 +1,5 @@
 package com.dmu.sash.flprdcrds;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,8 +35,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
     private Realm realm;
     private Context context;
     private Fragment fragment;
-    private GestureDetector gestureDetector;
-    private AdapterViewFlipper viewFlipper;
     private SharedPreferences sharedPreferences;
     private FragmentManager fragmentManager;
     private int numberOfWords;
@@ -51,8 +50,9 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         Button dontKnowWordButton, knowWordButton;
         ImageButton pronunciation;
     }
+
     //TODO remove the delete realm clause before release. After release implement migration methods.
-    WordCardAdapter(android.support.v4.app.Fragment fragment, List<Word> data, Context context, AdapterViewFlipper viewFlipper, FragmentManager fragmentManager) {
+    WordCardAdapter(Context context, List<Word> data) {
         super(context, R.layout.word_card, data);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
@@ -72,10 +72,7 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         }
         this.context = context;
         numberOfWords = getCount();
-       this.fragmentManager = fragmentManager;
-
-//        System.out.println(words.get(0).getWord());
-        this.viewFlipper = viewFlipper;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -94,20 +91,7 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (viewHolder.flipView.isBackSide()){
-//                        viewHolder.dontKnowWordButton.setVisibility(View.GONE);
-//                        viewHolder.knowWordButton.setVisibility(View.GONE);
-//                    }
                     viewHolder.flipView.flipTheView();
-//                    viewHolder.flipView.setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
-//                        @Override
-//                        public void onViewFlipCompleted(EasyFlipView easyFlipView, EasyFlipView.FlipState newCurrentSide) {
-//                            if (viewHolder.flipView.isBackSide()){
-//                                viewHolder.dontKnowWordButton.setVisibility(View.VISIBLE);
-//                                viewHolder.knowWordButton.setVisibility(View.VISIBLE);
-//                            }
-//                        }
-//                    });
                 }
             });
             viewHolder.word = convertView.findViewById(R.id.front);
@@ -144,13 +128,13 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         } else {
             System.out.println("NO MORE DATA");
             convertView.setVisibility(View.GONE);
-            LearningFragment.changeSession();
-            context.startActivity(new Intent(context, MainActivity.class));
+//            LearningFragment.changeSession();
+//            this.notifyDataSetChanged();
         }
         return convertView;
     }
 
-    private void refreshFragment(){
+    private void refreshFragment() {
         fragmentManager.beginTransaction().detach(fragment).commitNowAllowingStateLoss();
         fragmentManager.beginTransaction().attach(fragment).commitNowAllowingStateLoss();
     }

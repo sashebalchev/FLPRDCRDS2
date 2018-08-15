@@ -13,4 +13,5 @@
     <string name="add_word">Add Word</string>
     <string name="EXAMPLE_TEXT">Example text</string>
     <string name="next_session">NEXT SESSION</string>
+    <string name="REALM_FILENAME">flprcrds.realm</string>
 </resources>

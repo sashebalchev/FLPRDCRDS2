@@ -13,6 +13,7 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,58 +29,59 @@ public class LearningFragment extends Fragment {
     private ListView listView;
     private URLAsyncTask urlAsyncTask;
     private AdapterViewFlipper viewFlipper;
-    private RealmResults<Word> wordRealmResults;
     private List<Word> wordsForSession;
-
-    public static int session;
-    private static SharedPreferences sharedPreferences;
-
+    private LearningDataProvider learningDataProvider;
     public LearningFragment() {
     }
+
     //TODO remove the delete realm clause before release. After release implement migration methods.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("flprcrds.realm")
-                .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        session = sharedPreferences.getInt("SESSION", 1);
-        getRealmData();
-    }
-
-    private void getRealmData() {
-        switch (session) {
-            case 1:
-                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
-                break;
-            case 2:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
-                break;
-            case 3:
-                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
-                break;
-            case 4:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
-                break;
-            case 5:
-                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 3).findAll();
-                break;
-        }
-        if (wordRealmResults.size() > 0){
-            wordsForSession = realm.copyFromRealm(wordRealmResults);
-            Collections.shuffle(wordsForSession);
-            if (wordsForSession.size() == 0){
-                changeSession();
-                getRealmData();
-            }
-        } else {
-            wordsForSession = realm.copyFromRealm(wordRealmResults);
-        }
-
+        learningDataProvider = new LearningDataProvider(getContext());
+//        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+//                .name("flprcrds.realm")
+//                .schemaVersion(0)
+//                .deleteRealmIfMigrationNeeded()
+//                .build();
+//        realm = Realm.getInstance(realmConfig);
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+//        session = sharedPreferences.getInt("SESSION", 1);
+//        if (!realm.isEmpty()){
+//            getRealmData();
+//            while (wordsForSession.size() <= 0){
+//                changeSession();
+//                getRealmData();
+//            }
+//        } else {
+//            setFirstSession();
+//            wordsForSession = new ArrayList<>(0);
+//        }
+//    }
+//
+//    private void getRealmData() {
+//        RealmResults<Word> wordRealmResults = null;
+//        switch (session) {
+//            case 1:
+//                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
+//                break;
+//            case 2:
+//                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
+//                break;
+//            case 3:
+//                wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
+//                break;
+//            case 4:
+//                wordRealmResults = realm.where(Word.class).lessThanOrEqualTo("score", 2).findAll();
+//                break;
+//            case 5:
+//                wordRealmResults = realm.where(Word.class).findAll();
+//                break;
+//            default:
+//                wordRealmResults = realm.where(Word.class).findAll();
+//                break;
+//        }
+//        wordsForSession = realm.copyFromRealm(wordRealmResults);
     }
 
     @Nullable
@@ -93,18 +95,15 @@ public class LearningFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        List<Word> data = learningDataProvider.getData();
         viewFlipper = getView().findViewById(R.id.flipper_all);
-        WordCardAdapter wordCardAdapter = new WordCardAdapter(this, wordsForSession, getContext(), viewFlipper, getFragmentManager());
+        WordCardAdapter wordCardAdapter = new WordCardAdapter(getContext(), data);
         viewFlipper.setAdapter(wordCardAdapter);
-        Button sessionButton = getView().findViewById(R.id.session_button);
-        sessionButton.setOnClickListener(v -> changeSession());
+//        Button sessionButton = getView().findViewById(R.id.session_button);
+//        sessionButton.setOnClickListener(v -> changeSession());
     }
 
-    public static void changeSession() {
-        if (session < 5) {
-            sharedPreferences.edit().putInt("SESSION", session + 1).commit();
-        } else {
-            sharedPreferences.edit().putInt("SESSION", 1).commit();
-        }
-    }
+
+
+
 }
