@@ -14,9 +14,9 @@ public class Word extends RealmObject {
     @Required
     private String definition;
     @Required
-    private String pronounciation;
+    private String pronunciation;
     @Required
-    private String audioPronounciation;
+    private String audioPronunciation;
     private int score;
     private int proficiency;
     private long timestamp;
@@ -45,20 +45,20 @@ public class Word extends RealmObject {
         this.definition = definition;
     }
 
-    public String getPronounciation() {
-        return pronounciation;
+    public String getPronunciation() {
+        return pronunciation;
     }
 
-    public void setPronounciation(String pronounciation) {
-        this.pronounciation = pronounciation;
+    public void setPronunciation(String pronunciation) {
+        this.pronunciation = pronunciation;
     }
 
-    public String getAudioPronounciation() {
-        return audioPronounciation;
+    public String getAudioPronunciation() {
+        return audioPronunciation;
     }
 
-    public void setAudioPronounciation(String audioPronounciation) {
-        this.audioPronounciation = audioPronounciation;
+    public void setAudioPronunciation(String audioPronunciation) {
+        this.audioPronunciation = audioPronunciation;
     }
 
     public int getScore() {

@@ -3,10 +3,8 @@ package com.dmu.sash.flprdcrds;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -56,9 +54,11 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         return instance;
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO remove the delete realm clause before release. After release implement migration methods.
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)
@@ -151,7 +151,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                     .setTitle(word.getWord().toUpperCase())
                     .setView(wordEdit)
-                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getAudioPronounciation()))
+                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()))
                     .setNegativeButton("Delete", (dialog12, which) -> deleteWordEntry(word.getId()))
                     .create();
             dialog.show();
@@ -164,7 +164,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     }
 
     private void audioPronunciation(String url) {
-            AudioPronunciation.getInstance().play(url, getContext());
+        AudioPronunciation.getInstance().play(url, getContext());
     }
 
     private void deleteWordEntry(String id) {

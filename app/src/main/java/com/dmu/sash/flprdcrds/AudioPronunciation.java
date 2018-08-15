@@ -30,7 +30,6 @@ public class AudioPronunciation extends Application {
 
     public void play(String urlAudio, Context context) {
         mediaPlayer.reset();
-
         try {
             mediaPlayer.setDataSource(urlAudio);
             mediaPlayer.prepare();

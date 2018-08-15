@@ -16,8 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
-
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 
@@ -79,10 +77,10 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     private View.OnClickListener listener = (View view) -> {
         int position = (Integer) view.getTag();
         Word wordToPronounce = getItem(position);
-        String url = wordToPronounce.getAudioPronounciation();
+        String url = wordToPronounce.getAudioPronunciation();
 //            String pronunciationURL = null;
 //            if (word != null) {
-//                pronunciationURL = word.getAudioPronounciation();
+//                pronunciationURL = word.getAudioPronunciation();
         if (getCount() > 0) {
             AudioPronunciation.getInstance().play(url, context);
         }

@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO remove the delete realm clause before release. After release implement migration methods.
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)

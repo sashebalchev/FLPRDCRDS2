@@ -1,5 +1,4 @@
 package com.dmu.sash.flprdcrds;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 
@@ -53,7 +51,7 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         Button dontKnowWordButton, knowWordButton;
         ImageButton pronunciation;
     }
-
+    //TODO remove the delete realm clause before release. After release implement migration methods.
     WordCardAdapter(android.support.v4.app.Fragment fragment, List<Word> data, Context context, AdapterViewFlipper viewFlipper, FragmentManager fragmentManager) {
         super(context, R.layout.word_card, data);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
@@ -117,14 +115,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);
             setPreferences(viewHolder.word, viewHolder.definition, viewHolder.pronunciation);
             viewHolder.pronunciation.setOnClickListener(listener);
-//            viewHolder.pronunciation2 = convertView.findViewById(R.id.pronunciation_card_back);
-//            viewHolder.pronunciation2.setOnClickListener(listener);
-
-
-//            viewHolder.flipView.setInAnimation(context, R.anim.animate_flip_in);
-//            viewHolder.flipView.setOutAnimation(context, R.anim.animate_flip_out);
-
-
 
 
             viewHolder.dontKnowWordButton.setOnClickListener(v -> {
@@ -140,13 +130,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
                 this.remove(currentWord);
                 viewHolder.progressBar.setProgress(numberOfWords - getCount());
             });
-
-//            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    viewHolder.flipView.flipTheView();
-//                }
-//            });
 
             convertView.setTag(viewHolder);
 
@@ -201,10 +184,10 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         public void onClick(View view) {
             int position = (Integer) view.getTag();
             Word wordToPronounce = getItem(position);
-            String url = wordToPronounce.getAudioPronounciation();
+            String url = wordToPronounce.getAudioPronunciation();
 //            String pronunciationURL = null;
 //            if (word != null) {
-//                pronunciationURL = word.getAudioPronounciation();
+//                pronunciationURL = word.getAudioPronunciation();
             if (getCount() > 0) {
                 AudioPronunciation.getInstance().play(url, context);
             }

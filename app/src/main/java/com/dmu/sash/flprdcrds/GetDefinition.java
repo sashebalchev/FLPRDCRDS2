@@ -19,7 +19,8 @@ public class GetDefinition implements AsyncResponse {
 
     private Realm realm;
 
-    public GetDefinition() {
+    GetDefinition() {
+        //TODO remove the delete realm clause before release. After release implement migration methods.
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name("flprcrds.realm")
                 .schemaVersion(0)
@@ -34,7 +35,8 @@ public class GetDefinition implements AsyncResponse {
         String definition = null;
         String pronunciation = null;
         String audioPronunciation = null;
-        Result result;
+        Result result = null;
+        LexicalEntry lexicalEntry = null;
         Gson gson = new Gson();
         Response response = gson.fromJson(output, Response.class);
 //        word = response.getResults().get(0).getWord();
@@ -42,7 +44,7 @@ public class GetDefinition implements AsyncResponse {
             result = response.getResults().get(0);
             if (result != null) {
                 word = result.getWord();
-                LexicalEntry lexicalEntry = result.getLexicalEntries().get(0);
+                lexicalEntry = result.getLexicalEntries().get(0);
                 if (lexicalEntry != null) {
                     Entry entry = lexicalEntry.getEntries().get(0);
                     if (entry != null) {
@@ -68,12 +70,13 @@ public class GetDefinition implements AsyncResponse {
         } else {
             System.out.println("No results found.");
         }
-        //Else error
+
 
         // TODO Loop senses over and find the short definitions there.
         // TODO handle exception if word doesn't exist
-
-        LexicalEntry lexicalEntry = response.getResults().get(0).getLexicalEntries().get(0);
+        if (lexicalEntry == null) {
+            lexicalEntry = response.getResults().get(0).getLexicalEntries().get(0);
+        }
         List<Pronunciation> pronunciationList = lexicalEntry.getPronunciations();
         if (pronunciationList != null) {
             for (Pronunciation pronunciationEntry : pronunciationList) {
@@ -104,8 +107,8 @@ public class GetDefinition implements AsyncResponse {
             wordDef.setId(UUID.randomUUID().toString());
             wordDef.setWord(word);
             wordDef.setDefinition(definition);
-            wordDef.setPronounciation(pronunciation);
-            wordDef.setAudioPronounciation(audioPronunciation);
+            wordDef.setPronunciation(pronunciation);
+            wordDef.setAudioPronunciation(audioPronunciation);
             wordDef.setScore(1);
             wordDef.setProficiency(1);
             wordDef.setTimestamp(System.currentTimeMillis());
