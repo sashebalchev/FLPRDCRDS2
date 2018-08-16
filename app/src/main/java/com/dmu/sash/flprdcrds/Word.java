@@ -13,7 +13,6 @@ public class Word extends RealmObject {
     private String word;
     @Required
     private String definition;
-    @Required
     private String pronunciation;
     @Required
     private String audioPronunciation;
