@@ -13,106 +13,99 @@ import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class GetDefinition implements AsyncResponse {
 
-    private Realm realm;
-
-    GetDefinition() {
-        //TODO remove the delete realm clause before release. After release implement migration methods.
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("flprcrds.realm")
-                .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
-    }
-
     @Override
     public void processFinish(String output) {
-        String word = null;
-        String definition = null;
-        String pronunciation = null;
-        String audioPronunciation = null;
-        Result result = null;
-        LexicalEntry lexicalEntry = null;
+        Response response = extractResponse(output);
+        String word = extractWord(response);
+        LexicalEntry lexicalEntry = extractLexicalEntry(response);
+        String definition = extractDefinition(lexicalEntry);
+        String audioPronunciation = extractAudioPronunciation(lexicalEntry);
+        saveWord(word, definition, audioPronunciation);
+    }
+
+    private Response extractResponse(String output) {
         Gson gson = new Gson();
-        Response response = gson.fromJson(output, Response.class);
-//        word = response.getResults().get(0).getWord();
+        return gson.fromJson(output, Response.class);
+    }
+
+    private String extractWord(Response response) {
+        String word = null;
         if (response != null) {
-            result = response.getResults().get(0);
+            Result result = response.getResults().get(0);
             if (result != null) {
                 word = result.getWord();
-                lexicalEntry = result.getLexicalEntries().get(0);
-                if (lexicalEntry != null) {
-                    Entry entry = lexicalEntry.getEntries().get(0);
-                    if (entry != null) {
-                        Sense sense = entry.getSenses().get(0);
-                        if (sense != null) {
-                            if (sense.getShort_definitions() != null) {
-                                definition = sense.getShort_definitions().get(0);
-                            } else {
-                                System.out.println("Problem getting definition");
-                            }
-                        } else {
-                            System.out.println("No definitions");
-                        }
-                    } else {
-                        System.out.println("No entries");
-                    }
-                } else {
-                    System.out.println("No entries");
-                }
-            } else {
-                System.out.println("No word found.");
             }
-        } else {
-            System.out.println("No results found.");
         }
+        return word;
+    }
 
-
-        // TODO Loop senses over and find the short definitions there.
-        // TODO handle exception if word doesn't exist
-        if (lexicalEntry == null) {
-            lexicalEntry = response.getResults().get(0).getLexicalEntries().get(0);
+    private LexicalEntry extractLexicalEntry(Response response) {
+        LexicalEntry lexicalEntry = null;
+        if (response != null) {
+            Result result = response.getResults().get(0);
+            if (result != null) {
+                lexicalEntry = result.getLexicalEntries().get(0);
+            }
         }
+        return lexicalEntry;
+    }
+
+    private String extractDefinition(LexicalEntry lexicalEntry) {
+        String definition = null;
+        if (lexicalEntry != null) {
+            Entry entry = lexicalEntry.getEntries().get(0);
+            if (entry != null) {
+                Sense sense = entry.getSenses().get(0);
+                if (sense != null) {
+                    if (sense.getShort_definitions() != null) {
+                        definition = sense.getShort_definitions().get(0);
+                    }
+                }
+            }
+        }
+        return definition;
+    }
+
+    private String extractAudioPronunciation(LexicalEntry lexicalEntry) {
+        String audioPronunciation = null;
         List<Pronunciation> pronunciationList = lexicalEntry.getPronunciations();
         if (pronunciationList != null) {
             for (Pronunciation pronunciationEntry : pronunciationList) {
                 audioPronunciation = pronunciationEntry.getAudioFile();
-                if (audioPronunciation != null) {
-                    pronunciation = pronunciationEntry.getPhoneticSpelling();
-                    break;
-                }
+                if (audioPronunciation != null) break;
             }
         }
         if (audioPronunciation == null) {
-            pronunciationList = lexicalEntry.getEntries().get(0).getPronunciations();
-            for (Pronunciation pronunciationEntry : pronunciationList) {
-                audioPronunciation = pronunciationEntry.getAudioFile();
-
-                if (audioPronunciation != null) {
-                    pronunciation = pronunciationEntry.getPhoneticSpelling();
-                    break;
+            for (Entry entry : lexicalEntry.getEntries()) {
+                pronunciationList = entry.getPronunciations();
+                if (pronunciationList != null) {
+                    for (Pronunciation pronunciationEntry : pronunciationList) {
+                        audioPronunciation = pronunciationEntry.getAudioFile();
+                        if (audioPronunciation != null) break;
+                    }
                 }
+                if (audioPronunciation != null) break;
             }
         }
-//        for (int i = 0; audioPronunciation == null; i++) {
-//            audioPronunciation = response.getResults().get(0).getLexicalEntries().get(0).getPronunciations().get(i).getAudioFile();
-//        }
-//        definition = response.getResults().get(0).getLexicalEntries().get(0).getEntries().get(0).getSens().get(0).getShort_definitions().get(0);
-        if (word != null && definition != null && pronunciation != null && audioPronunciation != null) {
+        return audioPronunciation;
+    }
+
+    private void saveWord(String word, String definition, String audioPronunciation) {
+        if (word != null && definition != null && audioPronunciation != null) {
             final Word wordDef = new Word();
             wordDef.setId(UUID.randomUUID().toString());
             wordDef.setWord(word);
             wordDef.setDefinition(definition);
-            wordDef.setPronunciation(pronunciation);
             wordDef.setAudioPronunciation(audioPronunciation);
             wordDef.setScore(1);
             wordDef.setProficiency(1);
             wordDef.setTimestamp(System.currentTimeMillis());
-            realm.executeTransactionAsync(realm -> realm.copyToRealm(wordDef));
+            Realm realm = RealmFactory.getRealm();
+            realm.executeTransactionAsync(r -> r.copyToRealm(wordDef));
         }
     }
+
 }
