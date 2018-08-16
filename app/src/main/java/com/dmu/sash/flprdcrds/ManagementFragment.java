@@ -14,14 +14,17 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -80,6 +83,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = getView().findViewById(R.id.word_list);
+        final WordAdapter adapter = new WordAdapter(this, words, getActivity());
 //        listView.setBackgroundColor(bgColor);
         Button deleteButton = getView().findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
@@ -107,15 +111,26 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                         String text = taskEditText.getText().toString();
                         urlAsyncTask = new URLAsyncTask(getWord);
                         urlAsyncTask.execute(getWord.getSearchURL(text));
+//                        listView.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                listView.setSelection(adapter.getCount());
+//                            }
+//                        });
                     })
                     .setNegativeButton("Cancel", null)
                     .create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
             taskEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
+                    if (s.length()>0 && s.subSequence(s.length()-1, s.length())
+                            .toString().equalsIgnoreCase("\n")) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+                    }
                 }
 
                 @Override
@@ -136,9 +151,12 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
 
                 }
             });
+            taskEditText.setFocusableInTouchMode(true);
             taskEditText.requestFocus();
+
         });
-        final WordAdapter adapter = new WordAdapter(this, words, getActivity());
+
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             final Word word = (Word) parent.getAdapter().getItem(position);
@@ -156,8 +174,8 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .create();
             dialog.show();
         });
-    }
 
+    }
 
     private void deleteAllWords() {
         realm.executeTransactionAsync(realm -> realm.deleteAll());
