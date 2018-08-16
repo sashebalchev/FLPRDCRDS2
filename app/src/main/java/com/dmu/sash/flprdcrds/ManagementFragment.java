@@ -61,13 +61,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO remove the delete realm clause before release. After release implement migration methods.
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("flprcrds.realm")
-                .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
+        realm = RealmFactory.getRealm();
         words = realm.where(Word.class).findAllAsync().sort("timestamp");
     }
 
@@ -108,15 +102,9 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setView(taskEditText)
                     .setPositiveButton("Add", (dialogInterface, i) -> {
                         GetWord getWord = new GetWord();
-                        String text = taskEditText.getText().toString();
+                        String text = taskEditText.getText().toString().trim();
                         urlAsyncTask = new URLAsyncTask(getWord);
                         urlAsyncTask.execute(getWord.getSearchURL(text));
-//                        listView.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                listView.setSelection(adapter.getCount());
-//                            }
-//                        });
                     })
                     .setNegativeButton("Cancel", null)
                     .create();
@@ -129,6 +117,8 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                                           int count) {
                     if (s.length()>0 && s.subSequence(s.length()-1, s.length())
                             .toString().equalsIgnoreCase("\n")) {
+//                        if (dialog.getButton(AlertDialog.BUTTON_POSITIVE).getVisi)
+
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
                     }
                 }

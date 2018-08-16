@@ -56,7 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         super.onViewCreated(view, savedInstanceState);
         Preference resetPreferencesButton = findPreference(getString(R.string.PREF_RESET));
 
-        //TODO make preference selection reflect the real selection
+
         resetPreferencesButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -81,7 +81,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 //        getPreferenceScreen().getSharedPreferences()
 //                .unregisterOnSharedPreferenceChangeListener(this);
 //    }
-
+//TODO make preference selection reflect the real selection
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 

@@ -51,15 +51,9 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         ImageButton pronunciation;
     }
 
-    //TODO remove the delete realm clause before release. After release implement migration methods.
     WordCardAdapter(Context context, List<Word> data) {
         super(context, R.layout.word_card, data);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("flprcrds.realm")
-                .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
+        realm = RealmFactory.getRealm();
         this.fragment = fragment;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
@@ -128,7 +122,7 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         } else {
             System.out.println("NO MORE DATA");
             convertView.setVisibility(View.GONE);
-//            LearningFragment.changeSession();
+            SessionManager.getInstance(context).nextSession();
 //            this.notifyDataSetChanged();
         }
         return convertView;

@@ -38,8 +38,9 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
         // Required empty public constructor
     }
-    public static ProfileFragment getInstance(){
-        if (instance == null){
+
+    public static ProfileFragment getInstance() {
+        if (instance == null) {
             instance = new ProfileFragment();
         }
         return instance;
@@ -48,13 +49,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO remove the delete realm clause before release. After release implement migration methods.
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("flprcrds.realm")
-                .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
+        realm = RealmFactory.getRealm();
         gestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
     }
 

@@ -34,7 +34,6 @@ public class LearningFragment extends Fragment {
     public LearningFragment() {
     }
 
-    //TODO remove the delete realm clause before release. After release implement migration methods.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +98,6 @@ public class LearningFragment extends Fragment {
         viewFlipper = getView().findViewById(R.id.flipper_all);
         WordCardAdapter wordCardAdapter = new WordCardAdapter(getContext(), data);
         viewFlipper.setAdapter(wordCardAdapter);
-//        Button sessionButton = getView().findViewById(R.id.session_button);
-//        sessionButton.setOnClickListener(v -> changeSession());
     }
 
 
