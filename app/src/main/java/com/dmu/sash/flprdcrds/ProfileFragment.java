@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         easyFlipView = getView().findViewById(R.id.easy_flip);
         TextView test = getView().findViewById(R.id.back);
-        test.setText("BACK TEST");
+        test.setText(R.string.back_test);
 //        easyFlipView.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {

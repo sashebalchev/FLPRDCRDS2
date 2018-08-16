@@ -14,4 +14,6 @@
     <string name="EXAMPLE_TEXT">Example text</string>
     <string name="next_session">NEXT SESSION</string>
     <string name="REALM_FILENAME">flprcrds.realm</string>
+    <string name="back_test">BACK TEST</string>
+    <string name="delete_all_words">Delete ALL words</string>
 </resources>
