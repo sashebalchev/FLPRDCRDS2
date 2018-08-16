@@ -29,7 +29,7 @@ public class SessionManager {
     public int nextSession(){
         if (session < 5) {
             session++;
-            sharedPreferences.edit().putInt("SESSION", session).commit();
+            sharedPreferences.edit().putInt("SESSION", session).apply();
         } else {
             session = initialSession();
         }
@@ -38,7 +38,7 @@ public class SessionManager {
 
     public int initialSession(){
         session = 1;
-        sharedPreferences.edit().putInt("SESSION", session).commit();
+        sharedPreferences.edit().putInt("SESSION", session).apply();
         return session;
     }
 }
