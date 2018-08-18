@@ -18,6 +18,8 @@ public class Word extends RealmObject {
     private String audioPronunciation;
     private int score;
     private int proficiency;
+    private int consecutiveKnownSessions;
+    private int consecutiveNotKnownSessions;
     private long timestamp;
 
     public String getId() {
@@ -69,11 +71,15 @@ public class Word extends RealmObject {
     }
 
     public void decreaseScore() {
+        setConsecutiveKnownSessions(0);
         setScore(1);
         setProficiency(1);
+        increaseConsecutiveNotKnownSessions();
     }
 
     public void increaseScore() {
+        setConsecutiveNotKnownSessions(0);
+        increaseConsecutiveKnownSessions();
         if (score < 3) {
             score = score + 1;
         } else {
@@ -89,6 +95,22 @@ public class Word extends RealmObject {
         this.proficiency = proficiency;
     }
 
+    public void setConsecutiveKnownSessions(int consecutiveKnownSessions) {
+        this.consecutiveKnownSessions = consecutiveKnownSessions;
+    }
+
+    private void increaseConsecutiveKnownSessions() {
+        this.consecutiveKnownSessions++;
+    }
+
+    public void setConsecutiveNotKnownSessions(int consecutiveNotKnownSessions) {
+        this.consecutiveNotKnownSessions = consecutiveNotKnownSessions;
+    }
+
+    private void increaseConsecutiveNotKnownSessions() {
+        this.consecutiveNotKnownSessions++;
+    }
+
     public long getTimestamp() {
         return timestamp;
     }
@@ -96,4 +118,6 @@ public class Word extends RealmObject {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+
 }

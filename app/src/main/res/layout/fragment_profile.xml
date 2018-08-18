@@ -4,65 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ManagementFragment">
 
-    <com.wajahatkarim3.easyflipview.EasyFlipView
-        android:id="@+id/easy_flip"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        app:flipDuration="300"
-        app:flipEnabled="true"
-        app:flipFrom="right"
-        app:flipOnTouch="false"
-        app:flipType="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/back_logo_large_red" />-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/front_logo_large_red" />-->
-        <!-- Back Layout Goes Here -->
-        <!--<include layout="@layout/card_back_test" />-->
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/back_logo_large_red" />-->
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
+            android:id="@+id/number_sessions"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:text="BACK"
-            android:id="@+id/back"
-             />
-        <!-- Front Layout Goes Here -->
-        <!--<include layout="@layout/card_front_test" />-->
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/front_logo_large_red" />-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:text="FRONT"/>
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
 
-    </com.wajahatkarim3.easyflipview.EasyFlipView>
+        <TextView
+            android:id="@+id/mastered_words"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/known_words"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/struggled_words"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"></RelativeLayout>
+
+    </LinearLayout>
 
 
 </FrameLayout>

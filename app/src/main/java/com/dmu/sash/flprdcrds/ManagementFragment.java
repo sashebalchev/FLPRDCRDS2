@@ -72,10 +72,9 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ListView listView = getView().findViewById(R.id.word_list);
+        ListView listView = view.findViewById(R.id.word_list);
         final WordAdapter adapter = new WordAdapter(words, getContext());
-//        listView.setBackgroundColor(bgColor);
-        Button deleteButton = getView().findViewById(R.id.delete_words_button);
+        Button deleteButton = view.findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
             AlertDialog deleteWordsDialog = new AlertDialog.Builder(getContext())
                     .setTitle("Delete ALL words?")
@@ -85,7 +84,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             deleteWordsDialog.show();
         });
 
-        FloatingActionButton fab = getView().findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             final EditText taskEditText = new EditText(getActivity());
             taskEditText.setGravity(Gravity.CENTER);
