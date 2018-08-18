@@ -10,7 +10,6 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class LearningDataProvider {
-    private SharedPreferences sharedPreferences;
     private SessionManager sessionManager;
     private int session;
     private Realm realm;
@@ -27,7 +26,7 @@ public class LearningDataProvider {
             wordsForSession = getSessionData();
             while (wordsForSession.size() <= 0) {
                 session = sessionManager.nextSession();
-                getSessionData();
+                wordsForSession = getSessionData();
             }
         } else {
             session = sessionManager.initialSession();
