@@ -17,6 +17,7 @@ import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.prefs.PreferencesFactory;
 
 import io.realm.Realm;
 
@@ -104,10 +105,10 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
     }
 
     private void setPreferences(TextView word, TextView definition, ImageButton pronunciationButton) {
-        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
-        bgColor = sharedPreferencesFactory.getBackgroundColorPreference();
-        fontColor = sharedPreferencesFactory.getFontColorPreference();
-        String font = sharedPreferencesFactory.getFontStylePreference();
+        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
+        bgColor = preferencesProvider.getBackgroundColorPreference();
+        fontColor = preferencesProvider.getFontColorPreference();
+        String font = preferencesProvider.getFontStylePreference();
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {

@@ -112,8 +112,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                                           int count) {
                     if (s.length()>0 && s.subSequence(s.length()-1, s.length())
                             .toString().equalsIgnoreCase("\n")) {
-//                        if (dialog.getButton(AlertDialog.BUTTON_POSITIVE).getVisi)
-
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
                     }
                 }

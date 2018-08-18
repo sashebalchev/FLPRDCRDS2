@@ -48,7 +48,7 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<Word> data = learningDataProvider.getData();
-        viewFlipper = getView().findViewById(R.id.flipper_all);
+        viewFlipper = view.findViewById(R.id.flipper_all);
         WordCardAdapter wordCardAdapter = new WordCardAdapter(getContext(), data);
         viewFlipper.setAdapter(wordCardAdapter);
     }

@@ -30,10 +30,10 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
     WordAdapter(OrderedRealmCollection<Word> data, Context context){
         super(data);
         this.context = context;
-        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
-        backgroundColor = sharedPreferencesFactory.getBackgroundColorPreference();
-        fontColor = sharedPreferencesFactory.getFontColorPreference();
-        String font = sharedPreferencesFactory.getFontStylePreference();
+        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
+        backgroundColor = preferencesProvider.getBackgroundColorPreference();
+        fontColor = preferencesProvider.getFontColorPreference();
+        String font = preferencesProvider.getFontStylePreference();
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {
