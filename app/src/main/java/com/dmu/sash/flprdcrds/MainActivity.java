@@ -8,6 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.view.MenuItem;
 
+import com.dmu.sash.flprdcrds.learning.LearningFragment;
+import com.dmu.sash.flprdcrds.management.ManagementFragment;
+import com.dmu.sash.flprdcrds.profile.ProfileFragment;
+import com.dmu.sash.flprdcrds.settings.SettingsFragment;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     // my comment
