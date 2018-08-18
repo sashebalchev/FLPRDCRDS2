@@ -1,8 +1,8 @@
-package com.dmu.sash.flprdcrds.service.object;
+package com.dmu.sash.flprdcrds.service.objects;
 
 import java.util.List;
 
-public class Subsense {
+public class Sense {
     /**
      * crossReferenceMarkers : ["string"]
      * crossReferences : [{"id":"string","text":"string","type":"string"}]
@@ -32,6 +32,7 @@ public class Subsense {
     private List<String> regions;
     private List<String> registers;
     private List<String> short_definitions;
+    private List<Subsense> subsenses;
     private List<ThesaurusLink> thesaurusLinks;
     private List<Translation> translations;
     private List<VariantForm> variantForms;
@@ -122,6 +123,14 @@ public class Subsense {
 
     public void setShort_definitions(List<String> short_definitions) {
         this.short_definitions = short_definitions;
+    }
+
+    public List<Subsense> getSubsenses() {
+        return subsenses;
+    }
+
+    public void setSubsenses(List<Subsense> subsenses) {
+        this.subsenses = subsenses;
     }
 
     public List<ThesaurusLink> getThesaurusLinks() {

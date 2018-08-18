@@ -23,10 +23,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.dmu.sash.flprdcrds.helper.AudioPronunciation;
+import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
-import com.dmu.sash.flprdcrds.database.Word;
+import com.dmu.sash.flprdcrds.database.entities.Word;
 
 import java.util.Objects;
 

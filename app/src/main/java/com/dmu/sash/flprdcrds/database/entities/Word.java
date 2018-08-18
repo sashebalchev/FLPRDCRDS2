@@ -1,4 +1,4 @@
-package com.dmu.sash.flprdcrds.database;
+package com.dmu.sash.flprdcrds.database.entities;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

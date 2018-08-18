@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 
 import com.dmu.sash.flprdcrds.R;
-import com.dmu.sash.flprdcrds.database.Word;
+import com.dmu.sash.flprdcrds.database.entities.Word;
 
 import java.util.List;
 

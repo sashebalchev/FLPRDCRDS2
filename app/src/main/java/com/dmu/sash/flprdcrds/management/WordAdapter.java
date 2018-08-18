@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dmu.sash.flprdcrds.helper.AudioPronunciation;
+import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 import com.dmu.sash.flprdcrds.R;
-import com.dmu.sash.flprdcrds.database.Word;
+import com.dmu.sash.flprdcrds.database.entities.Word;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;

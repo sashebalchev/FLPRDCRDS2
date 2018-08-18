@@ -1,4 +1,4 @@
-package com.dmu.sash.flprdcrds.service.object;
+package com.dmu.sash.flprdcrds.service.objects;
 
 public class Metadata {
     private String provider;

@@ -2,13 +2,13 @@ package com.dmu.sash.flprdcrds.management;
 
 
 import com.dmu.sash.flprdcrds.database.RealmFactory;
-import com.dmu.sash.flprdcrds.database.Word;
-import com.dmu.sash.flprdcrds.service.object.Entry;
-import com.dmu.sash.flprdcrds.service.object.LexicalEntry;
-import com.dmu.sash.flprdcrds.service.object.Pronunciation;
-import com.dmu.sash.flprdcrds.service.object.Response;
-import com.dmu.sash.flprdcrds.service.object.Result;
-import com.dmu.sash.flprdcrds.service.object.Sense;
+import com.dmu.sash.flprdcrds.database.entities.Word;
+import com.dmu.sash.flprdcrds.service.objects.Entry;
+import com.dmu.sash.flprdcrds.service.objects.LexicalEntry;
+import com.dmu.sash.flprdcrds.service.objects.Pronunciation;
+import com.dmu.sash.flprdcrds.service.objects.Response;
+import com.dmu.sash.flprdcrds.service.objects.Result;
+import com.dmu.sash.flprdcrds.service.objects.Sense;
 import com.google.gson.Gson;
 
 import java.util.List;

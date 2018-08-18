@@ -1,4 +1,4 @@
-package com.dmu.sash.flprdcrds.helper;
+package com.dmu.sash.flprdcrds.helpers;
 
 import android.app.Application;
 import android.content.Context;

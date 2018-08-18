@@ -1,4 +1,4 @@
-package com.dmu.sash.flprdcrds.service.search;
+package com.dmu.sash.flprdcrds.service.searchobjects;
 
 public class Metadata {
     /**

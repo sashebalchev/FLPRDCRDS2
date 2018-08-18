@@ -1,6 +1,6 @@
 package com.dmu.sash.flprdcrds.management;
 
-import com.dmu.sash.flprdcrds.service.search.SearchResponse;
+import com.dmu.sash.flprdcrds.service.searchobjects.SearchResponse;
 import com.google.gson.Gson;
 
 public class GetWord implements AsyncResponse {

@@ -13,11 +13,11 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.dmu.sash.flprdcrds.helper.AudioPronunciation;
+import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
-import com.dmu.sash.flprdcrds.database.Word;
+import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.List;
