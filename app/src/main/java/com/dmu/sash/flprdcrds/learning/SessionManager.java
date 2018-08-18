@@ -3,6 +3,8 @@ package com.dmu.sash.flprdcrds.learning;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
+
 public class SessionManager {
 
     private SharedPreferences sharedPreferences;
@@ -10,9 +12,9 @@ public class SessionManager {
     private static SessionManager instance;
 
     private SessionManager(Context context) {
-        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
-        sharedPreferences = sharedPreferencesFactory.getSharedPreferences();
-        session = sharedPreferencesFactory.getSessionPreference();
+        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
+        sharedPreferences = preferencesProvider.getSharedPreferences();
+        session = preferencesProvider.getSessionPreference();
     }
 
     public static SessionManager getInstance(Context context) {

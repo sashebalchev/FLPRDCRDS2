@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.dmu.sash.flprdcrds.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private SharedPreferencesFactory sharedPreferencesFactory;
+    private PreferencesProvider preferencesProvider;
     private SharedPreferences sharedPreferences;
     private View view;
     private static SettingsFragment instance;
@@ -29,8 +29,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
-        sharedPreferencesFactory = new SharedPreferencesFactory(getContext());
-        sharedPreferences = sharedPreferencesFactory.getSharedPreferences();
+        preferencesProvider = new PreferencesProvider(getContext());
+        sharedPreferences = preferencesProvider.getSharedPreferences();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         resetPreferencesButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                int session = sharedPreferencesFactory.getSessionPreference();
+                int session = preferencesProvider.getSessionPreference();
                 sharedPreferences.edit().clear().apply();
                 sharedPreferences.edit().putInt("SESSION", session).apply();
                 return false;
