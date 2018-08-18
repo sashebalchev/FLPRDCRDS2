@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new URLAsyncTaskPrepare().execute("https://od-api.oxforddictionaries.com/api/v1/search/en/?q=");
+//        new URLAsyncTaskPrepare().execute("https://od-api.oxforddictionaries.com/api/v1/search/en/?q=");
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         PreferenceManager.getDefaultSharedPreferences(this);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences,true);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
         setFrag(new LearningFragment());
     }
         //Frame stuff here.

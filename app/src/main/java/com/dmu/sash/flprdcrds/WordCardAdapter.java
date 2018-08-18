@@ -1,20 +1,11 @@
 package com.dmu.sash.flprdcrds;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
-
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterViewFlipper;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -28,15 +19,11 @@ import java.util.List;
 import java.util.Objects;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
 
     private Realm realm;
     private Context context;
-    private Fragment fragment;
-    private SharedPreferences sharedPreferences;
-    private FragmentManager fragmentManager;
     private int numberOfWords;
 
     private int bgColor;
@@ -54,19 +41,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
     WordCardAdapter(Context context, List<Word> data) {
         super(context, R.layout.word_card, data);
         realm = RealmFactory.getRealm();
-        this.fragment = fragment;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        bgColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
-        String font = sharedPreferences.getString("PREF_STYLE_FONT", "1");
-        if (font.equals("1")) {
-            typeface = Typeface.DEFAULT;
-        } else if (font.equals("2")) {
-            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
-        }
         this.context = context;
         numberOfWords = getCount();
-        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -123,17 +99,21 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             System.out.println("NO MORE DATA");
             convertView.setVisibility(View.GONE);
             SessionManager.getInstance(context).nextSession();
-//            this.notifyDataSetChanged();
         }
         return convertView;
     }
 
-    private void refreshFragment() {
-        fragmentManager.beginTransaction().detach(fragment).commitNowAllowingStateLoss();
-        fragmentManager.beginTransaction().attach(fragment).commitNowAllowingStateLoss();
-    }
-
     private void setPreferences(TextView word, TextView definition, ImageButton pronunciationButton) {
+        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
+        bgColor = sharedPreferencesFactory.getBackgroundColorPreference();
+        fontColor = sharedPreferencesFactory.getFontColorPreference();
+        String font = sharedPreferencesFactory.getFontStylePreference();
+        if (font.equals("1")) {
+            typeface = Typeface.DEFAULT;
+        } else if (font.equals("2")) {
+            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
+        }
+
         word.setBackgroundColor(bgColor);
         word.setTextColor(fontColor);
         word.setTypeface(typeface);
@@ -163,9 +143,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             int position = (Integer) view.getTag();
             Word wordToPronounce = getItem(position);
             String url = wordToPronounce.getAudioPronunciation();
-//            String pronunciationURL = null;
-//            if (word != null) {
-//                pronunciationURL = word.getAudioPronunciation();
             if (getCount() > 0) {
                 AudioPronunciation.getInstance().play(url, context);
             }

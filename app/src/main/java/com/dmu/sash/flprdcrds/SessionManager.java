@@ -11,8 +11,9 @@ public class SessionManager {
     private static SessionManager instance;
 
     private SessionManager(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        session = sharedPreferences.getInt("SESSION", 1);
+        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
+        sharedPreferences = sharedPreferencesFactory.getSharedPreferences();
+        session = sharedPreferencesFactory.getSessionPreference();
     }
 
     public static SessionManager getInstance(Context context) {
@@ -33,6 +34,7 @@ public class SessionManager {
         } else {
             session = initialSession();
         }
+        System.out.println(session);
         return session;
     }
 

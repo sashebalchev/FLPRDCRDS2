@@ -1,12 +1,7 @@
 package com.dmu.sash.flprdcrds;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,18 +27,18 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
         LinearLayout layout;
     }
 
-    WordAdapter(Fragment fragment, OrderedRealmCollection<Word> data, Activity activity){
+    WordAdapter(OrderedRealmCollection<Word> data, Context context){
         super(data);
-        context = activity;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        String font = sharedPreferences.getString("PREF_STYLE_FONT", "1");
-        if (font.equals("1")){
+        this.context = context;
+        SharedPreferencesFactory sharedPreferencesFactory = new SharedPreferencesFactory(context);
+        backgroundColor = sharedPreferencesFactory.getBackgroundColorPreference();
+        fontColor = sharedPreferencesFactory.getFontColorPreference();
+        String font = sharedPreferencesFactory.getFontStylePreference();
+        if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
-        } else if (font.equals("2")){
-            typeface = ResourcesCompat.getFont(activity, R.font.hanalei_font_family);
+        } else if (font.equals("2")) {
+            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
         }
-        backgroundColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFFFF"));
-        fontColor = Color.parseColor(sharedPreferences.getString("PREF_COLOR_FONT", "#000000"));
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -78,9 +73,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
         int position = (Integer) view.getTag();
         Word wordToPronounce = getItem(position);
         String url = wordToPronounce.getAudioPronunciation();
-//            String pronunciationURL = null;
-//            if (word != null) {
-//                pronunciationURL = word.getAudioPronunciation();
         if (getCount() > 0) {
             AudioPronunciation.getInstance().play(url, context);
         }
