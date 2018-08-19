@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">FLPRDCRDS</string>
+    <string name="action_settings">Настройки</string>
+    <string name="nav_profile">Профил</string>
+    <string name="nav_learning">Учене</string>
+    <string name="pref_bgcolor">Цвят на фона</string>
+    <string name="pref_bgcolor_summary">Изберете цвят на фона</string>
+    <string name="pref_fontcolor">Цвят на шрифта</string>
+    <string name="pref_fontcolor_summary">Изберете цвят на шрифта</string>
+    <string name="pref_fontstyle">Шрифт</string>
+    <string name="pref_fontstyle_summary">Изберете шрифт</string>
+    <string name="pref_reset">Настройки по подразбиране</string>
+    <string name="pref_reset_summary">Изберете настройките по подразбиране</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="word_management">Управление на думите</string>
+    <string name="EXAMPLE_TEXT">Примерен текст</string>
+    <string name="next_session">Следваща Сесия</string>
+    <string name="delete_all_words">Изтрий всички думи</string>
+    <string name="add_word">Добави дума</string>
+    <string name="delete">Изтрий</string>
+    <string name="cancel">Отмени</string>
+    <string name="add">Добави</string>
+    <string name="pronunciation">Произношение</string>
+    <string name="sessions_finished_prompt">"Завършени учебни сесии: "</string>
+    <string name="words_mastered_prompt">"Научени думи: "</string>
+    <string name="best_known_words_prompt">"Думи, които се знаят най-добре: "</string>
+    <string name="words_you_struggle_with_prompt">"Думи, с които се затруднявате: "</string>
+</resources>

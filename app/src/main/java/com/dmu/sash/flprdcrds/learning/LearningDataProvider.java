@@ -38,7 +38,7 @@ public class LearningDataProvider {
     }
 
     private List<Word> getSessionData() {
-        RealmResults<Word> wordRealmResults = null;
+        RealmResults<Word> wordRealmResults;
         switch (session) {
             case 1:
                 wordRealmResults = realm.where(Word.class).equalTo("score", 1).findAll();
@@ -61,5 +61,4 @@ public class LearningDataProvider {
         }
         return realm.copyFromRealm(wordRealmResults);
     }
-
 }

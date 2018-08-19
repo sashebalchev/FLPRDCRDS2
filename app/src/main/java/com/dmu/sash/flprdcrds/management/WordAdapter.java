@@ -11,28 +11,28 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
-import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.entities.Word;
+import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
+import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 
-public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
+public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
 
     private int fontColor;
     private int backgroundColor;
     private Typeface typeface;
     private Context context;
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         TextView wordWithDef;
         ImageButton pronunciation;
         LinearLayout layout;
     }
 
-    WordAdapter(OrderedRealmCollection<Word> data, Context context){
+    WordAdapter(OrderedRealmCollection<Word> data, Context context) {
         super(data);
         this.context = context;
         PreferencesProvider preferencesProvider = new PreferencesProvider(context);
@@ -45,9 +45,9 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
             typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
         }
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext())
@@ -74,6 +74,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter{
         }
         return convertView;
     }
+
     private View.OnClickListener listener = (View view) -> {
         int position = (Integer) view.getTag();
         Word wordToPronounce = getItem(position);

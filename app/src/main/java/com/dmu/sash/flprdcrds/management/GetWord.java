@@ -8,8 +8,8 @@ public class GetWord implements AsyncResponse {
     private static final String DEFINITION_URL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/";
 
     public String getSearchURL(String text) {
-        final String wordLowerCase = text.toLowerCase();
-        if (wordLowerCase.length() >= 1) {
+        final String wordLowerCase = text.toLowerCase().trim();
+        if (wordLowerCase.length() > 0) {
             return SEARCH_URL + wordLowerCase;
         }
         return null;

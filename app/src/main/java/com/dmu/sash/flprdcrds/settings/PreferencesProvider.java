@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 public final class PreferencesProvider {
     private SharedPreferences sharedPreferences;
 
-   public PreferencesProvider(Context context) {
+    public PreferencesProvider(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

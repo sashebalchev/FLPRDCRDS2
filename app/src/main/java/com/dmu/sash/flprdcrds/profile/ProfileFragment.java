@@ -17,15 +17,12 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProfileFragment extends Fragment {
     private static ProfileFragment instance;
 
 
     Realm realm;
+
     public ProfileFragment() {
 
     }
@@ -45,8 +42,7 @@ public class ProfileFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -59,48 +55,29 @@ public class ProfileFragment extends Fragment {
         TextView bestKnownWordsTextView = view.findViewById(R.id.known_words);
         TextView struggleWordsTextView = view.findViewById(R.id.struggled_words);
 
-        String forSessionsTV = "Learning sessions finished: ";
-        String forMasteredWordsTV = "Words mastered: ";
-        String forKnownWordsTV = "Best known words: ";
-        String forStruggleWordsTV = "Words you struggle with: ";
-
-        ArrayList<Word> masteredWords = (ArrayList<Word>)realm.copyFromRealm(realm.where(Word.class)
-                .greaterThan("proficiency", 5).findAll());
-
-        for(int i = 0; i < masteredWords.size();i++){
-            if (i == masteredWords.size()-1){
-                forMasteredWordsTV += masteredWords.get(i).getWord();
-            } else {
-                forMasteredWordsTV += masteredWords.get(i).getWord() + ", ";
-            }
-        }
-
-        ArrayList<Word> bestKnownWords = (ArrayList<Word>)realm.copyFromRealm(realm.where(Word.class)
-                .greaterThan("consecutiveKnownSessions", 5).findAll());
-
-        for(int i = 0; i < bestKnownWords.size();i++){
-            if (i == bestKnownWords.size()-1){
-                forKnownWordsTV += bestKnownWords.get(i).getWord();
-            } else {
-                forKnownWordsTV += bestKnownWords.get(i).getWord() + ", ";
-            }
-        }
-
-        ArrayList<Word> struggleWords = (ArrayList<Word>)realm.copyFromRealm(realm.where(Word.class)
-                .greaterThan("consecutiveNotKnownSessions", 5).findAll());
-
-        for(int i = 0; i < struggleWords.size();i++){
-            if (i == struggleWords.size()-1){
-                forStruggleWordsTV += struggleWords.get(i).getWord();
-            } else {
-                forStruggleWordsTV += struggleWords.get(i).getWord() + ", ";
-            }
-        }
-
+        String forSessionsTV = getResources().getString(R.string.sessions_finished_prompt);
+        String forMasteredWordsTV = getText(R.string.words_mastered_prompt, "proficiency", 5);
+        String forKnownWordsTV = getText(R.string.words_mastered_prompt, "consecutiveKnownSessions", 5);
+        String forStruggleWordsTV = getText(R.string.words_you_struggle_with_prompt, "consecutiveNotKnownSessions", 5);
 
         sessionsTextView.setText(forSessionsTV);
         masteredWordsTextView.setText(forMasteredWordsTV);
         bestKnownWordsTextView.setText(forKnownWordsTV);
         struggleWordsTextView.setText(forStruggleWordsTV);
+    }
+
+    @NonNull
+    private String getText(int strId, String fieldName, int fieldValue) {
+        ArrayList<Word> words = (ArrayList<Word>) realm.copyFromRealm(realm.where(Word.class).greaterThan(fieldName, fieldValue).findAll());
+
+        StringBuilder result = new StringBuilder();
+        result.append(getResources().getString(strId));
+        for (int i = 0; i < words.size(); i++) {
+            result.append(words.get(i).getWord());
+            if (i < (words.size() - 1)) {
+                result.append(", ");
+            }
+        }
+        return result.toString();
     }
 }

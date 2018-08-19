@@ -18,7 +18,7 @@ public class SessionManager {
     }
 
     public static SessionManager getInstance(Context context) {
-        if (instance == null){
+        if (instance == null) {
             instance = new SessionManager(context);
         }
         return instance;
@@ -28,7 +28,7 @@ public class SessionManager {
         return session;
     }
 
-    public int nextSession(){
+    public int nextSession() {
         if (session < 5) {
             session++;
             sharedPreferences.edit().putInt("SESSION", session).apply();
@@ -39,7 +39,7 @@ public class SessionManager {
         return session;
     }
 
-    public int initialSession(){
+    public int initialSession() {
         session = 1;
         sharedPreferences.edit().putInt("SESSION", session).apply();
         return session;

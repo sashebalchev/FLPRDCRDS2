@@ -14,7 +14,6 @@ import com.dmu.sash.flprdcrds.database.entities.Word;
 
 import java.util.List;
 
-
 public class LearningFragment extends Fragment {
 
     private AdapterViewFlipper viewFlipper;
@@ -32,8 +31,7 @@ public class LearningFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_learning, container, false);
     }
 

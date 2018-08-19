@@ -9,33 +9,33 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class URLAsyncTask extends AsyncTask<String, Integer, String> {
-    private String data = "";
-    private static final String app_id = "e6e4aac0";
-    private static final String app_key = "cef4c78764ba3d3a8395707ad006bb25";
-    public AsyncResponse delegate;
+    private static final String APP_ID = "e6e4aac0";
+    private static final String APP_KEY = "cef4c78764ba3d3a8395707ad006bb25";
+    private AsyncResponse delegate;
 
-    public URLAsyncTask(AsyncResponse activity){
+    public URLAsyncTask(AsyncResponse activity) {
         delegate = activity;
     }
+
     @Override
     protected String doInBackground(String... params) {
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Accept", "application/Response");
-            urlConnection.setRequestProperty("app_id", app_id);
-            urlConnection.setRequestProperty("app_key", app_key);
-            if (urlConnection.getResponseCode() == 200){
+            urlConnection.setRequestProperty("app_id", APP_ID);
+            urlConnection.setRequestProperty("app_key", APP_KEY);
+            if (urlConnection.getResponseCode() == 200) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
+                String data;
                 while ((data = reader.readLine()) != null) {
                     stringBuilder.append(data).append("\n");
-                    data = stringBuilder.toString();
                 }
                 return stringBuilder.toString();
-            } else if (400 <= urlConnection.getResponseCode() && urlConnection.getResponseCode() < 500  ){
+            } else if (400 <= urlConnection.getResponseCode() && urlConnection.getResponseCode() < 500) {
                 System.out.println("Bad request or word not found");
-            } else if (urlConnection.getResponseCode() >= 500){
+            } else if (urlConnection.getResponseCode() >= 500) {
                 System.out.println("Server problem");
             }
 

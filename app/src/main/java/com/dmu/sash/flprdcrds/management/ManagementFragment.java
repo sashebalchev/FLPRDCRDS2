@@ -23,20 +23,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
+import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 
 import java.util.Objects;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ManagementFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Realm realm;
@@ -57,7 +53,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         }
         return instance;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,9 +77,9 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         Button deleteButton = view.findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
             AlertDialog deleteWordsDialog = new AlertDialog.Builder(getContext())
-                    .setTitle("Delete ALL words?")
-                    .setPositiveButton("Delete", (dialog1, which) -> deleteAllWords())
-                    .setNegativeButton("Cancel", null)
+                    .setTitle(R.string.delete_all_words)
+                    .setPositiveButton(R.string.delete, (dialog1, which) -> deleteAllWords())
+                    .setNegativeButton(R.string.cancel, null)
                     .create();
             deleteWordsDialog.show();
         });
@@ -100,22 +95,21 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.add_word)
                     .setView(taskEditText)
-                    .setPositiveButton("Add", (dialogInterface, i) -> {
+                    .setPositiveButton(R.string.add, (dialogInterface, i) -> {
                         GetWord getWord = new GetWord();
                         String text = taskEditText.getText().toString().trim();
                         urlAsyncTask = new URLAsyncTask(getWord);
                         urlAsyncTask.execute(getWord.getSearchURL(text));
                     })
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton(R.string.cancel, null)
                     .create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 
             taskEditText.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before,
-                                          int count) {
-                    if (s.length()>0 && s.subSequence(s.length()-1, s.length())
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length() > 0 && s.subSequence(s.length() - 1, s.length())
                             .toString().equalsIgnoreCase("\n")) {
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
                     }
@@ -130,7 +124,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                 public void afterTextChanged(Editable s) {
                     // Check if EditText is empty
                     if (TextUtils.isEmpty(s)) {
-                        // Disable ADD button if no there's no text.
+                        // Disable ADD button if there's no text.
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                     } else {
                         // Enable ADD button if there's some text.
@@ -144,7 +138,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
 
         });
 
-
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             final Word word = (Word) parent.getAdapter().getItem(position);
@@ -157,12 +150,11 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                     .setTitle(word.getWord().toUpperCase())
                     .setView(wordEdit)
-                    .setPositiveButton("Pronunciation", (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()))
-                    .setNegativeButton("Delete", (dialog12, which) -> deleteWordEntry(word.getId()))
+                    .setPositiveButton(R.string.pronunciation, (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()))
+                    .setNegativeButton(R.string.delete, (dialog12, which) -> deleteWordEntry(word.getId()))
                     .create();
             dialog.show();
         });
-
     }
 
     private void deleteAllWords() {

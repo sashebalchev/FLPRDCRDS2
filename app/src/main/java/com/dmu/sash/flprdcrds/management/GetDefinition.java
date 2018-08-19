@@ -109,5 +109,4 @@ public class GetDefinition implements AsyncResponse {
             realm.executeTransactionAsync(r -> r.copyToRealm(wordDef));
         }
     }
-
 }

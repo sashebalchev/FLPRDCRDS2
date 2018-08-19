@@ -13,13 +13,8 @@ import com.dmu.sash.flprdcrds.management.ManagementFragment;
 import com.dmu.sash.flprdcrds.profile.ProfileFragment;
 import com.dmu.sash.flprdcrds.settings.SettingsFragment;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    // my comment
-    // alskjdasd
-    // Sashe comment
-    // sadkhaskdasd
-    // Third comment
     private BottomNavigationView mainNav;
 
     @Override
@@ -30,13 +25,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         PreferenceManager.getDefaultSharedPreferences(this);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         setFrag(new LearningFragment());
     }
-        //Frame stuff here.
+
+    //Frame stuff here.
     //Setting the fragment
     private boolean setFrag(android.support.v4.app.Fragment fragment) {
-        if (fragment != null){
+        if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
@@ -50,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         android.support.v4.app.Fragment fragment = null;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 fragment = new LearningFragment();
                 break;
