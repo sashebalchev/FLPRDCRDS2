@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
         String forSessionsTV = getResources().getString(R.string.sessions_finished_prompt);
         String forMasteredWordsTV = getText(R.string.words_mastered_prompt, "proficiency", 5);
-        String forKnownWordsTV = getText(R.string.words_mastered_prompt, "consecutiveKnownSessions", 5);
+        String forKnownWordsTV = getText(R.string.best_known_words_prompt, "consecutiveKnownSessions", 5);
         String forStruggleWordsTV = getText(R.string.words_you_struggle_with_prompt, "consecutiveNotKnownSessions", 5);
 
         sessionsTextView.setText(forSessionsTV);
