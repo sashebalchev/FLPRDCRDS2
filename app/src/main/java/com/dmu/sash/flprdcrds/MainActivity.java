@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = ProfileFragment.getInstance();
                 break;
             case R.id.nav_settings:
-                fragment = SettingsFragment.getInstance();
+                fragment = new SettingsFragment();
                 break;
         }
         return setFrag(fragment);
