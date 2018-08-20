@@ -68,7 +68,8 @@ public class ProfileFragment extends Fragment {
 
     @NonNull
     private String getText(int strId, String fieldName, int fieldValue) {
-        ArrayList<Word> words = (ArrayList<Word>) realm.copyFromRealm(realm.where(Word.class).greaterThan(fieldName, fieldValue).findAll());
+        ArrayList<Word> words = (ArrayList<Word>) realm.copyFromRealm(realm.where(Word.class)
+                .greaterThan(fieldName, fieldValue).findAll());
         StringBuilder result = new StringBuilder();
         result.append(getResources().getString(strId));
         for (int i = 0; i < words.size(); i++) {
