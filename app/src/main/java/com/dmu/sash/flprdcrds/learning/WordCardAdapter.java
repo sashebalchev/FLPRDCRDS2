@@ -2,7 +2,6 @@ package com.dmu.sash.flprdcrds.learning;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +39,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         public void onClick(View view) {
             int position = (Integer) view.getTag();
             Word wordToPronounce = getItem(position);
+            String url = wordToPronounce.getAudioPronunciation();
             if (getCount() > 0) {
-                String url = wordToPronounce.getAudioPronunciation();
                 AudioPronunciation.getInstance().play(url, context);
             }
         }
@@ -54,9 +53,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         numberOfWords = getCount();
     }
 
-    @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext())
@@ -68,7 +66,12 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.progressBar.setProgress(numberOfWords - getCount());
             viewHolder.dontKnowWordButton = convertView.findViewById(R.id.dont_know_word);
             viewHolder.knowWordButton = convertView.findViewById(R.id.know_word);
-            viewHolder.flipView.setOnClickListener(v -> viewHolder.flipView.flipTheView());
+            viewHolder.flipView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.flipView.flipTheView();
+                }
+            });
             viewHolder.word = convertView.findViewById(R.id.front);
             viewHolder.definition = convertView.findViewById(R.id.back);
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);

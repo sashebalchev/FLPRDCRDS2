@@ -44,12 +44,10 @@
             android:textColor="@color/fontColor"
             android:textSize="20sp" />
 
-        <RelativeLayout
+        <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"></RelativeLayout>
+            android:layout_weight="0.6"/>
 
     </LinearLayout>
-
-
 </FrameLayout>
