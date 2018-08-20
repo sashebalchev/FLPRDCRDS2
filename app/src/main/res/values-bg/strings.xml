@@ -25,4 +25,16 @@
     <string name="words_mastered_prompt">"Научени думи: "</string>
     <string name="best_known_words_prompt">"Думи, които се знаят най-добре: "</string>
     <string name="words_you_struggle_with_prompt">"Думи, с които се затруднявате: "</string>
+    <string name="bgcolors_white">Бял</string>
+    <string name="bgcolors_red">Червен</string>
+    <string name="bgcolors_green">Зелен</string>
+    <string name="bgcolors_blue">Син</string>
+    <string name="fontcolors_green">Зелен</string>
+    <string name="fontcolors_red">Червен</string>
+    <string name="fontcolors_white">Бял</string>
+    <string name="fontcolors_blue">Син</string>
+    <string name="bgcolors_black">Черен</string>
+    <string name="fontcolors_black">Черен</string>
+    <string name="fontstyle_default">Шрифт по подразбиране</string>
+    <string name="fontstyle_hanalei">Ханалей</string>
 </resources>

@@ -2,11 +2,11 @@
 <resources>
 
     <string-array name="BGcolorsArray">
-        <item>White</item>
-        <item>Red</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Black</item>
+        <item>@string/bgcolors_white</item>
+        <item>@string/bgcolors_red</item>
+        <item>@string/bgcolors_green</item>
+        <item>@string/bgcolors_blue</item>
+        <item>@string/bgcolors_black</item>
     </string-array>
 
     <string-array name="BGcolorsValues">
@@ -18,11 +18,11 @@
     </string-array>
 
     <string-array name="fontColorsArray">
-        <item>White</item>
-        <item>Red</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Black</item>
+        <item>@string/fontcolors_white</item>
+        <item>@string/fontcolors_red</item>
+        <item>@string/fontcolors_green</item>
+        <item>@string/fontcolors_blue</item>
+        <item>@string/fontcolors_black</item>
     </string-array>
 
     <string-array name="fontColorsValues">
@@ -34,8 +34,8 @@
     </string-array>
 
     <string-array name="fontStylesArray">
-        <item>Default</item>
-        <item>Hanalei</item>
+        <item>@string/fontstyle_default</item>
+        <item>@string/fontstyle_hanalei</item>
     </string-array>
 
     <string-array name="fontStylesValues">

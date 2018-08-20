@@ -25,4 +25,16 @@
     <string name="words_mastered_prompt">"Words mastered: "</string>
     <string name="best_known_words_prompt">"Best known words: "</string>
     <string name="words_you_struggle_with_prompt">"Words you struggle with: "</string>
+    <string name="bgcolors_white">White</string>
+    <string name="bgcolors_red">Red</string>
+    <string name="bgcolors_green">Green</string>
+    <string name="bgcolors_blue">Blue</string>
+    <string name="bgcolors_black">Black</string>
+    <string name="fontcolors_white">White</string>
+    <string name="fontcolors_red">Red</string>
+    <string name="fontcolors_green">Green</string>
+    <string name="fontcolors_blue">Blue</string>
+    <string name="fontcolors_black">Black</string>
+    <string name="fontstyle_default">Default</string>
+    <string name="fontstyle_hanalei">Hanalei</string>
 </resources>
