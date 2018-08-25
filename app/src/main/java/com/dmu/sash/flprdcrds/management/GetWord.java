@@ -1,7 +1,10 @@
 package com.dmu.sash.flprdcrds.management;
 
+import com.dmu.sash.flprdcrds.service.searchobjects.Result;
 import com.dmu.sash.flprdcrds.service.searchobjects.SearchResponse;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 public class GetWord implements AsyncResponse {
     private static final String SEARCH_URL = "https://od-api.oxforddictionaries.com/api/v1/search/en?q=";
@@ -16,12 +19,15 @@ public class GetWord implements AsyncResponse {
     }
 
     @Override
-    public void processFinish(String output) {
+    public void processFinish(boolean hasErrors, String output) {
         Gson gson = new Gson();
         SearchResponse searchResponse = gson.fromJson(output, SearchResponse.class);
-        String searchedWord = searchResponse.getResults().get(0).getWord();
-        GetDefinition getDefinition = new GetDefinition();
-        URLAsyncTask urlAsyncTask = new URLAsyncTask(getDefinition);
-        urlAsyncTask.execute(DEFINITION_URL + searchedWord);
+        List<Result> results = searchResponse.getResults();
+        if ((results != null) && (results.size() > 0)) {
+            String searchedWord = results.get(0).getWord();
+            GetDefinition getDefinition = new GetDefinition();
+            URLAsyncTask urlAsyncTask = new URLAsyncTask(getDefinition);
+            urlAsyncTask.execute(DEFINITION_URL + searchedWord);
+        }
     }
 }

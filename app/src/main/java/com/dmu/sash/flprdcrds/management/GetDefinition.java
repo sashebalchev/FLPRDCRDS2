@@ -19,7 +19,7 @@ import io.realm.Realm;
 public class GetDefinition implements AsyncResponse {
 
     @Override
-    public void processFinish(String output) {
+    public void processFinish(boolean hasErrors, String output) {
         Response response = extractResponse(output);
         String word = extractWord(response);
         LexicalEntry lexicalEntry = extractLexicalEntry(response);
