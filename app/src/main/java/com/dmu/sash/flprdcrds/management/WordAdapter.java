@@ -67,6 +67,9 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Word word = getItem(position);
+        if (word.getAudioPronunciation()==null){
+            viewHolder.pronunciation.setVisibility(View.GONE);
+        }
         String text = "";
         if (word != null) {
             text = word.getWord() + " - " + word.getDefinition();

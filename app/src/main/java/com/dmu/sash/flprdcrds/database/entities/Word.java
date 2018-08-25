@@ -14,7 +14,6 @@ public class Word extends RealmObject {
     @Required
     private String definition;
     private String pronunciation;
-    @Required
     private String audioPronunciation;
     private int score;
     private int proficiency;

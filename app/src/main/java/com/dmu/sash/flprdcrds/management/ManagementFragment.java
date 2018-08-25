@@ -73,10 +73,11 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = view.findViewById(R.id.word_list);
-        final WordAdapter adapter = new WordAdapter(words, getContext());
+        final Context context = getContext();
+        final WordAdapter adapter = new WordAdapter(words, context);
         Button deleteButton = view.findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
-            AlertDialog deleteWordsDialog = new AlertDialog.Builder(getContext())
+            AlertDialog deleteWordsDialog = new AlertDialog.Builder(context)
                     .setTitle(R.string.delete_all_words)
                     .setPositiveButton(R.string.delete, (dialog1, which) -> deleteAllWords())
                     .setNegativeButton(R.string.cancel, null)
@@ -92,14 +93,13 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
             }));
-            AlertDialog dialog = new AlertDialog.Builder(getActivity())
+            AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle(R.string.add_word)
                     .setView(taskEditText)
                     .setPositiveButton(R.string.add, (dialogInterface, i) -> {
-                        GetWord getWord = new GetWord();
-                        String text = taskEditText.getText().toString().trim();
-                        urlAsyncTask = new URLAsyncTask(getWord);
-                        urlAsyncTask.execute(getWord.getSearchURL(text));
+                        WordDataProcessor wordDataProcessor = new WordDataProcessor(context);
+                        String text = taskEditText.getText().toString().trim().toLowerCase();
+                        wordDataProcessor.processWord(text);
                     })
                     .setNegativeButton(R.string.cancel, null)
                     .create();

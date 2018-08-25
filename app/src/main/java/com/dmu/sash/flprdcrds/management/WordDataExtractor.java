@@ -1,11 +1,7 @@
 package com.dmu.sash.flprdcrds.management;
 
+import android.support.annotation.NonNull;
 
-import android.app.AlertDialog;
-import android.widget.Toast;
-
-import com.dmu.sash.flprdcrds.database.RealmFactory;
-import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.dmu.sash.flprdcrds.service.objects.Entry;
 import com.dmu.sash.flprdcrds.service.objects.LexicalEntry;
 import com.dmu.sash.flprdcrds.service.objects.Pronunciation;
@@ -15,20 +11,29 @@ import com.dmu.sash.flprdcrds.service.objects.Sense;
 import com.google.gson.Gson;
 
 import java.util.List;
-import java.util.UUID;
 
-import io.realm.Realm;
+public class WordDataExtractor implements AsyncResponse{
+    private static final String DEFINITION_URL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/";
+    private WordDataResultHandler handler;
 
-public class GetDefinition implements AsyncResponse {
+    public void extractWordData(@NonNull WordDataResultHandler handler, @NonNull String word){
+        this.handler = handler;
+        URLAsyncTask urlAsyncTask = new URLAsyncTask(this);
+        urlAsyncTask.execute(DEFINITION_URL + word);
+    }
 
     @Override
     public void processFinish(boolean hasErrors, String output) {
-        Response response = extractResponse(output);
-        String word = extractWord(response);
-        LexicalEntry lexicalEntry = extractLexicalEntry(response);
-        String definition = extractDefinition(lexicalEntry);
-        String audioPronunciation = extractAudioPronunciation(lexicalEntry);
-        saveWord(word, definition, audioPronunciation);
+        if (hasErrors){
+            handler.handleWordDataResult(output, null, null, null);
+        } else {
+            Response response = extractResponse(output);
+            String word = extractWord(response);
+            LexicalEntry lexicalEntry = extractLexicalEntry(response);
+            String definition = extractWordData(lexicalEntry);
+            String audioPronunciation = extractAudioPronunciation(lexicalEntry);
+            handler.handleWordDataResult(null, word, definition, audioPronunciation);
+        }
     }
 
     private Response extractResponse(String output) {
@@ -58,7 +63,7 @@ public class GetDefinition implements AsyncResponse {
         return lexicalEntry;
     }
 
-    private String extractDefinition(LexicalEntry lexicalEntry) {
+    private String extractWordData(LexicalEntry lexicalEntry) {
         String definition = null;
         if (lexicalEntry != null) {
             Entry entry = lexicalEntry.getEntries().get(0);
@@ -96,20 +101,5 @@ public class GetDefinition implements AsyncResponse {
             }
         }
         return audioPronunciation;
-    }
-
-    private void saveWord(String word, String definition, String audioPronunciation) {
-        if (word != null && definition != null && audioPronunciation != null) {
-            final Word wordDef = new Word();
-            wordDef.setId(UUID.randomUUID().toString());
-            wordDef.setWord(word);
-            wordDef.setDefinition(definition);
-            wordDef.setAudioPronunciation(audioPronunciation);
-            wordDef.setScore(1);
-            wordDef.setProficiency(1);
-            wordDef.setTimestamp(System.currentTimeMillis());
-            Realm realm = RealmFactory.getRealm();
-            realm.executeTransactionAsync(r -> r.copyToRealm(wordDef));
-        }
     }
 }

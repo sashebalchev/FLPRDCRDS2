@@ -14,8 +14,8 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
     private AsyncResponse delegate;
     private boolean hasErrors = false;
 
-    public URLAsyncTask(AsyncResponse activity) {
-        delegate = activity;
+    public URLAsyncTask(AsyncResponse asyncResponse) {
+        delegate = asyncResponse;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
             System.out.println("Problem with connection");
             hasErrors = true;
-            return("Problem with connection: " + e.getMessage());
+            return("Problem with connection.");
         }
         return null;
     }
