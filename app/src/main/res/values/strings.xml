@@ -16,7 +16,7 @@
     <string name="add_word">Add Word</string>
     <string name="EXAMPLE_TEXT">Example text</string>
     <string name="next_session">NEXT SESSION</string>
-    <string name="delete_all_words">Delete ALL words?</string>
+    <string name="delete_all_words">Delete ALL words</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
@@ -37,4 +37,5 @@
     <string name="fontcolors_black">Black</string>
     <string name="fontstyle_default">Default</string>
     <string name="fontstyle_hanalei">Hanalei</string>
+    <string name="delete_all_words_prompt">Are you sure you want to delete ALL words?</string>
 </resources>

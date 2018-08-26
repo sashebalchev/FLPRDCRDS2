@@ -78,7 +78,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         Button deleteButton = view.findViewById(R.id.delete_words_button);
         deleteButton.setOnClickListener(v -> {
             AlertDialog deleteWordsDialog = new AlertDialog.Builder(context)
-                    .setTitle(R.string.delete_all_words)
+                    .setTitle(R.string.delete_all_words_prompt)
                     .setPositiveButton(R.string.delete, (dialog1, which) -> deleteAllWords())
                     .setNegativeButton(R.string.cancel, null)
                     .create();
