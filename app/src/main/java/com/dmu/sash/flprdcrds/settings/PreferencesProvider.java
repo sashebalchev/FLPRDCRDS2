@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-
+//TODO Setters
 public final class PreferencesProvider {
     private SharedPreferences sharedPreferences;
 
@@ -26,6 +26,10 @@ public final class PreferencesProvider {
 
     public int getSessionPreference() {
         return sharedPreferences.getInt("SESSION", 1);
+    }
+
+    public boolean getNotificationFlag() {
+        return sharedPreferences.getBoolean("FIRST_TIME", false);
     }
 
     public SharedPreferences getSharedPreferences() {

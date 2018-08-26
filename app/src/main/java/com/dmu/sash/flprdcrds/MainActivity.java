@@ -1,6 +1,7 @@
 package com.dmu.sash.flprdcrds;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 
 import com.dmu.sash.flprdcrds.learning.LearningFragment;
 import com.dmu.sash.flprdcrds.management.ManagementFragment;
+import com.dmu.sash.flprdcrds.notification.NotificationAlarmSetter;
 import com.dmu.sash.flprdcrds.profile.ProfileFragment;
 import com.dmu.sash.flprdcrds.settings.SettingsFragment;
 
@@ -24,9 +26,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        new URLAsyncTaskPrepare().execute("https://od-api.oxforddictionaries.com/api/v1/search/en/?q=");
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
-        PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         setFrag(new LearningFragment());
+        NotificationAlarmSetter notificationAlarmSetter = new NotificationAlarmSetter(this);
+        notificationAlarmSetter.setAlarm();
     }
 
     //Frame stuff here.

@@ -28,8 +28,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             public boolean onPreferenceClick(Preference preference) {
                 PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
                 int session = preferencesProvider.getSessionPreference();
-                preferencesProvider.getSharedPreferences().edit().clear().apply();
-                preferencesProvider.getSharedPreferences().edit().putInt("SESSION", session).apply();
+                boolean notification = preferencesProvider.getNotificationFlag();
+                SharedPreferences preferences = preferencesProvider.getSharedPreferences();
+                //TODO extract implementation to PreferencesProvider. Setters.
+                preferences.edit().clear().apply();
+                preferences.edit().putInt("SESSION", session).apply();
+//                preferences.edit().putBoolean("FIRST_TIME", notification).apply();
                 return false;
             }
         });
