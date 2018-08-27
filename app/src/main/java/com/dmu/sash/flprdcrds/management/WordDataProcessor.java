@@ -2,8 +2,14 @@ package com.dmu.sash.flprdcrds.management;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.dmu.sash.flprdcrds.database.entities.Word;
+
+import java.util.List;
 
 public class WordDataProcessor implements WordResultHandler, WordDataResultHandler {
     private Context context;
@@ -17,11 +23,48 @@ public class WordDataProcessor implements WordResultHandler, WordDataResultHandl
         wordFinder.findWord(this, word);
     }
 
+
+    //    public void handleWordDataResult(String error, String word, String definition, String audioPronunciation) {
+//        if (error == null) {
+//            WordSaver wordSaver = new WordSaver();
+//            wordSaver.saveWord(word, definition, audioPronunciation);
+//        } else {
+//            TextView textView = new TextView(context);
+//            textView.setText(error);
+//            AlertDialog dialog = new AlertDialog.Builder(context)
+//                    .setTitle("Error finding word data.")
+//                    .setView(textView)
+//                    .setPositiveButton("OK", null)
+//                    .create();
+//            dialog.show();
+//        }
+//    }
     @Override
-    public void handleWordDataResult(String error, String word, String definition, String audioPronunciation) {
+    public void handleWordDataResult(String error, List<Word> words) {
         if (error == null) {
             WordSaver wordSaver = new WordSaver();
-            wordSaver.saveWord(word, definition, audioPronunciation);
+            if (words.size() > 1) {
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_singlechoice);
+                for (Word word : words) {
+                    arrayAdapter.add(word.getDefinition());
+                }
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+                alertBuilder.setTitle("Select definition for " + words.get(0).getWord());
+                alertBuilder.setNegativeButton("Cancel", null);
+                alertBuilder.setAdapter(arrayAdapter, (dialog, which) -> {
+                    AlertDialog.Builder innerDialog = new AlertDialog.Builder(context);
+                    innerDialog.setTitle(words.get(which).getWord());
+                    innerDialog.setMessage(words.get(which).getDefinition());
+                    innerDialog.setPositiveButton("OK", (dialog1, which1) ->
+                            wordSaver.saveWord(words.get(which)));
+                    innerDialog.setNegativeButton("Cancel", null);
+                    innerDialog.show();
+                });
+                alertBuilder.show();
+            } else if (words.size() == 1) {
+                wordSaver.saveWord(words.get(0));
+            }
         } else {
             TextView textView = new TextView(context);
             textView.setText(error);
