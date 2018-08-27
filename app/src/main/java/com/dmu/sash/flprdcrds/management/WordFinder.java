@@ -11,9 +11,11 @@ import java.util.List;
 public class WordFinder implements AsyncResponse {
     private static final String SEARCH_URL = "https://od-api.oxforddictionaries.com/api/v1/search/en?q=";
     private WordResultHandler wordResultHandler;
+    private String word;
 
     public void findWord(@NonNull WordResultHandler handler, @NonNull String word) {
         this.wordResultHandler = handler;
+        this.word = word;
         URLAsyncTask urlAsyncTask = new URLAsyncTask(this);
         urlAsyncTask.execute(SEARCH_URL + word);
     }
@@ -30,7 +32,7 @@ public class WordFinder implements AsyncResponse {
                 String searchedWord = results.get(0).getWord();
                 wordResultHandler.handleWordResult(null, searchedWord);
             } else {
-                wordResultHandler.handleWordResult("Error finding word", null);
+                wordResultHandler.handleWordResult("Could not find the word '" + word + "' in the dictionary", null);
             }
         }
     }

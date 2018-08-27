@@ -16,15 +16,12 @@ import java.util.List;
 
 public class LearningFragment extends Fragment {
 
-    private LearningDataProvider learningDataProvider;
-
     public LearningFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        learningDataProvider = new LearningDataProvider(getContext());
     }
 
     @Nullable
@@ -36,6 +33,7 @@ public class LearningFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LearningDataProvider learningDataProvider = new LearningDataProvider(getContext());
         List<Word> data = learningDataProvider.getData();
         AdapterViewFlipper viewFlipper = view.findViewById(R.id.flipper_all);
         WordCardAdapter wordCardAdapter = new WordCardAdapter(getContext(), data);

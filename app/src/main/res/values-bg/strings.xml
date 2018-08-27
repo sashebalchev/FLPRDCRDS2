@@ -37,4 +37,5 @@
     <string name="fontcolors_black">Черен</string>
     <string name="fontstyle_default">Шрифт по подразбиране</string>
     <string name="fontstyle_hanalei">Ханалей</string>
+    <string name="delete_all_words_prompt">Сигурни ли сте, че искате да изтриете ВСИЧКИ думи?</string>
 </resources>

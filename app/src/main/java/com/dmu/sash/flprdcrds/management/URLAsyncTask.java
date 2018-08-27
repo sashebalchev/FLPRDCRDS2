@@ -48,7 +48,7 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
             System.out.println("Problem with connection");
             hasErrors = true;
-            return("Problem with connection.");
+            return("Problem with connection");
         }
         return null;
     }

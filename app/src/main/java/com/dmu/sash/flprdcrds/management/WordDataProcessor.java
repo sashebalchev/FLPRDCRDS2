@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
+import android.view.Gravity;
 import android.widget.TextView;
 
 import com.dmu.sash.flprdcrds.database.entities.Word;
@@ -51,6 +52,7 @@ public class WordDataProcessor implements WordResultHandler, WordDataResultHandl
         } else {
             TextView textView = new TextView(context);
             textView.setText(error);
+            textView.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle("Error finding word data.")
                     .setView(textView)
@@ -68,6 +70,7 @@ public class WordDataProcessor implements WordResultHandler, WordDataResultHandl
         } else {
             TextView textView = new TextView(context);
             textView.setText(error);
+            textView.setGravity(Gravity.CENTER);
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setTitle("Error finding word.")
                     .setView(textView)

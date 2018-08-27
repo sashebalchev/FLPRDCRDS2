@@ -31,7 +31,11 @@ public class WordDataExtractor implements AsyncResponse {
         } else {
             Response response = extractResponse(output);
             List<Word> words = extractWords(response);
-            handler.handleWordDataResult(null, words);
+            if (words.size() == 0) {
+                handler.handleWordDataResult("No definitions found", null);
+            } else {
+                handler.handleWordDataResult(null, words);
+            }
         }
     }
 
@@ -58,7 +62,11 @@ public class WordDataExtractor implements AsyncResponse {
             List<Entry> entries = lexicalEntry.getEntries();
             if (entries != null) {
                 for (Entry entry : entries) {
-                    Sense sense = entry.getSenses().get(0);
+                    List<Sense> senses = entry.getSenses();
+                    if (senses == null || senses.size() == 0){
+                        continue;
+                    }
+                    Sense sense = senses.get(0);
                     if (sense.getShort_definitions() == null || sense.getShort_definitions().size() == 0) {
                         continue;
                     }
