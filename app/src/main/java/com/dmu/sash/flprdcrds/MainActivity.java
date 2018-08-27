@@ -23,14 +23,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        new URLAsyncTaskPrepare().execute("https://od-api.oxforddictionaries.com/api/v1/search/en/?q=");
         mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         setFrag(new LearningFragment());
-        NotificationAlarmSetter notificationAlarmSetter = new NotificationAlarmSetter(this);
-        notificationAlarmSetter.setAlarm();
+        if (!preferences.getBoolean("FIRST_TIME", false)){
+            NotificationAlarmSetter notificationAlarmSetter = new NotificationAlarmSetter(this);
+            notificationAlarmSetter.setAlarm();
+        }
     }
 
     //Frame stuff here.
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_frame, fragment)
-                    .addToBackStack(null)
                     .commit();
             return true;
         }
