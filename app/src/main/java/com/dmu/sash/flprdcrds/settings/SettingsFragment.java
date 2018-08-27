@@ -23,22 +23,18 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         super.onViewCreated(view, savedInstanceState);
         Preference resetPreferencesButton = findPreference("PREF_RESET");
 
-        resetPreferencesButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
-                int session = preferencesProvider.getSessionPreference();
-                boolean notification = preferencesProvider.getNotificationFlag();
-                SharedPreferences preferences = preferencesProvider.getSharedPreferences();
-                //TODO extract implementation to PreferencesProvider. Setters.
-                preferences.edit().clear().apply();
-                preferences.edit().putInt("SESSION", session).apply();
-//                preferences.edit().putBoolean("FIRST_TIME", notification).apply();
-                return false;
-            }
+        resetPreferencesButton.setOnPreferenceClickListener(preference -> {
+            PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
+            int session = preferencesProvider.getSessionPreference();
+            boolean notification = preferencesProvider.getNotificationFlag();
+            SharedPreferences preferences = preferencesProvider.getSharedPreferences();
+            //TODO extract implementation to PreferencesProvider. Setters.
+            preferences.edit().clear().apply();
+            preferences.edit().putInt("SESSION", session).apply();
+//            preferences.edit().putBoolean("FIRST_TIME", notification).apply();
+            return false;
         });
     }
-
     //TODO make preference selection reflect the real selection
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {

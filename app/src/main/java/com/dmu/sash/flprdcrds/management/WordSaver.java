@@ -3,7 +3,6 @@ package com.dmu.sash.flprdcrds.management;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 
-import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -25,7 +24,7 @@ public class WordSaver {
             Realm realm = RealmFactory.getRealm();
             Word existingWord = realm.where(Word.class).equalTo("word", wordStr)
                     .and().equalTo("definition", definition).findFirst();
-            if (existingWord == null){
+            if (existingWord == null) {
                 realm.executeTransactionAsync(r -> r.copyToRealm(wordDef));
             }
         }

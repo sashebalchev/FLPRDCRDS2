@@ -56,9 +56,9 @@ public class ProfileFragment extends Fragment {
         TextView struggleWordsTextView = view.findViewById(R.id.struggled_words);
 
         String forSessionsTV = getResources().getString(R.string.sessions_finished_prompt);
-        String forMasteredWordsTV = getText(R.string.words_mastered_prompt, "proficiency", 5);
-        String forKnownWordsTV = getText(R.string.best_known_words_prompt, "consecutiveKnownSessions", 5);
-        String forStruggleWordsTV = getText(R.string.words_you_struggle_with_prompt, "consecutiveNotKnownSessions", 5);
+        String forMasteredWordsTV = getText(R.string.words_mastered_prompt, "proficiency");
+        String forKnownWordsTV = getText(R.string.best_known_words_prompt, "consecutiveKnownSessions");
+        String forStruggleWordsTV = getText(R.string.words_you_struggle_with_prompt, "consecutiveNotKnownSessions");
 
         sessionsTextView.setText(forSessionsTV);
         masteredWordsTextView.setText(forMasteredWordsTV);
@@ -67,9 +67,9 @@ public class ProfileFragment extends Fragment {
     }
 
     @NonNull
-    private String getText(int strId, String fieldName, int fieldValue) {
+    private String getText(int strId, String fieldName) {
         ArrayList<Word> words = (ArrayList<Word>) realm.copyFromRealm(realm.where(Word.class)
-                .greaterThan(fieldName, fieldValue).findAll());
+                .greaterThan(fieldName, 5).findAll());
         StringBuilder result = new StringBuilder();
         result.append(getResources().getString(strId));
         for (int i = 0; i < words.size(); i++) {

@@ -2,7 +2,6 @@ package com.dmu.sash.flprdcrds.management;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import java.util.List;
 public class WordDataProcessor implements WordResultHandler, WordDataResultHandler {
     private Context context;
 
-    public WordDataProcessor(Context context) {
+    WordDataProcessor(Context context) {
         this.context = context;
     }
 
@@ -23,22 +22,6 @@ public class WordDataProcessor implements WordResultHandler, WordDataResultHandl
         wordFinder.findWord(this, word);
     }
 
-
-    //    public void handleWordDataResult(String error, String word, String definition, String audioPronunciation) {
-//        if (error == null) {
-//            WordSaver wordSaver = new WordSaver();
-//            wordSaver.saveWord(word, definition, audioPronunciation);
-//        } else {
-//            TextView textView = new TextView(context);
-//            textView.setText(error);
-//            AlertDialog dialog = new AlertDialog.Builder(context)
-//                    .setTitle("Error finding word data.")
-//                    .setView(textView)
-//                    .setPositiveButton("OK", null)
-//                    .create();
-//            dialog.show();
-//        }
-//    }
     @Override
     public void handleWordDataResult(String error, List<Word> words) {
         if (error == null) {

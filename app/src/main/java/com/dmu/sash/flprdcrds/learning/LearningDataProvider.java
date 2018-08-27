@@ -16,7 +16,7 @@ public class LearningDataProvider {
     private int session;
     private Realm realm;
 
-    public LearningDataProvider(Context context) {
+    LearningDataProvider(Context context) {
         sessionManager = SessionManager.getInstance(context);
         session = sessionManager.getSession();
         realm = RealmFactory.getRealm();

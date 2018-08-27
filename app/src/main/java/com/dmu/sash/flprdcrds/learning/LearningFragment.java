@@ -16,9 +16,7 @@ import java.util.List;
 
 public class LearningFragment extends Fragment {
 
-    private AdapterViewFlipper viewFlipper;
     private LearningDataProvider learningDataProvider;
-    List<Word> data;
 
     public LearningFragment() {
     }
@@ -39,7 +37,7 @@ public class LearningFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<Word> data = learningDataProvider.getData();
-        viewFlipper = view.findViewById(R.id.flipper_all);
+        AdapterViewFlipper viewFlipper = view.findViewById(R.id.flipper_all);
         WordCardAdapter wordCardAdapter = new WordCardAdapter(getContext(), data);
         viewFlipper.setAdapter(wordCardAdapter);
     }

@@ -8,7 +8,7 @@ import android.os.PowerManager;
 
 import java.io.IOException;
 
-public class AudioPronunciation extends Application {
+public class AudioPronunciation{
 
     private MediaPlayer mediaPlayer;
     private static AudioPronunciation instance;
@@ -28,12 +28,11 @@ public class AudioPronunciation extends Application {
         return instance;
     }
 
-    public void play(String urlAudio, Context context) {
+    public void play(String urlAudio) {
         mediaPlayer.reset();
         try {
             mediaPlayer.setDataSource(urlAudio);
             mediaPlayer.prepare();
-            mediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
             mediaPlayer.seekTo(0);
             mediaPlayer.start();
         } catch (IOException e) {

@@ -14,7 +14,7 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
     private AsyncResponse delegate;
     private boolean hasErrors = false;
 
-    public URLAsyncTask(AsyncResponse asyncResponse) {
+    URLAsyncTask(AsyncResponse asyncResponse) {
         delegate = asyncResponse;
     }
 

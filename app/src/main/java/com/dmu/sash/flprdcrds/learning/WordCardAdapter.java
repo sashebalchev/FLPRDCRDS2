@@ -32,18 +32,13 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
     private Context context;
     private int numberOfWords;
 
-    private int bgColor;
-    private int fontColor;
     private Typeface typeface;
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            int position = (Integer) view.getTag();
-            Word wordToPronounce = getItem(position);
-            if (getCount() > 0) {
-                String url = wordToPronounce.getAudioPronunciation();
-                AudioPronunciation.getInstance().play(url, context);
-            }
+    private View.OnClickListener listener = view -> {
+        int position = (Integer) view.getTag();
+        Word wordToPronounce = getItem(position);
+        if (getCount() > 0) {
+            String url = wordToPronounce.getAudioPronunciation();
+            AudioPronunciation.getInstance().play(url);
         }
     };
 
@@ -74,8 +69,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation_card_front);
             setPreferences(viewHolder.word, viewHolder.definition, viewHolder.pronunciation);
             viewHolder.pronunciation.setOnClickListener(listener);
-
-
             viewHolder.dontKnowWordButton.setOnClickListener(v -> {
                 Word currentWord = getItem(position);
                 rankDown(currentWord.getId());
@@ -101,7 +94,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.definition.setText(wordFromData.getDefinition());
             viewHolder.pronunciation.setTag(position);
         } else {
-            System.out.println("NO MORE DATA");
             convertView.setVisibility(View.GONE);
             SessionManager.getInstance(context).nextSession();
         }
@@ -110,8 +102,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
 
     private void setPreferences(TextView word, TextView definition, ImageButton pronunciationButton) {
         PreferencesProvider preferencesProvider = new PreferencesProvider(context);
-        bgColor = preferencesProvider.getBackgroundColorPreference();
-        fontColor = preferencesProvider.getFontColorPreference();
+        int bgColor = preferencesProvider.getBackgroundColorPreference();
+        int fontColor = preferencesProvider.getFontColorPreference();
         String font = preferencesProvider.getFontStylePreference();
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;

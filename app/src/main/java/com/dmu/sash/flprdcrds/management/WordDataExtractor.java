@@ -30,10 +30,6 @@ public class WordDataExtractor implements AsyncResponse {
             handler.handleWordDataResult(output, null);
         } else {
             Response response = extractResponse(output);
-//            String word = extractWord(response);
-//            LexicalEntry lexicalEntry = extractLexicalEntry(response);
-//            String definition = extractWordData(lexicalEntry);
-//            String audioPronunciation = extractAudioPronunciation(lexicalEntry);
             List<Word> words = extractWords(response);
             handler.handleWordDataResult(null, words);
         }
@@ -42,69 +38,6 @@ public class WordDataExtractor implements AsyncResponse {
     private Response extractResponse(String output) {
         Gson gson = new Gson();
         return gson.fromJson(output, Response.class);
-    }
-
-    private String extractWord(Response response) {
-        String word = null;
-        if (response != null) {
-            Result result = response.getResults().get(0);
-            if (result != null) {
-                word = result.getWord();
-            }
-        }
-        return word;
-    }
-
-    private LexicalEntry extractLexicalEntry(Response response) {
-        LexicalEntry lexicalEntry = null;
-        if (response != null) {
-            Result result = response.getResults().get(0);
-            if (result != null) {
-                lexicalEntry = result.getLexicalEntries().get(0);
-            }
-        }
-        return lexicalEntry;
-    }
-
-    private String extractWordData(LexicalEntry lexicalEntry) {
-        String definition = null;
-        if (lexicalEntry != null) {
-            Entry entry = lexicalEntry.getEntries().get(0);
-            if (entry != null) {
-                Sense sense = entry.getSenses().get(0);
-                if (sense != null) {
-                    if (sense.getShort_definitions() != null) {
-                        definition = sense.getShort_definitions().get(0);
-                    }
-                }
-            }
-        }
-        return definition;
-    }
-
-    private String extractAudioPronunciation(LexicalEntry lexicalEntry) {
-        String audioPronunciation = null;
-        List<Pronunciation> pronunciationList;
-        for (Entry entry : lexicalEntry.getEntries()) {
-            pronunciationList = entry.getPronunciations();
-            if (pronunciationList != null) {
-                for (Pronunciation pronunciationEntry : pronunciationList) {
-                    audioPronunciation = pronunciationEntry.getAudioFile();
-                    if (audioPronunciation != null) break;
-                }
-            }
-            if (audioPronunciation != null) break;
-        }
-        if (audioPronunciation == null) {
-            pronunciationList = lexicalEntry.getPronunciations();
-            if (pronunciationList != null) {
-                for (Pronunciation pronunciationEntry : pronunciationList) {
-                    audioPronunciation = pronunciationEntry.getAudioFile();
-                    if (audioPronunciation != null) break;
-                }
-            }
-        }
-        return audioPronunciation;
     }
 
     public List<Word> extractWords(Response response) {

@@ -25,12 +25,16 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
     private int backgroundColor;
     private Typeface typeface;
     private Context context;
-
-    private static class ViewHolder {
-        TextView wordWithDef;
-        ImageButton pronunciation;
-        LinearLayout layout;
-    }
+    private View.OnClickListener listener = (View view) -> {
+        int position = (Integer) view.getTag();
+        Word wordToPronounce = getItem(position);
+        if (wordToPronounce != null) {
+            String url = wordToPronounce.getAudioPronunciation();
+            if ((url != null) && !url.isEmpty()) {
+                AudioPronunciation.getInstance().play(url);
+            }
+        }
+    };
 
     WordAdapter(OrderedRealmCollection<Word> data, Context context) {
         super(data);
@@ -67,11 +71,11 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Word word = getItem(position);
-        if (word.getAudioPronunciation()==null){
-            viewHolder.pronunciation.setVisibility(View.GONE);
-        }
         String text = "";
         if (word != null) {
+            if (word.getAudioPronunciation() == null) {
+                viewHolder.pronunciation.setVisibility(View.GONE);
+            }
             text = word.getWord() + " - " + word.getDefinition();
         }
         viewHolder.wordWithDef.setText(text);
@@ -79,14 +83,9 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         return convertView;
     }
 
-    private View.OnClickListener listener = (View view) -> {
-        int position = (Integer) view.getTag();
-        Word wordToPronounce = getItem(position);
-        if (wordToPronounce != null) {
-            String url = wordToPronounce.getAudioPronunciation();
-            if ((url != null) && !url.isEmpty()) {
-                AudioPronunciation.getInstance().play(url, context);
-            }
-        }
-    };
+    private static class ViewHolder {
+        TextView wordWithDef;
+        ImageButton pronunciation;
+        LinearLayout layout;
+    }
 }

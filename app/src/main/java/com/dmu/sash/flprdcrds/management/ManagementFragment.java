@@ -162,7 +162,7 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
     }
 
     private void audioPronunciation(String url) {
-        AudioPronunciation.getInstance().play(url, getContext());
+        AudioPronunciation.getInstance().play(url);
     }
 
     private void deleteWordEntry(String id) {
