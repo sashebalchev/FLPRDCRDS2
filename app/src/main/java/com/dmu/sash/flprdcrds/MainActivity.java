@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         setFrag(new LearningFragment());
-        if (!preferences.getBoolean("FIRST_TIME", false)){
+        if (!preferences.getBoolean("FIRST_TIME", false)) {
             NotificationAlarmSetter notificationAlarmSetter = new NotificationAlarmSetter(this);
             notificationAlarmSetter.setAlarm();
         }
