@@ -6,6 +6,7 @@ import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
@@ -29,11 +30,13 @@ public class LearningDataProvider {
             while (wordsForSession.size() <= 0) {
                 session = sessionManager.nextSession();
                 wordsForSession = getSessionData();
+
             }
         } else {
             session = sessionManager.initialSession();
             wordsForSession = new ArrayList<>(0);
         }
+        Collections.shuffle(wordsForSession);
         return wordsForSession;
     }
 

@@ -2,6 +2,7 @@ package com.dmu.sash.flprdcrds.management;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,7 +96,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         RealmChangeListener wordsChangeListener = new RealmChangeListener() {
 
             @Override
-            public void onChange(Object o) {
+            public void onChange(@NonNull Object o) {
                 notifyDataSetChanged();
             }
         };
