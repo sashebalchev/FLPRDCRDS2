@@ -93,10 +93,10 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         Realm realm = RealmFactory.getRealm();
         RealmResults<Word> words = realm.where(Word.class).findAllAsync();
 
-        RealmChangeListener wordsChangeListener = new RealmChangeListener() {
+        RealmChangeListener<RealmResults<Word>> wordsChangeListener = new RealmChangeListener<RealmResults<Word>>() {
 
             @Override
-            public void onChange(@NonNull Object o) {
+            public void onChange(@NonNull RealmResults<Word> o) {
                 notifyDataSetChanged();
             }
         };
