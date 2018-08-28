@@ -97,8 +97,8 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         } else {
             convertView.setVisibility(View.GONE);
             AlertDialog dialog = new AlertDialog.Builder(context)
-                    .setTitle("Hooray! You did it!")
-                    .setMessage("Come back tomorrow to learn some more.")
+                    .setTitle(R.string.end_session_title)
+                    .setMessage(R.string.end_session_msg)
                     .create();
             dialog.show();
 

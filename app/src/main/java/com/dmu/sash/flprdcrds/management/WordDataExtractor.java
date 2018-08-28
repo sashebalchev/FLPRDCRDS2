@@ -1,7 +1,10 @@
 package com.dmu.sash.flprdcrds.management;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
 
+import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.dmu.sash.flprdcrds.service.objects.Entry;
 import com.dmu.sash.flprdcrds.service.objects.LexicalEntry;
@@ -14,9 +17,13 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordDataExtractor implements AsyncResponse {
+public class WordDataExtractor extends ContextWrapper implements AsyncResponse {
     private static final String DEFINITION_URL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/";
     private WordDataResultHandler handler;
+
+    public WordDataExtractor(Context context) {
+        super(context);
+    }
 
     public void extractWordData(@NonNull WordDataResultHandler handler, @NonNull String word) {
         this.handler = handler;
@@ -32,7 +39,7 @@ public class WordDataExtractor implements AsyncResponse {
             Response response = extractResponse(output);
             List<Word> words = extractWords(response);
             if (words.size() == 0) {
-                handler.handleWordDataResult("No definitions found", null);
+                handler.handleWordDataResult(getString(R.string.error_no_definitions_found), null);
             } else {
                 handler.handleWordDataResult(null, words);
             }

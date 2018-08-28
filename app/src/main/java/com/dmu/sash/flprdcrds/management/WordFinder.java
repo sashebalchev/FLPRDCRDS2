@@ -1,17 +1,24 @@
 package com.dmu.sash.flprdcrds.management;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
 
+import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.service.searchobjects.Result;
 import com.dmu.sash.flprdcrds.service.searchobjects.SearchResponse;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-public class WordFinder implements AsyncResponse {
+public class WordFinder extends ContextWrapper implements AsyncResponse {
     private static final String SEARCH_URL = "https://od-api.oxforddictionaries.com/api/v1/search/en?q=";
     private WordResultHandler wordResultHandler;
     private String word;
+
+    public WordFinder (Context context) {
+        super(context);
+    }
 
     public void findWord(@NonNull WordResultHandler handler, @NonNull String word) {
         this.wordResultHandler = handler;
@@ -32,7 +39,8 @@ public class WordFinder implements AsyncResponse {
                 String searchedWord = results.get(0).getWord();
                 wordResultHandler.handleWordResult(null, searchedWord);
             } else {
-                wordResultHandler.handleWordResult("Could not find the word '" + word + "' in the dictionary", null);
+                String error = getString(R.string.error_could_not_find_word, word);
+                wordResultHandler.handleWordResult(error, null);
             }
         }
     }

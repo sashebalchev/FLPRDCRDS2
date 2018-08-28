@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
                         android:elevation="2dp"
-                        android:text="DIDN'T GET IT" />
+                        android:text="@string/didn_t_get_it" />
 
                     <Button
                         android:id="@+id/know_word"
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
                         android:elevation="2dp"
-                        android:text="I GOT IT" />
+                        android:text="@string/i_got_it" />
                 </LinearLayout>
 
 

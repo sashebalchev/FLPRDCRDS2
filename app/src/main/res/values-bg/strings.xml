@@ -38,4 +38,16 @@
     <string name="fontstyle_default">Шрифт по подразбиране</string>
     <string name="fontstyle_hanalei">Ханалей</string>
     <string name="delete_all_words_prompt">Сигурни ли сте, че искате да изтриете ВСИЧКИ думи?</string>
+    <string name="select_definition_prompt">Изберете дефиниция за \'%1$s\'</string>
+    <string name="btn_ok">Oк</string>
+    <string name="error_finding_word_data">Грешка при търсенето на данни за думата</string>
+    <string name="error_finding_word">Грешка при търсенето на думата</string>
+    <string name="error_no_definitions_found">Не са намерени дефиниции</string>
+    <string name="error_could_not_find_word">Думата \'%1$s\' не е намерена в речника</string>
+    <string name="notification_title">Време е за учене</string>
+    <string name="notification_msg">Време е да научите няколко думи преди лягане</string>
+    <string name="didn_t_get_it">НЕ Я ЗНАМ</string>
+    <string name="i_got_it">ЗНАМ Я</string>
+    <string name="end_session_title">УРА! Ти успя!</string>
+    <string name="end_session_msg">Ела утре пак, за да научиш повече :)</string>
 </resources>

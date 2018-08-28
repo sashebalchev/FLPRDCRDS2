@@ -38,4 +38,16 @@
     <string name="fontstyle_default">Default</string>
     <string name="fontstyle_hanalei">Hanalei</string>
     <string name="delete_all_words_prompt">Are you sure you want to delete ALL words?</string>
+    <string name="select_definition_prompt">Select definition for \'%1$s\'</string>
+    <string name="btn_ok">OK</string>
+    <string name="error_finding_word_data">Error finding word data</string>
+    <string name="error_finding_word">Error finding word</string>
+    <string name="error_no_definitions_found">No definitions found</string>
+    <string name="error_could_not_find_word">Could not find the word \'%1$s\' in the dictionary</string>
+    <string name="notification_title">Study time</string>
+    <string name="notification_msg">It\'s time to study some words before you go to bed</string>
+    <string name="didn_t_get_it">DIDN\'T GET IT</string>
+    <string name="i_got_it">I GOT IT</string>
+    <string name="end_session_title">Hooray! You did it!</string>
+    <string name="end_session_msg">Come back tomorrow to learn some more :)</string>
 </resources>

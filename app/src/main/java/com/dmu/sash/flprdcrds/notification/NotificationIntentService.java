@@ -16,8 +16,8 @@ public class NotificationIntentService extends JobIntentService {
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         Notification.Builder notificationBuilder = new Notification.Builder(this)
-                .setContentTitle("Study time")
-                .setContentText("It's time to study some words before you go to bed.")
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_msg))
                 .setSmallIcon(R.drawable.baseline_school_black_24dp)
                 .setAutoCancel(true);
         Intent notificationIntent = new Intent(this, MainActivity.class);
