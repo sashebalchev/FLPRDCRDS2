@@ -12,12 +12,16 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.dmu.sash.flprdcrds.R;
+import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
 import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 
 import io.realm.OrderedRealmCollection;
+import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
 public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
 
@@ -48,6 +52,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         } else if (font.equals("2")) {
             typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
         }
+        changesToRealm();
     }
 
     @Override
@@ -81,6 +86,20 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         viewHolder.wordWithDef.setText(text);
         viewHolder.pronunciation.setTag(position);
         return convertView;
+    }
+
+    private void changesToRealm() {
+        Realm realm = RealmFactory.getRealm();
+        RealmResults<Word> words = realm.where(Word.class).findAllAsync();
+
+        RealmChangeListener wordsChangeListener = new RealmChangeListener() {
+
+            @Override
+            public void onChange(Object o) {
+                notifyDataSetChanged();
+            }
+        };
+        words.addChangeListener(wordsChangeListener);
     }
 
     private static class ViewHolder {

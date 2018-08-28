@@ -1,5 +1,6 @@
 package com.dmu.sash.flprdcrds.learning;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -95,6 +96,12 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             viewHolder.pronunciation.setTag(position);
         } else {
             convertView.setVisibility(View.GONE);
+            AlertDialog dialog = new AlertDialog.Builder(context)
+                    .setTitle("Hooray! You did it!")
+                    .setMessage("Come back tomorrow to learn some more.")
+                    .create();
+            dialog.show();
+
             SessionManager.getInstance(context).nextSession();
         }
         return convertView;
