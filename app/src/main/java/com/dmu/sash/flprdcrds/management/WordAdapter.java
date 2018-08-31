@@ -29,7 +29,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
     private int fontColor;
     private int backgroundColor;
     private Typeface typeface;
-    private Context context;
     private View.OnClickListener listener = (View view) -> {
         int position = (Integer) view.getTag();
         Word wordToPronounce = getItem(position);
@@ -43,7 +42,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
 
     WordAdapter(OrderedRealmCollection<Word> data, Context context) {
         super(data);
-        this.context = context;
         PreferencesProvider preferencesProvider = new PreferencesProvider(context);
         backgroundColor = preferencesProvider.getBackgroundColorPreference();
         fontColor = preferencesProvider.getFontColorPreference();
@@ -71,7 +69,6 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
             viewHolder.pronunciation = convertView.findViewById(R.id.pronunciation);
             viewHolder.pronunciation.setColorFilter(fontColor);
             viewHolder.pronunciation.setOnClickListener(listener);
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -81,6 +78,8 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         if (word != null) {
             if (word.getAudioPronunciation() == null) {
                 viewHolder.pronunciation.setVisibility(View.GONE);
+            } else {
+                viewHolder.pronunciation.setVisibility(View.VISIBLE);
             }
             text = word.getWord() + " - " + word.getDefinition();
         }
@@ -92,14 +91,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
     private void changesToRealm() {
         Realm realm = RealmFactory.getRealm();
         RealmResults<Word> words = realm.where(Word.class).findAllAsync();
-
-        RealmChangeListener<RealmResults<Word>> wordsChangeListener = new RealmChangeListener<RealmResults<Word>>() {
-
-            @Override
-            public void onChange(@NonNull RealmResults<Word> o) {
-                notifyDataSetChanged();
-            }
-        };
+        RealmChangeListener<RealmResults<Word>> wordsChangeListener = o -> notifyDataSetChanged();
         words.addChangeListener(wordsChangeListener);
     }
 

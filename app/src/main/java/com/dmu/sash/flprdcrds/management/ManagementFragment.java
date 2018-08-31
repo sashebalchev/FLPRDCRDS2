@@ -2,6 +2,7 @@ package com.dmu.sash.flprdcrds.management;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -37,10 +38,6 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
 
     private Realm realm;
     private RealmResults<Word> words;
-    private URLAsyncTask urlAsyncTask;
-    private String textColor;
-    private int bgColor;
-    private int fontColor;
     private static ManagementFragment instance;
 
     public ManagementFragment() {
@@ -141,18 +138,21 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             final Word word = (Word) parent.getAdapter().getItem(position);
-            final TextView wordEdit = new TextView(getActivity());
+            final TextView wordEdit = new TextView(getContext());
             wordEdit.setText(word.getDefinition());
             wordEdit.setTextSize(24);
             wordEdit.setPadding(14, 14, 14, 14);
             wordEdit.setTypeface(null, Typeface.ITALIC);
             wordEdit.setGravity(Gravity.CENTER);
-            AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+            AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                     .setTitle(word.getWord().toUpperCase())
                     .setView(wordEdit)
-                    .setPositiveButton(R.string.pronunciation, (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()))
                     .setNegativeButton(R.string.delete, (dialog12, which) -> deleteWordEntry(word.getId()))
                     .create();
+            if (word.getAudioPronunciation()!=null){
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.pronunciation),
+                        (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()));
+            }
             dialog.show();
         });
     }

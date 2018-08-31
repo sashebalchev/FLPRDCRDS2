@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="BGcolorsArray">
+        <item>@string/bgcolors_default</item>
         <item>@string/bgcolors_white</item>
         <item>@string/bgcolors_red</item>
         <item>@string/bgcolors_green</item>
@@ -10,6 +11,7 @@
     </string-array>
 
     <string-array name="BGcolorsValues">
+        <item>#FCFAD1</item>
         <item>#FFFFFF</item>
         <item>#FF0000</item>
         <item>#00FF00</item>
@@ -42,4 +44,5 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string name="bgcolors_default">Default</string>
 </resources>

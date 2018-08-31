@@ -101,8 +101,9 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
                     .setMessage(R.string.end_session_msg)
                     .create();
             dialog.show();
-
+            SessionManager.getInstance(context).finishedSession();
             SessionManager.getInstance(context).nextSession();
+
         }
         return convertView;
     }

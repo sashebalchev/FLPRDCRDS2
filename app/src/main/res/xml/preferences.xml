@@ -7,7 +7,7 @@
         android:entries="@array/BGcolorsArray"
         android:entryValues="@array/BGcolorsValues"
         android:key="PREF_COLOR_BG"
-        android:summary="@string/pref_bgcolor_summary"
+        android:summary="%s"
         android:title="@string/pref_bgcolor" />
 
     <android.support.v7.preference.ListPreference
@@ -15,7 +15,7 @@
         android:entries="@array/fontColorsArray"
         android:entryValues="@array/fontColorsValues"
         android:key="PREF_COLOR_FONT"
-        android:summary="@string/pref_fontcolor_summary"
+        android:summary="%s"
         android:title="@string/pref_fontcolor" />
 
     <android.support.v7.preference.ListPreference
@@ -23,7 +23,7 @@
         android:entries="@array/fontStylesArray"
         android:entryValues="@array/fontStylesValues"
         android:key="PREF_STYLE_FONT"
-        android:summary="@string/pref_fontstyle_summary"
+        android:summary="%s"
         android:title="@string/pref_fontstyle" />
 
     <android.support.v7.preference.Preference

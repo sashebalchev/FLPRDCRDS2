@@ -7,13 +7,12 @@ import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 
 public class SessionManager {
 
-    private SharedPreferences sharedPreferences;
+    private PreferencesProvider preferencesProvider;
     private int session;
     private static SessionManager instance;
 
     private SessionManager(Context context) {
-        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
-        sharedPreferences = preferencesProvider.getSharedPreferences();
+        preferencesProvider = new PreferencesProvider(context);
         session = preferencesProvider.getSessionPreference();
     }
 
@@ -31,17 +30,21 @@ public class SessionManager {
     public int nextSession() {
         if (session < 5) {
             session++;
-            sharedPreferences.edit().putInt("SESSION", session).apply();
+            preferencesProvider.setSessionPreference(session);
         } else {
             session = initialSession();
         }
-        System.out.println(session);
         return session;
     }
 
     public int initialSession() {
         session = 1;
-        sharedPreferences.edit().putInt("SESSION", session).apply();
+        preferencesProvider.setSessionPreference(session);
         return session;
+    }
+
+    public void finishedSession() {
+        int totalSessions = preferencesProvider.getTotalSessions() + 1;
+        preferencesProvider.setTotalSessions(totalSessions);
     }
 }

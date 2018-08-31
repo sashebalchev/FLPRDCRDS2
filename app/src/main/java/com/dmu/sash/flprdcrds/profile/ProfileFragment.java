@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
+import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
 
 import java.util.ArrayList;
 
@@ -19,13 +20,11 @@ import io.realm.Realm;
 
 public class ProfileFragment extends Fragment {
     private static ProfileFragment instance;
-
-
     Realm realm;
 
     public ProfileFragment() {
-
     }
+
 
     public static ProfileFragment getInstance() {
         if (instance == null) {
@@ -55,7 +54,7 @@ public class ProfileFragment extends Fragment {
         TextView bestKnownWordsTextView = view.findViewById(R.id.known_words);
         TextView struggleWordsTextView = view.findViewById(R.id.struggled_words);
 
-        String forSessionsTV = getResources().getString(R.string.sessions_finished_prompt);
+        String forSessionsTV = getResources().getString(R.string.sessions_finished_prompt) + getTotalSessions();
         String forMasteredWordsTV = getText(R.string.words_mastered_prompt, "proficiency");
         String forKnownWordsTV = getText(R.string.best_known_words_prompt, "consecutiveKnownSessions");
         String forStruggleWordsTV = getText(R.string.words_you_struggle_with_prompt, "consecutiveNotKnownSessions");
@@ -64,6 +63,11 @@ public class ProfileFragment extends Fragment {
         masteredWordsTextView.setText(forMasteredWordsTV);
         bestKnownWordsTextView.setText(forKnownWordsTV);
         struggleWordsTextView.setText(forStruggleWordsTV);
+    }
+
+    private int getTotalSessions() {
+        PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
+        return preferencesProvider.getTotalSessions();
     }
 
     @NonNull
