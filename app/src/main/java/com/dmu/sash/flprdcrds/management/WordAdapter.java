@@ -2,7 +2,6 @@ package com.dmu.sash.flprdcrds.management;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
-import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -42,10 +41,10 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
 
     WordAdapter(OrderedRealmCollection<Word> data, Context context) {
         super(data);
-        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
-        backgroundColor = preferencesProvider.getBackgroundColorPreference();
-        fontColor = preferencesProvider.getFontColorPreference();
-        String font = preferencesProvider.getFontStylePreference();
+        PreferencesManager preferencesManager = new PreferencesManager(context);
+        backgroundColor = preferencesManager.getBackgroundColorPreference();
+        fontColor = preferencesManager.getFontColorPreference();
+        String font = preferencesManager.getFontStylePreference();
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {

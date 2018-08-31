@@ -1,19 +1,18 @@
 package com.dmu.sash.flprdcrds.learning;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 
 public class SessionManager {
 
-    private PreferencesProvider preferencesProvider;
+    private PreferencesManager preferencesManager;
     private int session;
     private static SessionManager instance;
 
     private SessionManager(Context context) {
-        preferencesProvider = new PreferencesProvider(context);
-        session = preferencesProvider.getSessionPreference();
+        preferencesManager = new PreferencesManager(context);
+        session = preferencesManager.getSessionPreference();
     }
 
     public static SessionManager getInstance(Context context) {
@@ -30,7 +29,7 @@ public class SessionManager {
     public int nextSession() {
         if (session < 5) {
             session++;
-            preferencesProvider.setSessionPreference(session);
+            preferencesManager.setSessionPreference(session);
         } else {
             session = initialSession();
         }
@@ -39,12 +38,12 @@ public class SessionManager {
 
     public int initialSession() {
         session = 1;
-        preferencesProvider.setSessionPreference(session);
+        preferencesManager.setSessionPreference(session);
         return session;
     }
 
     public void finishedSession() {
-        int totalSessions = preferencesProvider.getTotalSessions() + 1;
-        preferencesProvider.setTotalSessions(totalSessions);
+        int totalSessions = preferencesManager.getTotalSessions() + 1;
+        preferencesManager.setTotalSessions(totalSessions);
     }
 }

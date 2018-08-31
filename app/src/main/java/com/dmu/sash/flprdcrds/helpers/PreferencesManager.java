@@ -1,16 +1,19 @@
-package com.dmu.sash.flprdcrds.settings;
+package com.dmu.sash.flprdcrds.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 
+import com.dmu.sash.flprdcrds.R;
 
-public final class PreferencesProvider {
+
+public final class PreferencesManager {
     private SharedPreferences sharedPreferences;
 
-    public PreferencesProvider(Context context) {
+    public PreferencesManager(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        android.support.v7.preference.PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
     }
 
     public int getBackgroundColorPreference() {
@@ -30,12 +33,13 @@ public final class PreferencesProvider {
     }
 
     public void setSessionPreference(int sessionNumber) {
-        sharedPreferences.edit().putInt("SESSION", sessionNumber).apply();
+        sharedPreferences.edit().putInt("SESSION", sessionNumber).commit();
     }
 
     public boolean getNotificationFlag() {
         return sharedPreferences.getBoolean("FIRST_TIME", false);
     }
+
 
     public int getTotalSessions() {
         return sharedPreferences.getInt("TOTAL_SESSIONS", 0);
@@ -49,7 +53,7 @@ public final class PreferencesProvider {
         return sharedPreferences;
     }
 
-    public void setNotification(boolean notification) {
+    public void setNotificationFlag(boolean notification) {
         sharedPreferences.edit().putBoolean("FIRST_TIME", notification).apply();
     }
 

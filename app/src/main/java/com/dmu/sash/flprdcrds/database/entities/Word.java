@@ -61,23 +61,19 @@ public class Word extends RealmObject {
         this.audioPronunciation = audioPronunciation;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public void setScore(int score) {
         this.score = score;
     }
 
     public void decreaseScore() {
-        setConsecutiveKnownSessions(0);
+        setConsecutiveKnownSessions();
         setScore(1);
         setProficiency(1);
         increaseConsecutiveNotKnownSessions();
     }
 
     public void increaseScore() {
-        setConsecutiveNotKnownSessions(0);
+        setConsecutiveNotKnownSessions();
         increaseConsecutiveKnownSessions();
         if (score < 3) {
             score = score + 1;
@@ -94,16 +90,16 @@ public class Word extends RealmObject {
         this.proficiency = proficiency;
     }
 
-    public void setConsecutiveKnownSessions(int consecutiveKnownSessions) {
-        this.consecutiveKnownSessions = consecutiveKnownSessions;
+    private void setConsecutiveKnownSessions() {
+        this.consecutiveKnownSessions = 0;
     }
 
     private void increaseConsecutiveKnownSessions() {
         this.consecutiveKnownSessions++;
     }
 
-    public void setConsecutiveNotKnownSessions(int consecutiveNotKnownSessions) {
-        this.consecutiveNotKnownSessions = consecutiveNotKnownSessions;
+    private void setConsecutiveNotKnownSessions() {
+        this.consecutiveNotKnownSessions = 0;
     }
 
     private void increaseConsecutiveNotKnownSessions() {

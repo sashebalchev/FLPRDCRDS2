@@ -1,18 +1,17 @@
 package com.dmu.sash.flprdcrds;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
 import android.view.MenuItem;
 
 import com.dmu.sash.flprdcrds.learning.LearningFragment;
 import com.dmu.sash.flprdcrds.management.ManagementFragment;
 import com.dmu.sash.flprdcrds.notification.NotificationAlarmSetter;
 import com.dmu.sash.flprdcrds.profile.ProfileFragment;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 import com.dmu.sash.flprdcrds.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -23,10 +22,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         BottomNavigationView mainNav = findViewById(R.id.main_nav);
         mainNav.setOnNavigationItemSelectedListener(MainActivity.this);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferencesManager preferencesManager = new PreferencesManager(this);
         setFrag(new LearningFragment());
-        if (!preferences.getBoolean("FIRST_TIME", false)) {
+        if (!preferencesManager.getNotificationFlag()) {
             NotificationAlarmSetter notificationAlarmSetter = new NotificationAlarmSetter(this);
             notificationAlarmSetter.setAlarm();
         }

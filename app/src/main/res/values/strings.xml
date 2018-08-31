@@ -50,4 +50,6 @@
     <string name="i_got_it">I GOT IT</string>
     <string name="end_session_title">Hooray! You did it!</string>
     <string name="end_session_msg">Come back tomorrow to learn some more :)</string>
+    <string name="channel_name">flprcrdsChannel</string>
+    <string name="channel_description">Notification from flprcrds application.</string>
 </resources>

@@ -9,7 +9,6 @@ public final class RealmFactory {
     private RealmFactory() {
     }
 
-    //TODO remove the delete realm clause before release. After release implement migration methods.
     public static Realm getRealm() {
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name(REALM_FILENAME)

@@ -11,6 +11,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.View;
 
 import com.dmu.sash.flprdcrds.R;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 
 public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -18,7 +19,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        sharedPreferences = new PreferencesProvider(getContext()).getSharedPreferences();
+        sharedPreferences = new PreferencesManager(getContext()).getSharedPreferences();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         addPreferencesFromResource(R.xml.preferences);
     }
@@ -29,14 +30,14 @@ public class SettingsFragment extends PreferenceFragmentCompat
         Preference resetPreferencesButton = findPreference("PREF_RESET");
 
         resetPreferencesButton.setOnPreferenceClickListener(preference -> {
-            PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
-            int session = preferencesProvider.getSessionPreference();
-            boolean notification = preferencesProvider.getNotificationFlag();
-            int totalSessions = preferencesProvider.getTotalSessions();
-            preferencesProvider.clearPreferences();
-            preferencesProvider.setSessionPreference(session);
-            preferencesProvider.setNotification(notification);
-            preferencesProvider.setTotalSessions(totalSessions);
+            PreferencesManager preferencesManager = new PreferencesManager(getContext());
+            int session = preferencesManager.getSessionPreference();
+            boolean notification = preferencesManager.getNotificationFlag();
+            int totalSessions = preferencesManager.getTotalSessions();
+            preferencesManager.clearPreferences();
+            preferencesManager.setSessionPreference(session);
+            preferencesManager.setNotificationFlag(notification);
+            preferencesManager.setTotalSessions(totalSessions);
             return false;
         });
     }

@@ -19,7 +19,7 @@ import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
 import com.dmu.sash.flprdcrds.helpers.AudioPronunciation;
-import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.List;
@@ -109,10 +109,10 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
     }
 
     private void setPreferences(TextView word, TextView definition, ImageButton pronunciationButton) {
-        PreferencesProvider preferencesProvider = new PreferencesProvider(context);
-        int bgColor = preferencesProvider.getBackgroundColorPreference();
-        int fontColor = preferencesProvider.getFontColorPreference();
-        String font = preferencesProvider.getFontStylePreference();
+        PreferencesManager preferencesManager = new PreferencesManager(context);
+        int bgColor = preferencesManager.getBackgroundColorPreference();
+        int fontColor = preferencesManager.getFontColorPreference();
+        String font = preferencesManager.getFontStylePreference();
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {

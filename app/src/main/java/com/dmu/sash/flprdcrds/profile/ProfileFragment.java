@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.RealmFactory;
 import com.dmu.sash.flprdcrds.database.entities.Word;
-import com.dmu.sash.flprdcrds.settings.PreferencesProvider;
+import com.dmu.sash.flprdcrds.helpers.PreferencesManager;
 
 import java.util.ArrayList;
 
@@ -66,8 +66,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private int getTotalSessions() {
-        PreferencesProvider preferencesProvider = new PreferencesProvider(getContext());
-        return preferencesProvider.getTotalSessions();
+        PreferencesManager preferencesManager = new PreferencesManager(getContext());
+        return preferencesManager.getTotalSessions();
     }
 
     @NonNull
