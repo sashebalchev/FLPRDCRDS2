@@ -91,9 +91,17 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         }
         if (getCount() > 0) {
             Word wordFromData = getItem(position);
-            viewHolder.word.setText(wordFromData.getWord());
-            viewHolder.definition.setText(wordFromData.getDefinition());
-            viewHolder.pronunciation.setTag(position);
+            if (wordFromData != null) {
+                if (wordFromData.getAudioPronunciation() == null) {
+                    viewHolder.pronunciation.setVisibility(View.GONE);
+                } else {
+                    viewHolder.pronunciation.setVisibility(View.VISIBLE);
+                }
+                viewHolder.word.setText(wordFromData.getWord());
+                viewHolder.definition.setText(wordFromData.getDefinition());
+                viewHolder.pronunciation.setTag(position);
+            }
+
         } else {
             convertView.setVisibility(View.GONE);
             AlertDialog dialog = new AlertDialog.Builder(context)
