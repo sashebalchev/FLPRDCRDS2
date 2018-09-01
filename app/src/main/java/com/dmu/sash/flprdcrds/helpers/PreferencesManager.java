@@ -33,7 +33,7 @@ public final class PreferencesManager {
     }
 
     public void setSessionPreference(int sessionNumber) {
-        sharedPreferences.edit().putInt("SESSION", sessionNumber).commit();
+        sharedPreferences.edit().putInt("SESSION", sessionNumber).apply();
     }
 
     public boolean getNotificationFlag() {

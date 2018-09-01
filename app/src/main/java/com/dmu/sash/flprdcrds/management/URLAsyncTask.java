@@ -35,18 +35,15 @@ public class URLAsyncTask extends AsyncTask<String, Integer, String> {
                 }
                 return stringBuilder.toString();
             } else if (400 <= urlConnection.getResponseCode() && urlConnection.getResponseCode() < 500) {
-                System.out.println("Bad request or word not found");
                 hasErrors = true;
                 return("Bad request or word not found");
             } else if (urlConnection.getResponseCode() >= 500) {
-                System.out.println("Server problem");
                 hasErrors = true;
                 return("Server problem");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Problem with connection");
             hasErrors = true;
             return("Problem with connection");
         }

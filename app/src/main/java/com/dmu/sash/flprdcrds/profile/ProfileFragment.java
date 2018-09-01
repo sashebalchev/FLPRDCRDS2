@@ -25,7 +25,6 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
     }
 
-
     public static ProfileFragment getInstance() {
         if (instance == null) {
             instance = new ProfileFragment();
