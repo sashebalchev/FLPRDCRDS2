@@ -18,7 +18,7 @@ public class NotificationIntentService extends JobIntentService {
         Notification.Builder notificationBuilder = new Notification.Builder(this)
                 .setContentTitle(getString(R.string.notification_title))
                 .setContentText(getString(R.string.notification_msg))
-                .setSmallIcon(R.drawable.baseline_school_black_24dp)
+                .setSmallIcon(R.drawable.baseline_school_white_24dp)
                 .setAutoCancel(true);
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -36,7 +36,6 @@
     <string name="bgcolors_black">Черен</string>
     <string name="fontcolors_black">Черен</string>
     <string name="fontstyle_default">Шрифт по подразбиране</string>
-    <string name="fontstyle_hanalei">Ханалей</string>
     <string name="delete_all_words_prompt">Сигурни ли сте, че искате да изтриете ВСИЧКИ думи?</string>
     <string name="select_definition_prompt">Изберете дефиниция за \'%1$s\'</string>
     <string name="btn_ok">Oк</string>
