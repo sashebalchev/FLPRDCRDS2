@@ -11,7 +11,7 @@
     </string-array>
 
     <string-array name="BGcolorsValues">
-        <item>#FCFAD1</item>
+        <item>#FFFBEB</item>
         <item>#FFFFFF</item>
         <item>#FF0000</item>
         <item>#00FF00</item>
@@ -37,7 +37,7 @@
 
     <string-array name="fontStylesArray">
         <item>@string/fontstyle_default</item>
-        <item>@string/fontstyle_hanalei</item>
+        <item>@string/fontstyle_comicsans</item>
     </string-array>
 
     <string-array name="fontStylesValues">
@@ -45,4 +45,5 @@
         <item>2</item>
     </string-array>
     <string name="bgcolors_default">Default</string>
+    <string name="fontstyle_comicsans">Comic Sans</string>
 </resources>

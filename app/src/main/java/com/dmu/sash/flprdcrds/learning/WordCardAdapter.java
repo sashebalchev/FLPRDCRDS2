@@ -111,7 +111,6 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
             dialog.show();
             SessionManager.getInstance(context).finishedSession();
             SessionManager.getInstance(context).nextSession();
-
         }
         return convertView;
     }
@@ -124,7 +123,7 @@ public class WordCardAdapter extends ArrayAdapter<Word> implements ListAdapter {
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {
-            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
+            typeface = ResourcesCompat.getFont(context, R.font.comic_sans);
         }
 
         word.setBackgroundColor(bgColor);

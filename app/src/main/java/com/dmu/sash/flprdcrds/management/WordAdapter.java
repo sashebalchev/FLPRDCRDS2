@@ -48,7 +48,7 @@ public class WordAdapter extends RealmBaseAdapter<Word> implements ListAdapter {
         if (font.equals("1")) {
             typeface = Typeface.DEFAULT;
         } else if (font.equals("2")) {
-            typeface = ResourcesCompat.getFont(context, R.font.hanalei_font_family);
+            typeface = ResourcesCompat.getFont(context, R.font.comic_sans);
         }
         changesToRealm();
     }
