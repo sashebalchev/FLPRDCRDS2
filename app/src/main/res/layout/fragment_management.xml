@@ -30,7 +30,9 @@
         <Button
             android:id="@+id/delete_words_button"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@color/fontColor"
+            android:background="#f44336"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_all_words"

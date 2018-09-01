@@ -4,6 +4,7 @@ package com.dmu.sash.flprdcrds.management;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,9 +37,9 @@ import io.realm.RealmResults;
 
 public class ManagementFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private static ManagementFragment instance;
     private Realm realm;
     private RealmResults<Word> words;
-    private static ManagementFragment instance;
 
     public ManagementFragment() {
         // Required empty public constructor
@@ -149,7 +150,10 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setView(wordEdit)
                     .setNegativeButton(R.string.delete, (dialog12, which) -> deleteWordEntry(word.getId()))
                     .create();
-            if (word.getAudioPronunciation()!=null){
+            dialog.setOnShowListener(arg1 -> dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                    .setTextColor(Color.parseColor("#f44336")));
+
+            if (word.getAudioPronunciation() != null) {
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.pronunciation),
                         (dialog1, which) -> audioPronunciation(word.getAudioPronunciation()));
             }
