@@ -148,10 +148,26 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             AlertDialog dialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
                     .setTitle(word.getWord().toUpperCase())
                     .setView(wordEdit)
-                    .setNegativeButton(R.string.delete, (dialog12, which) -> deleteWordEntry(word.getId()))
+                    .setNegativeButton(R.string.delete, (dialog12, which) -> {
+                        AlertDialog confirmDeletionOfWordDialog = new AlertDialog.Builder(getContext())
+                                .setTitle(getString(R.string.delete_single_word_prompt))
+                                .setPositiveButton(R.string.delete, (dialog1, which1) -> deleteWordEntry(word.getId()))
+                                .setNegativeButton(R.string.cancel, null)
+                                .create();
+                        confirmDeletionOfWordDialog.setOnShowListener(arg1 -> {
+                            confirmDeletionOfWordDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                                    .setTextColor(Color.parseColor("#f44336"));
+
+                        });
+                        confirmDeletionOfWordDialog.show();
+                    })
                     .create();
-            dialog.setOnShowListener(arg1 -> dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-                    .setTextColor(Color.parseColor("#f44336")));
+            dialog.setOnShowListener(arg1 -> {
+                dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                        .setTextColor(Color.parseColor("#f44336"));
+
+            });
+
 
             if (word.getAudioPronunciation() != null) {
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.pronunciation),
