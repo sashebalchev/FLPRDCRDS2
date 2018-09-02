@@ -80,6 +80,11 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
                     .setPositiveButton(R.string.delete, (dialog1, which) -> deleteAllWords())
                     .setNegativeButton(R.string.cancel, null)
                     .create();
+            deleteWordsDialog.setOnShowListener(arg1 -> {
+                deleteWordsDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                        .setTextColor(Color.parseColor("#f44336"));
+
+            });
             deleteWordsDialog.show();
         });
 
