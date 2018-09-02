@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 import android.view.Gravity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dmu.sash.flprdcrds.R;
 import com.dmu.sash.flprdcrds.database.entities.Word;
@@ -54,12 +55,14 @@ public class WordDataProcessor extends ContextWrapper implements WordResultHandl
             TextView textView = new TextView(this);
             textView.setText(error);
             textView.setGravity(Gravity.CENTER);
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle(R.string.error_finding_word_data)
-                    .setView(textView)
-                    .setPositiveButton(R.string.btn_ok, null)
-                    .create();
-            dialog.show();
+            Toast toast = Toast.makeText(this, getString(R.string.error_finding_word_data) + "\n" + error, Toast.LENGTH_LONG);
+            toast.show();
+//            AlertDialog dialog = new AlertDialog.Builder(this)
+//                    .setTitle(R.string.error_finding_word_data)
+//                    .setView(textView)
+//                    .setPositiveButton(R.string.btn_ok, null)
+//                    .create();
+//            dialog.show();
         }
     }
 
@@ -72,12 +75,14 @@ public class WordDataProcessor extends ContextWrapper implements WordResultHandl
             TextView textView = new TextView(this);
             textView.setText(error);
             textView.setGravity(Gravity.CENTER);
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle(R.string.error_finding_word)
-                    .setView(textView)
-                    .setPositiveButton(R.string.btn_ok, null)
-                    .create();
-            dialog.show();
+            Toast toast = Toast.makeText(this, getString(R.string.error_finding_word )+ "\n" + error, Toast.LENGTH_LONG);
+                    toast.show();
+//            AlertDialog dialog = new AlertDialog.Builder(this)
+//                    .setTitle(R.string.error_finding_word)
+//                    .setView(textView)
+//                    .setPositiveButton(R.string.btn_ok, null)
+//                    .create();
+//            dialog.show();
         }
     }
 }
