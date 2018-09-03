@@ -78,7 +78,7 @@ public class MainActivityTest {
 
 
     @Test
-    public void addingWordSound_shouldHave7Choises() {
+    public void addingWordSound_shouldHave7Choices() {
         // Click on the Word Management menu
         onView(withId(R.id.nav_management)).perform(click());
 
