@@ -21,7 +21,7 @@ public class WordDataExtractorTest {
         Gson gson = new Gson();
         Response response = gson.fromJson(LEAD_JSON, Response.class);
         Assert.assertNotNull(response);
-        WordDataExtractor wordDataExtractor = new WordDataExtractor();
+        WordDataExtractor wordDataExtractor = new WordDataExtractor(null);
         List<Word> words = wordDataExtractor.extractWords(response);
         Assert.assertNotNull(words);
         Assert.assertEquals(3, words.size());
@@ -42,7 +42,7 @@ public class WordDataExtractorTest {
         Gson gson = new Gson();
         Response response = gson.fromJson(NO_JSON, Response.class);
         Assert.assertNotNull(response);
-        WordDataExtractor wordDataExtractor = new WordDataExtractor();
+        WordDataExtractor wordDataExtractor = new WordDataExtractor(null);
         List<Word> words = wordDataExtractor.extractWords(response);
         Assert.assertNotNull(words);
         Assert.assertEquals(5, words.size());
@@ -62,7 +62,7 @@ public class WordDataExtractorTest {
         Gson gson = new Gson();
         Response response = gson.fromJson(INFLAMMATION_JSON, Response.class);
         Assert.assertNotNull(response);
-        WordDataExtractor wordDataExtractor = new WordDataExtractor();
+        WordDataExtractor wordDataExtractor = new WordDataExtractor(null);
         List<Word> words = wordDataExtractor.extractWords(response);
         Assert.assertNotNull(words);
         Assert.assertEquals(1, words.size());
