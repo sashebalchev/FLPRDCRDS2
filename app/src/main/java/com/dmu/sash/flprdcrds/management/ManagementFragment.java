@@ -93,7 +93,8 @@ public class ManagementFragment extends Fragment implements SharedPreferences.On
             final EditText taskEditText = new EditText(getActivity());
             taskEditText.setGravity(Gravity.CENTER);
             taskEditText.setOnFocusChangeListener((v1, hasFocus) -> taskEditText.post(() -> {
-                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.showSoftInput(taskEditText, InputMethodManager.SHOW_IMPLICIT);
             }));
             AlertDialog dialog = new AlertDialog.Builder(context)

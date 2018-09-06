@@ -13,7 +13,6 @@ public final class RealmFactory {
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .name(REALM_FILENAME)
                 .schemaVersion(0)
-                .deleteRealmIfMigrationNeeded()
                 .build();
         return Realm.getInstance(realmConfig);
     }

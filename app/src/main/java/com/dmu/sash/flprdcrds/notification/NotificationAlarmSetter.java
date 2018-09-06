@@ -17,6 +17,7 @@ public class NotificationAlarmSetter {
         this.context = context;
     }
 
+    //TODO Set notification channel for SDK 26+.
     public void setAlarm() {
         Intent notifyIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,

@@ -71,7 +71,6 @@
                         android:textColor="@color/fontColor"/>
                 </LinearLayout>
 
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -97,6 +96,7 @@
                     android:background="@android:color/transparent"
                     android:src="@drawable/outline_volume_up_white_24dp" />
             </RelativeLayout>
+
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 
 </FrameLayout>

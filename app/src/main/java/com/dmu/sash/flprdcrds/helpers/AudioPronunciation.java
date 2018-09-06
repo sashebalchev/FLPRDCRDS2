@@ -1,17 +1,14 @@
 package com.dmu.sash.flprdcrds.helpers;
 
-import android.app.Application;
-import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.os.PowerManager;
 
 import java.io.IOException;
 
-public class AudioPronunciation{
+public class AudioPronunciation {
 
-    private MediaPlayer mediaPlayer;
     private static AudioPronunciation instance;
+    private MediaPlayer mediaPlayer;
 
     private AudioPronunciation() {
         mediaPlayer = new MediaPlayer();

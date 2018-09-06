@@ -17,7 +17,7 @@ public final class PreferencesManager {
     }
 
     public int getBackgroundColorPreference() {
-        return Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FCFAD1"));
+        return Color.parseColor(sharedPreferences.getString("PREF_COLOR_BG", "#FFFBEB"));
     }
 
     public int getFontColorPreference() {

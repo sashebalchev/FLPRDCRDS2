@@ -17,6 +17,7 @@ import java.util.List;
 public class LearningFragment extends Fragment {
 
     public LearningFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -26,7 +27,8 @@ public class LearningFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_learning, container, false);
     }
 

@@ -10,7 +10,6 @@
         android:summary="%s"
         android:title="@string/pref_bgcolor" />
 
-
     <android.support.v7.preference.ListPreference
         android:defaultValue="#000000"
         android:entries="@array/fontColorsArray"

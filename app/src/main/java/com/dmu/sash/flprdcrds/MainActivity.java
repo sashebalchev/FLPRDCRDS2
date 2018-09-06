@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    //Frame stuff here.
-    //Setting the fragment
     private boolean setFrag(android.support.v4.app.Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager()

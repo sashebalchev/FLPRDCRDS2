@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class URLAsyncTask extends AsyncTask<String, Integer, String> {
+    //Personal API keys for Oxford Dictionary.
     private static final String APP_ID = "e6e4aac0";
     private static final String APP_KEY = "cef4c78764ba3d3a8395707ad006bb25";
     private AsyncResponse delegate;

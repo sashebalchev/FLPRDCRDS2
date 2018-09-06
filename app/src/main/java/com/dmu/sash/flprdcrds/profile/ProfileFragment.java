@@ -23,6 +23,7 @@ public class ProfileFragment extends Fragment {
     Realm realm;
 
     public ProfileFragment() {
+        // Required empty public constructor
     }
 
     public static ProfileFragment getInstance() {

@@ -42,11 +42,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
         });
     }
 
-    //TODO make preference selection reflect the real selection
+    //TODO make preference selection reflect the real selection and implement example text.
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        ListPreference preference = (ListPreference) findPreference(key);
-//        preference.setSummary(preference.getValue());
     }
 
     @Override

@@ -52,4 +52,5 @@
     <string name="channel_name">flprcrdsChannel</string>
     <string name="channel_description">Notification from flprcrds application.</string>
     <string name="delete_single_word_prompt">Are you sure you want to delete this word entry?</string>
+    <string name="pronunciation_button">Pronunciation button</string>
 </resources>

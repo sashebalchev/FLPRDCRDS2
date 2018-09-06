@@ -31,7 +31,8 @@ public class WordDataProcessor extends ContextWrapper implements WordResultHandl
             WordSaver wordSaver = new WordSaver();
             if (words.size() > 1) {
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                        android.R.layout.select_dialog_singlechoice);
                 for (Word word : words) {
                     arrayAdapter.add(word.getDefinition());
                 }
@@ -57,12 +58,6 @@ public class WordDataProcessor extends ContextWrapper implements WordResultHandl
             textView.setGravity(Gravity.CENTER);
             Toast toast = Toast.makeText(this, getString(R.string.error_finding_word_data) + "\n" + error, Toast.LENGTH_LONG);
             toast.show();
-//            AlertDialog dialog = new AlertDialog.Builder(this)
-//                    .setTitle(R.string.error_finding_word_data)
-//                    .setView(textView)
-//                    .setPositiveButton(R.string.btn_ok, null)
-//                    .create();
-//            dialog.show();
         }
     }
 
@@ -77,12 +72,6 @@ public class WordDataProcessor extends ContextWrapper implements WordResultHandl
             textView.setGravity(Gravity.CENTER);
             Toast toast = Toast.makeText(this, getString(R.string.error_finding_word )+ "\n" + error, Toast.LENGTH_LONG);
                     toast.show();
-//            AlertDialog dialog = new AlertDialog.Builder(this)
-//                    .setTitle(R.string.error_finding_word)
-//                    .setView(textView)
-//                    .setPositiveButton(R.string.btn_ok, null)
-//                    .create();
-//            dialog.show();
         }
     }
 }

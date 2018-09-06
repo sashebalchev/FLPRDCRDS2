@@ -49,4 +49,5 @@
             android:layout_weight="0.6" />
 
     </LinearLayout>
+
 </FrameLayout>
